@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Anna + Valdrin</title>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> -->
+  <style>
+    body {
+      margin: 0;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    section {
+      box-sizing: border-box;
+      padding: 1rem;
+      background-color: white;
+    }
+    section:nth-of-type(even) {
+      background-color: rgb(254, 246, 228);
+    }
+    aside {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      height: 100vh;
+    }
+    #gif {
+      width: 100%;
+      height: 100%;
+    }
+    .frame {
+      filter: contrast(1.3);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      will-change: opacity;
+      opacity: 0;
+      transform: scale(1.1);
+      background-repeat: no-repeat;
+      background-position: center 90%;
+      background-size: cover;
+    }
+    .frame:nth-of-type(1) {
+      background-image: url("1.jpg");
+    }
+    .frame:nth-of-type(2) {
+      background-image: url("2.jpg");
+    }
+    .frame:nth-of-type(3) {
+      background-image: url("3.jpg");
+    }
+    .frame:nth-of-type(4) {
+      background-image: url("4.jpg");
+    }
+    .frame:nth-of-type(5) {
+      background-image: url("5.jpg");
+    }
+    .frame:nth-of-type(6) {
+      background-image: url("6.jpg");
+    }
+    .frame:nth-of-type(7) {
+      background-image: url("7.jpg");
+    }
+    .frame:nth-of-type(5),
+    .frame:nth-of-type(6) {
+      transform: translateX(-12px) scale(1.1);
+    }
+    .frame:nth-of-type(7) {
+      transform: translate(-12px, -5px) rotate(1deg) scale(1.1);
+    }
+    #sun {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30vh;
+      transform: translate(-50%, -50%);
+      animation: sunSpin 2.8s infinite alternate linear;
+    }
+    @keyframes sunSpin {
+      to { transform: translate(-50%, -50%) rotateZ(180deg); }
+    }
+    #drink {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 20vh;
+      transform-origin: center bottom;
+      animation: drinkRotate 1.3s infinite alternate linear;
+    }
+    @keyframes drinkRotate {
+      from { transform: rotateZ(-15deg); }
+      to   { transform: rotateZ(15deg); }
+    }
+    h1 {
+      font-size: 4rem;
+      color: #7fcac0;
+      margin-bottom: 0;
+      font-family: 'Kaushan Script', cursive;
+    }
+    h4 {
+      color: #7fcac0;
+      margin: 3rem 0;
+    }
+    h3 {
+      font-size: 3rem;
+      color: lightblue;
+      font-family: 'Kaushan Script', cursive;
+    }
+    @media (min-width: 600px) {
+      aside {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+      }
+      section {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <div id="gif">
+      <div class="frame"></div>
+      <div class="frame"></div>
+      <div class="frame"></div>
+      <div class="frame"></div>
+      <div class="frame"></div>
+      <div class="frame"></div>
+      <div class="frame"></div>
+    </div>
+    <img id="sun" src="sun.png">
+    <img id="drink" src="drink.png">
+  </aside>
+  <section id="main">
+    <h1>Save our Date</h1>
+    <h4>Anna ❤ Valdrin</h4>
+    <p style="margin: 4rem 0">Saturday, November 30th, at 5PM</p>
+    <p>
+      <a target="_blank" rel="noopener noreferrer" 
+         href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Royalton Bávaro Resort &amp; Spa All Inclusive<br>
+        Punta Cana, Dominican Republic
+      </a>
+    </p>
+  </section>
+  <section id="more">
+    <h3>Wait, there's more!</h3>
+    <p>We are reserving a block of rooms at the Royalton Bavaro resort, punta cana, dominican republic. </p>
+    <p>More details on how to book your room at a discounted rate will be available through our wedding website soon.</p>
+    <p>Formal invitation to follow.</p>
+  </section>
+  <script>
+    const frames = document.querySelectorAll('#gif > *');
+    let frameIndex = 0;
+    let lastTime = 0;
+    function render(t = 0) {
+      requestAnimationFrame(render);
+      if (t - lastTime >= 300) {
+        lastTime = t;
+        frames.forEach((f, i) => f.style.opacity = Number(i <= frameIndex));
+        frameIndex = (frameIndex + 1) % frames.length;
+      }
+    }
+    render();
+  </script>
+</body>
+</html>
