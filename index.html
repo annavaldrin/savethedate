@@ -24,7 +24,7 @@
       display: block;
       contain: content;
       overflow: hidden;
-      height: calc(100 * var(--vh, 1vh));
+      height: var(--height, 100vh);
       position: relative;
     }
     .frame-container {
@@ -38,7 +38,7 @@
     }
     .frame {
       overflow: hidden;
-      height: calc(100 * var(--vh, 1vh));
+      height: var(--height, 100vh);
       position: relative;
     }
     .frame::after {
@@ -163,13 +163,15 @@
     <p>Formal invitation to follow.</p>
   </section>
   <script>
-    // We listen to the resize event
-    window.addEventListener('resize', updateVH);
-    updateVH();
-    function updateVH() {
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (iOS) {
+      // We listen to the resize event
+      window.addEventListener('resize', onResize);
+      onResize();
+    }
+    function onResize() {
       // We execute the same script as before
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);
     }
   </script>
 </body>
