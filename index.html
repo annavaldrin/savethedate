@@ -24,7 +24,7 @@
       display: block;
       contain: content;
       overflow: hidden;
-      height: 100vh;
+      height: calc(100 * var(--vh, 1vh));
       position: relative;
     }
     .frame-container {
@@ -38,12 +38,13 @@
     }
     .frame {
       overflow: hidden;
-      height: 100vh;
+      height: calc(100 * var(--vh, 1vh));
+      position: relative;
     }
     .frame::after {
       content: '';
       display: block;
-      height: 100vh;
+      height: 100%;
       transform: scale(1.1);
       background-repeat: no-repeat;
       background-position: center 90%;
@@ -161,5 +162,15 @@
     <p>More details on how to book your room at a discounted rate will be available through our wedding website soon.</p>
     <p>Formal invitation to follow.</p>
   </section>
+  <script>
+    // We listen to the resize event
+    window.addEventListener('resize', updateVH);
+    updateVH();
+    function updateVH() {
+      // We execute the same script as before
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+  </script>
 </body>
 </html>
