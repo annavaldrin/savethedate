@@ -12,6 +12,7 @@
       display: flex;
       flex-direction: column;
       text-align: center;
+      --animation: none 2.4s steps(7) infinite;
     }
     section {
       box-sizing: border-box;
@@ -22,51 +23,62 @@
       background-color: rgb(254, 246, 228);
     }
     aside {
+      contain: content;
       overflow: hidden;
       width: 100%;
-      position: relative;
       height: 100vh;
+      position: relative;
+    }
+    .frame-container {
+      filter: contrast(1.3);
+      will-change: transform;
+      animation: var(--animation);
+      animation-name: gif;
+    }
+    @keyframes gif {
+      to { transform: translateY(-700vh); }
     }
     .frame {
-      filter: contrast(1.3);
-      position: absolute;
-      left: 0;
-      top: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+    .frame::after {
+      content: '';
+      display: block;
       width: 100%;
       height: 100%;
-      will-change: opacity;
-      opacity: 0;
       transform: scale(1.1);
       background-repeat: no-repeat;
       background-position: center 90%;
       background-size: cover;
     }
-    .frame:nth-of-type(1) {
+    .f1::after {
       background-image: url("1.jpg");
     }
-    .frame:nth-of-type(2) {
+    .f2::after {
       background-image: url("2.jpg");
     }
-    .frame:nth-of-type(3) {
+    .f3::after {
       background-image: url("3.jpg");
     }
-    .frame:nth-of-type(4) {
+    .f4::after {
       background-image: url("4.jpg");
     }
-    .frame:nth-of-type(5) {
+    .f5::after {
       background-image: url("5.jpg");
     }
-    .frame:nth-of-type(6) {
+    .f6::after {
       background-image: url("6.jpg");
     }
-    .frame:nth-of-type(7) {
+    .f7::after {
       background-image: url("7.jpg");
     }
-    .frame:nth-of-type(5),
-    .frame:nth-of-type(6) {
+    .fix-traslate::after {
       transform: translateX(-12px) scale(1.1);
     }
-    .frame:nth-of-type(7) {
+    .fix-traslate-scale::after {
       transform: translate(-12px, -5px) rotate(1deg) scale(1.1);
     }
     #sun {
@@ -75,7 +87,8 @@
       left: 0;
       width: 30vh;
       transform: translate(-50%, -50%);
-      animation: sunSpin 2.8s infinite alternate linear;
+      animation: var(--animation);
+      animation-name: sunSpin;
     }
     @keyframes sunSpin {
       to { transform: translate(-50%, -50%) rotateZ(180deg); }
@@ -86,7 +99,8 @@
       right: 0;
       width: 20vh;
       transform-origin: center bottom;
-      animation: drinkRotate 1.3s infinite alternate linear;
+      animation: var(--animation);
+      animation-name: drinkRotate;
     }
     @keyframes drinkRotate {
       from { transform: rotateZ(-15deg); }
@@ -122,13 +136,15 @@
 </head>
 <body>
   <aside>
-    <div class="frame"></div>
-    <div class="frame"></div>
-    <div class="frame"></div>
-    <div class="frame"></div>
-    <div class="frame"></div>
-    <div class="frame"></div>
-    <div class="frame"></div>
+    <div class="frame-container">
+      <div class="frame f1"></div>
+      <div class="frame f2"></div>
+      <div class="frame f3"></div>
+      <div class="frame f4"></div>
+      <div class="frame f5 fix-traslate"></div>
+      <div class="frame f6 fix-traslate"></div>
+      <div class="frame f7 fix-traslate-scale"></div>
+    </div>
     <img id="sun" src="sun.png">
     <img id="drink" src="drink.png">
   </aside>
@@ -150,19 +166,5 @@
     <p>More details on how to book your room at a discounted rate will be available through our wedding website soon.</p>
     <p>Formal invitation to follow.</p>
   </section>
-  <script>
-    const frames = document.querySelectorAll('.frame');
-    let frameIndex = 0;
-    let lastTime = 0;
-    function render(t = 0) {
-      requestAnimationFrame(render);
-      if (t - lastTime >= 300) {
-        lastTime = t;
-        frames.forEach((f, i) => f.style.opacity = Number(i <= frameIndex));
-        frameIndex = (frameIndex + 1) % frames.length;
-      }
-    }
-    render();
-  </script>
 </body>
 </html>
