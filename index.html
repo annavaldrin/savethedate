@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Save the date! 11/30/2019</title>
-  <!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> -->
   <style>
+    @font-face {
+      font-family: 'hugs_and_kisses';
+      src: url('hugs_and_kisses.woff2') format('woff2'),
+          url('hugs_and_kisses.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
     body {
       margin: 0;
       font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -46,6 +52,7 @@
       display: block;
       height: 100%;
       transform: scale(1.1);
+      transform-origin: center 90%;
       background-repeat: no-repeat;
       background-position: center 90%;
       background-size: cover;
@@ -79,34 +86,91 @@
     }
     #sun {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -15vh;
+      left: -15vh;
       width: 30vh;
-      transform: translate(-50%, -50%);
       animation: var(--animation);
       animation-name: sunSpin;
     }
     @keyframes sunSpin {
-      to { transform: translate(-50%, -50%) rotateZ(180deg); }
+      to { transform: rotate(180deg); }
     }
-    #drink {
+    .leaf {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 20vh;
-      transform-origin: center bottom;
-      animation: var(--animation);
-      animation-name: drinkRotate;
+      top: 54vh;
+      right: -73px;
+      width: 200px;
+      transform-origin: right center;
+      animation: leafRotate 800ms alternate infinite ease-in-out;
     }
-    @keyframes drinkRotate {
-      from { transform: rotateZ(-15deg); }
-      to   { transform: rotateZ(15deg); }
+    .l2 {
+      right: -93px;
+      transform: rotate(-19deg);
+      animation-name: leafRotate2;
+      animation-delay: 200ms;
+    }
+    @keyframes leafRotate {
+      to   { transform: rotateZ(-3deg); }
+    }
+    @keyframes leafRotate2 {
+      to   { transform: rotateZ(-16deg); }
+    }
+    .heart {
+      display: block;
+      background-image: url("heart.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 12px;
+      height: 12px;
+    }
+    .backdrop {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(180deg, #0000 50%, rgba(0,0,0,.5) 100%);
+    }
+    #footer {
+      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
+      font-size: 1.1rem;
+      letter-spacing: .8px;
+      color: white;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      width: 100%;
+    }
+    #footer > * {
+      display: inline-block;
+    }
+    #footer > *+* {
+      margin-left: 0.5rem;
     }
     h1 {
-      font-size: 4rem;
-      color: #7fcac0;
+      font-size: 7rem;
+      line-height: 6.8rem;
+      font-weight: 100;
+      font-family: 'hugs_and_kisses';
       margin-bottom: 0;
-      font-family: 'Kaushan Script', cursive;
+      position: relative;
+    }
+    h1 .heart {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 20px;
+      top: 0;
+    }
+    .pulse {
+      animation: pulse .4s ease-in-out alternate infinite;
+    }
+    @keyframes pulse {
+      to { transform: scale(0.95); }
     }
     h4 {
       color: #7fcac0;
@@ -114,8 +178,8 @@
     }
     h3 {
       font-size: 3rem;
-      color: lightblue;
-      font-family: 'Kaushan Script', cursive;
+      color: black;
+      font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, sans-serif;
     }
     @media (min-width: 600px) {
       aside {
@@ -142,10 +206,19 @@
       <div class="frame f7 fix-traslate-scale"></div>
     </div>
     <img id="sun" src="sun.png">
-    <img id="drink" src="drink.png">
+    <div class="backdrop"></div>
+    <div id="footer">
+      <div>Anna &amp; Valdrin</div>
+      <div class="heart"></div>
+      <div>11.30.2019</div>
+      <div class="heart"></div>
+      <div>Dominican Republic</div>
+    </div>
+    <img class="leaf l1" src="leaf.svg">
+    <img class="leaf l2" src="leaf.svg">
   </aside>
   <section id="main">
-    <h1>Save our Date</h1>
+    <h1>Save the Date <span class="heart pulse"></span></h1>
     <h4>Anna ❤ Valdrin</h4>
     <p style="margin: 4rem 0">Saturday, November 30th, at 5PM</p>
     <p>
