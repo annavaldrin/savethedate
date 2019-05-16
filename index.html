@@ -172,14 +172,23 @@
     @keyframes pulse {
       to { transform: scale(0.95); }
     }
-    h4 {
-      color: #7fcac0;
+    h4, h5 {
+      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
+      font-size: 2rem;
       margin: 3rem 0;
+    }
+    h5 {
+      font-size: 1.4rem;
     }
     h3 {
       font-size: 3rem;
       color: black;
       font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, sans-serif;
+    }
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #00a0c0;
     }
     @media (min-width: 600px) {
       aside {
@@ -211,28 +220,33 @@
       <div>Anna &amp; Valdrin</div>
       <div class="heart"></div>
       <div>11.30.2019</div>
-      <div class="heart"></div>
-      <div>Dominican Republic</div>
+      <!-- <div class="heart"></div>
+      <div>Dominican Republic</div> -->
     </div>
     <img class="leaf l1" src="leaf.svg">
     <img class="leaf l2" src="leaf.svg">
   </aside>
   <section id="main">
     <h1>Save the Date <span class="heart pulse"></span></h1>
-    <h4>Anna ❤ Valdrin</h4>
-    <p style="margin: 4rem 0">Saturday, November 30th, at 5PM</p>
-    <p>
+    <h4>Saturday, November 30th<br>05:00 PM</h4>
+    <p id="countdown"></p>
+    <h5>Anna &amp; Valdrin</h5>
+    <p>at the
       <a target="_blank" rel="noopener noreferrer" 
          href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-        Royalton Bávaro Resort &amp; Spa All Inclusive<br>
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a>,<br>
         Punta Cana, Dominican Republic
-      </a>
+      
     </p>
   </section>
   <section id="more">
     <h3>Wait, there's more!</h3>
-    <p>We are reserving a block of rooms at the Royalton Bavaro resort, punta cana, dominican republic. </p>
-    <p>More details on how to book your room at a discounted rate will be available through our wedding website soon.</p>
+    <p>We are reserving a block of rooms at the
+        <a target="_blank" rel="noopener noreferrer" 
+        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
+    </p>
+    <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
     <p>Formal invitation to follow.</p>
   </section>
   <script>
@@ -245,6 +259,32 @@
     function onResize() {
       // We execute the same script as before
       document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);
+    }
+    countdown('2019/11/30 05:00:00 PM'); 
+    function countdown(endDate) {
+      const endTime = new Date(endDate).getTime();
+      const countdown = document.getElementById('countdown');
+      if (Number.isFinite(endTime)) {
+        calculate();
+      }
+      function calculate() {
+        const t = endTime - Date.parse(new Date());
+        if (!Math.floor((t/1000))) {
+          countdown.textContent = '👰🤵';
+          return;
+        }
+        const seconds = Math.floor((t/1000) % 60);
+        const minutes = Math.floor((t/1000/60) % 60);
+        const hours =   Math.floor((t/(1000*60*60)) % 24);
+        const days =    Math.floor(t/(1000*60*60*24));
+        const months =  Math.floor(t/(1000*60*60*24*30));
+        let msg = '-';
+        if (months > 0) msg += `${months} months (`;
+        msg += `${days} days, ${('0' + hours).slice(-2)}h ${('0' + minutes).slice(-2)}m ${('0' + seconds).slice(-2)}s`;
+        if (months > 0) msg += ')';
+        countdown.textContent = msg;
+        setTimeout(calculate, 1000);
+      }
     }
   </script>
 </body>
