@@ -143,19 +143,19 @@
       color: #7fcac0;
       margin: 3rem 0;
     }
-    #more {
-      margin: 0 auto;
+    p {
+      margin-left: auto;
+      margin-right: auto;
       padding: 0 20px;
-      box-sizing: border-box;
-      max-width: 405px;
-      margin-bottom: 100px;
+      max-width: 365px;
       color: #5a6068;
       font-family: "Helvetica Neue", Helvetica, sans-serif;
-    }
-    #more p {
       line-height: 20px;
     }
-    #more p a {
+    p:last-of-type {
+      margin-bottom: 100px;
+    }
+    p a {
       text-decoration: none;
       font-weight: bold;
       color: #00a0c0;
@@ -253,19 +253,17 @@
     </a>
   </div>
   <!--This sets gmail's description with a nice message.-->
-  <p style="opacity: 0; margin: 0; line-height: 0">Anna & Valdrin are getting married!</p>
-  <section id="more">
-    <a target="_blank" rel="noopener noreferrer" href="https://annavaldrin.github.io/savethedate/" class="button">View more</a>
-    <p>We are reserving a block of rooms at the
-        <a target="_blank" rel="noopener noreferrer" 
-        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-       Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
-    </p>
-    <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
-    <p>Formal invitation to follow.</p>
-    <p><img src="heart.png" class="heart"></p>
-    <p>Anna &amp; Valdrin</p>
-  </section>
+  <p style="opacity: 0; margin: 0; line-height: 0">Anna &amp; Valdrin are getting married!</p>
+  <a target="_blank" rel="noopener noreferrer" href="https://annavaldrin.github.io/savethedate/" class="button">View more</a>
+  <p>We are reserving a block of rooms at the
+      <a target="_blank" rel="noopener noreferrer" 
+      href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+      Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
+  </p>
+  <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
+  <p>Formal invitation to follow.</p>
+  <p><img src="heart.png" class="heart"></p>
+  <p>Anna &amp; Valdrin</p>
   <script>
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (iOS) {
