@@ -7,95 +7,58 @@
   <style>
     body {
       margin: 0;
-      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      margin-bottom: 100px;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
       text-align: center;
     }
-    h4 {
-      color: #7fcac0;
-      margin: 3rem 0;
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 0;
+      color: #5a6068
     }
     p {
+      margin-top: 4px;
       margin-left: auto;
       margin-right: auto;
       padding: 0 20px;
-      max-width: 365px;
-      color: #5a6068;
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      max-width: 410px;
+      box-sizing: border-box;
+      color: #7a828c;
       line-height: 20px;
     }
-    p:last-of-type {
-      margin-bottom: 100px;
-    }
-    p a {
+    a {
       text-decoration: none;
-      font-weight: bold;
       color: #00a0c0;
     }
-    .button,
-    .button:focus,
-    .button:hover {
-      display: block;
-      background-color: #ff4f3c;  
-      border-radius: 6px;
-      margin: 30px auto;
-      color: white;
-      letter-spacing: 1px;
-      padding: 10px 0;
-      max-width: 180px;
-      box-sizing: border-box;
-      font-size: 13px;
-      font-weight: bold;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-    }
-    .heart {
-      display: block;
-      width: 12px;
-      height: 12px;
-      margin: auto;
-    }
-    #gif img {
+    img {
       display: inline-block;
       width: 100%;
       padding: 0 20px;
-      max-width: 405px;
+      max-width: 410px;
       box-sizing: border-box;
-    }
-    #gif a {
-      display: inline-block;
     }
   </style>
 </head>
 <body>
-  <div id="gif">
-    <a target="_blank" rel="noopener noreferrer" href="https://annavaldrin.github.io/savethedate/">
-      <img src="savethedate.gif">
-    </a>
-  </div>
-  <!--This sets gmail's description with a nice message.-->
-  <p style="opacity: 0; margin: 0; line-height: 0">Anna &amp; Valdrin are getting married!</p>
-  <a target="_blank" rel="noopener noreferrer" href="https://annavaldrin.github.io/savethedate/" class="button">View more</a>
+  <img src="savethedate.gif">
+  <h3>When &amp; Where</h3>  
+  <p>
+    <a target="_blank" rel="noopener noreferrer"
+    href="https://www.google.com/calendar/render?action=TEMPLATE&text=Anna+%26+Valdrin+wedding%21&location=Royalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive%2C+Arena+Gorda+Beach+road%2C+Macao%2C+B%C3%A1varo+23301%2C+Dominican+Republic&dates=20191130T220000Z%2F20191201T110000Z">
+    November 30th, 2019</a><br>
+    Punta Cana, Dominican Republic<br>
+    🦃 + 🏝
+  </p>
+  <h3>Suggested Dates of Travel</h3>
+  <p>11/27 - 12/04</p>
+  <h3>Guest Accommodations</h3>
   <p>We are reserving a block of rooms at the
       <a target="_blank" rel="noopener noreferrer" 
       href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-      Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
+      Royalton Bávaro Resort &amp; Spa All Inclusive</a>.
   </p>
-  <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
-  <p>Formal invitation to follow.</p>
-  <p><img class="heart" src="heart.png"></p>
-  <p>Anna &amp; Valdrin</p>
-  <script>
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (iOS) {
-      // We listen to the resize event
-      window.addEventListener('resize', onResize);
-      onResize();
-    }
-    function onResize() {
-      // We execute the same script as before
-      document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);
-    }
-  </script>
+  <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email! 👀</p>
+  <p>Formal invitation to follow 📬</p>
+  <p>With <span style="color:#f3867a">❤</span><br>Anna &amp; Valdrin</p>
 </body>
 </html>
