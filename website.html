@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Anna &amp; Valdrin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
+
+  <style rel=stylesheet href="https://use.typekit.net/hiz3qle.css"></style>
+  <style>
+    @font-face {
+      font-family: 'hugs_and_kisses';
+      src: url('hugs_and_kisses.woff2') format('woff2'),
+        url('hugs_and_kisses.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    html {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      --lazy-image-fit: cover;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      background: #fefefe;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #5a6068;
+    }
+
+    header>div {
+      width: 100%;
+      text-align: left;
+    }
+
+    header>a {
+      padding: 0 20px;
+      font-family: "brandon-grotesque", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      text-transform: uppercase;
+      font-size: .8rem;
+      text-decoration: none;
+      color: #5a6068;
+    }
+
+    lazy-image {
+      display: block;
+    }
+
+    /* ---- Main START ---- */
+
+    #main {
+      display: block;
+      contain: content;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    #main lazy-image {
+      width: 100%;
+      height: 100%;
+    }
+
+    #main .leaf {
+      position: absolute;
+      bottom: 45%;
+      right: -14.5%;
+      width: 40%;
+      transform-origin: right center;
+      animation: leafRotate 800ms alternate infinite ease-in-out;
+    }
+
+    #main .l2 {
+      right: -18%;
+      transform: rotate(-19deg);
+      animation-name: leafRotate2;
+      animation-delay: 200ms;
+    }
+
+    @keyframes leafRotate {
+      to {
+        transform: rotateZ(-3deg);
+      }
+    }
+
+    @keyframes leafRotate2 {
+      to {
+        transform: rotateZ(-16deg);
+      }
+    }
+
+    #main h1 {
+      font-size: 6rem;
+      line-height: 7rem;
+      color: white;
+      font-weight: 100;
+      font-family: 'hugs_and_kisses';
+      position: absolute;
+      left: 15%;
+      top: 30%;
+      margin: 0;
+      text-align: left;
+    }
+
+    #main .backdrop {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(270deg, #0000 29%, rgba(0, 0, 0, .29) 100%);
+    }
+
+    /* ---- Main END   ---- */
+
+    #countdown {
+      padding: 20px 10px;
+      color: #5a6068;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: -116px;
+      height: 116px;
+      background: #fefefe;
+      position: relative;
+    }
+
+    #countdown li {
+      font-size: .7em;
+      width: 5rem;
+      list-style-type: none;
+      text-transform: uppercase;
+    }
+
+    #countdown span {
+      font-family: 'hugs_and_kisses';
+      display: block;
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+
+    section:not(#main) {
+      max-width: 900px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+
+    input {
+      display: inline-block;
+      width: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      border: none;
+      border-bottom: 2px lightgray solid;
+      background: #fcfcfc;
+      padding: 5px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #notice {
+      font-size: .9rem;
+      font-style: italic;
+    }
+
+    #rooms {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 20px 0;
+    }
+
+    .room {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+      margin-top: 40px;
+    }
+    .room + .room {
+      margin-left: 5px;
+    }
+
+    .room .title {
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .room lazy-image {
+      height: 200px;
+    }
+
+    .room .total {
+      position: absolute;
+      font-size: 1.2rem;
+      color: white;
+      text-shadow: 0 0 2px #000010;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 5px;
+      box-sizing: border-box;
+      background-image: linear-gradient(0, #0000 50%, rgba(0, 0, 0, .5) 100%);
+    }
+
+    .room .total span {
+      font-size: 1.6rem;
+      vertical-align: bottom;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>A &amp; V</div>
+    <a href="#">Home</a>
+    <a href="#">Resort</a>
+    <a href="#">Contacts</a>
+  </header>
+  <section id="main">
+    <lazy-image src="2.jpg"></lazy-image>
+    <div class="backdrop"></div>
+    <h1>Anna<br>&amp; Valdrin</h1>
+    <img class="leaf l1" src="leaf.svg">
+    <img class="leaf l2" src="leaf.svg">
+  </section>
+  <ul id="countdown">
+    <li><span id="months">&nbsp;</span>months</li>
+    <li><span id="days">&nbsp;</span>days</li>
+    <li><span id="hours">&nbsp;</span>Hours</li>
+    <li><span id="minutes">&nbsp;</span>Minutes</li>
+    <li><span id="seconds">&nbsp;</span>Seconds</li>
+  </ul>
+  <section>
+    Show prices for
+    <label>
+      <input type="number" id="adults" value="2" pattern="\d+" min="1" max="4">
+      adult<span class="plural">s</span>
+    </label>
+    and
+    <label>
+      <input type="number" id="children" value="0" pattern="\d+" min="0" max="4">
+      child<span class="plural">ren</span> age 2-12,</label>
+    <label>
+      staying
+      <input type="number" id="nights" value="3" pattern="\d+" min="3" max="14">
+      nights.</label>
+    <p id="notice">
+      Note: Child rates only applicable if sharing a room with 2 adults.
+    </p>
+    <div id="rooms">
+      <div id="swimOut" class="room">
+        <lazy-image src="http://annavaldrinwedding.com/images/package2.jpg"></lazy-image>
+        <div class="title">Luxury Junior Suite Swim-Out</div>
+        <div class="total"></div>
+      </div>
+      <div id="oceanView" class="room">
+        <lazy-image src="http://annavaldrinwedding.com/images/package1.jpg"></lazy-image>
+        <div class="title">Luxury Junior Suite Ocean View</div>
+        <div class="total"></div>
+      </div>
+      <div id="familySuite" class="room">
+        <lazy-image src="http://annavaldrinwedding.com/images/package3.jpg"></lazy-image>
+        <div class="title">Luxury Family Suite</div>
+        <div class="total"></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // HACK to get countdown.js to work
+    window.module = { exports: true };
+  </script>
+  <script src="https://www.unpkg.com/countdown@2.6.0/countdown.js"></script>
+  <script type="module">
+    import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
+
+    const countdown = window.module.exports;
+    const finalDiscount = 200;
+    const rates = {
+      familySuite: {
+        adults: {
+          1: 245,
+          2: 165,
+          3: 152,
+          4: 145,
+        },
+        children: 86,
+      },
+      oceanView: {
+        adults: {
+          1: 245,
+          2: 165,
+          3: 152,
+          4: 145,
+        },
+        children: 86,
+      },
+      swimOut: {
+        adults: {
+          1: 218,
+          2: 148,
+          3: 137,
+          4: 131,
+        },
+        children: 78,
+      }
+    };
+    const adultsEl = document.getElementById('adults');
+    const childrenEl = document.getElementById('children');
+    const nightsEl = document.getElementById('nights');
+    const countdownEl = document.getElementById('countdown');
+    const noticeEl = document.getElementById('notice');
+    document.addEventListener('change', updateFinalPrice);
+    updateFinalPrice();
+    countdownLoop('2019/11/30 05:00:00 PM');
+
+    function updateFinalPrice() {
+      let adultsCount = getValueAsNumber(adultsEl);
+      let childrenCount = getValueAsNumber(childrenEl);
+      if (childrenCount > 0 && adultsCount === 1) {
+        childrenCount--;
+        adultsCount++;
+        noticeEl.hidden = false;
+      } else {
+        noticeEl.hidden = true;
+      }
+      const nightsCount = getValueAsNumber(nightsEl);
+      for (const roomType in rates) {
+        const totalEl = document.querySelector(`#${roomType} .total`);
+        if (adultsCount + childrenCount > 4) {
+          totalEl.textContent = 'Max 4 guests';
+        } else {
+          const roomRates = rates[roomType];
+          const adultRate = roomRates.adults[adultsCount];
+          const childRate = roomRates.children;
+          const nightRate = adultRate * adultsCount + childRate * childrenCount;
+          let total = nightRate * nightsCount - finalDiscount;
+          if (total >= 1000) {
+            total = (total / 1000).toFixed(3).replace('.', ',');
+          }
+          totalEl.innerHTML = `Total: <span>\$${total}</span>`;
+        }
+      }
+    }
+
+    function getValueAsNumber(el) {
+      let num = Math.floor(Math.min(Math.max(el.valueAsNumber || 0, el.min), el.max));
+      el.value = num;
+      const plurEl = el.nextElementSibling;
+      if (plurEl && plurEl.classList.contains('plural')) {
+        plurEl.hidden = num === 1;
+      }
+      return num;
+    }
+
+    function countdownLoop(endDate) {
+      const endTime = new Date(endDate).getTime();
+      if (!Number.isFinite(endTime)) {
+        return;
+      }
+      const monthsEl = countdownEl.querySelector('#months');
+      const daysEl = countdownEl.querySelector('#days');
+      const hoursEl = countdownEl.querySelector('#hours');
+      const minutesEl = countdownEl.querySelector('#minutes');
+      const secondsEl = countdownEl.querySelector('#seconds');
+      calculate();
+      function calculate() {
+        const { months, days, hours, minutes, seconds } = countdown(new Date(), endTime, countdown.MONTHS |
+          countdown.DAYS |
+          countdown.HOURS |
+          countdown.MINUTES |
+          countdown.SECONDS);
+        monthsEl.textContent = format(months);
+        daysEl.textContent = format(days);
+        hoursEl.textContent = format(hours);
+        minutesEl.textContent = format(minutes);
+        secondsEl.textContent = format(seconds);
+        if (!months && !days && !hours && !minutes && !seconds) {
+          countdownEl.innerHTML = '👰🤵';
+          return;
+        }
+        setTimeout(calculate, 1000);
+
+        function format(t) {
+          return ('0' + t).slice(-2);
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
