@@ -614,33 +614,6 @@
           "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package3.jpg",
           "child_Price": 86
         },
-        "package4": {
-          "title4_c": "",
-          "singlePrice": "{package4_singlePrice}",
-          "doublePrice": "{package4_doublePrice}",
-          "triplePrice": "{package4_triplePrice}",
-          "type": "{package4_pricingtype4}",
-          "image_link": "{package4_imageLink}",
-          "child_price": ""
-        },
-        "package5": {
-          "title5_c": "",
-          "singlePrice": "{package5_singlePrice}",
-          "doublePrice": "{package5_doublePrice}",
-          "triplePrice": "{package5_triplePrice}",
-          "type": "{package5_pricingtype5}",
-          "image_link": "{package5_imageLink}",
-          "child_price": ""
-        },
-        "package6": {
-          "title6_c": "",
-          "singlePrice": "{package6_singlePrice}",
-          "doublePrice": "{package6_doublePrice}",
-          "triplePrice": "{package6_triplePrice}",
-          "type": "{package6_pricingtype6}",
-          "image_link": "{package6_imageLink}",
-          "child_price": ""
-        },
         "minimum_nights": 3,
         "destination": "Dominican Republic",
         "deposits_person": "$150",
@@ -686,6 +659,7 @@
     }
     const rates = {
       familySuite: {
+        index: 3,
         adults: {
           1: 245,
           2: 165,
@@ -695,6 +669,7 @@
         children: 86,
       },
       oceanView: {
+        index: 1,
         adults: {
           1: 245,
           2: 165,
@@ -704,6 +679,7 @@
         children: 86,
       },
       swimOut: {
+        index: 2,
         adults: {
           1: 218,
           2: 148,
@@ -745,6 +721,12 @@
           totalEl.textContent = 'Max 4 guests';
         } else {
           const roomRates = rates[roomType];
+          // We assume people are gonna input the same # of nights in destify page.
+          const pkg = data['websiteInfo']['package' + roomRates.index];
+          pkg.singlePrice = roomRates.adults[1] - finalDiscount / nightsCount;
+          pkg.doublePrice = roomRates.adults[2] - finalDiscount / (2 * nightsCount);
+          pkg.triplePrice = roomRates.adults[3] - finalDiscount / (3 * nightsCount);
+
           const adultRate = roomRates.adults[adultsCount];
           const childRate = roomRates.children;
           const nightRate = adultRate * adultsCount + childRate * childrenCount;
