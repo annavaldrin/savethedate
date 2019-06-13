@@ -282,6 +282,35 @@
       padding: 10px;
       background: white;
       border: 1px solid lightgray;
+      font-size: 1rem;
+    }
+
+    #rsvpForm:invalid button {
+      pointer-events: none;
+      background: white;
+      color: darkgray;
+      border-color: #eee;
+    }
+
+    #sentMsg {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      bottom: 50px;
+      background: white;
+      border: 1px solid lightgray;
+      border-radius: 15px;
+      padding: 20px;
+      box-sizing: border-box;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity .5s, transform .5s;
+    }
+
+    #sentMsg.show {
+      opacity: 1;
+      transform: none;
     }
 
     @media (max-width: 740px) {
@@ -359,6 +388,7 @@
         </label>
       </div>
       <button name="send">Send RSVP</button>
+      <div id="sentMsg"></div>
     </form>
   </section>
   <section id="resort">
@@ -587,6 +617,7 @@
     }
 
     const rsvpEl = document.getElementById('rsvpForm');
+    const sentMsg = document.getElementById('sentMsg');
     rsvpEl.addEventListener('submit', onSubmit);
     function onSubmit(event) {
       event.preventDefault();
@@ -608,9 +639,13 @@
       sendRsvp(data).then(() => {
         rsvpEl.send.disabled = false;
         rsvpEl.reset();
-        alert('RSVP sent, thank you!');
+        sentMsg.textContent = '📬 RSVP sent, thank you!';
       }, () => {
+        sentMsg.textContent = '⚠️ Something went wrong, please try again!';
         rsvpEl.send.disabled = false;
+      }).then(() => {
+        sentMsg.classList.add('show');
+        setTimeout(() => sentMsg.classList.remove('show'), 4000);
       });
     }
     async function sendRsvp(data) {
