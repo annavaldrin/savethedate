@@ -1,291 +1,677 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <title>Anna &amp; Valdrin</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Save the date! 11/30/2019</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
+
+  <style rel=stylesheet href="https://use.typekit.net/hiz3qle.css"></style>
   <style>
     @font-face {
       font-family: 'hugs_and_kisses';
       src: url('hugs_and_kisses.woff2') format('woff2'),
-          url('hugs_and_kisses.woff') format('woff');
+        url('hugs_and_kisses.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
+
+    html {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      --lazy-image-fit: cover;
+    }
+
     body {
       margin: 0;
-      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-      text-align: center;
-      --animation: none 2.4s steps(7) infinite;
     }
-    section {
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      background: #fefefe;
+      padding: 20px;
       box-sizing: border-box;
-      padding: 1rem;
-      background-color: white;
+      color: #5a6068;
     }
-    section:nth-of-type(even) {
-      background-color: rgb(254, 246, 228);
+
+    header>*:first-child {
+      width: 100%;
+      text-align: left;
     }
-    aside {
+
+    header>a {
+      font-family: "brandon-grotesque", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      text-transform: uppercase;
+      font-size: .8rem;
+      text-decoration: none;
+      color: #5a6068;
+    }
+
+    header>a+a {
+      margin-left: 40px;
+    }
+
+    lazy-image {
+      display: block;
+    }
+
+    /* ---- Main START ---- */
+
+    #main {
       display: block;
       contain: content;
       overflow: hidden;
       height: var(--height, 100vh);
       position: relative;
     }
-    .frame-container {
-      filter: contrast(1.3);
-      will-change: transform;
-      animation: var(--animation);
-      animation-name: scrollDown;
-    }
-    @keyframes scrollDown {
-      to { transform: translateY(-100%); }
-    }
-    .frame {
-      overflow: hidden;
-      height: var(--height, 100vh);
-      position: relative;
-    }
-    .frame::after {
-      content: '';
-      display: block;
+
+    #main lazy-image {
+      width: 100%;
       height: 100%;
-      transform: scale(1.1);
-      transform-origin: center 90%;
-      background-repeat: no-repeat;
-      background-position: center 90%;
-      background-size: cover;
     }
-    .f1::after {
-      background-image: url("1.jpg");
-    }
-    .f2::after {
-      background-image: url("2.jpg");
-    }
-    .f3::after {
-      background-image: url("3.jpg");
-    }
-    .f4::after {
-      background-image: url("4.jpg");
-    }
-    .f5::after {
-      background-image: url("5.jpg");
-    }
-    .f6::after {
-      background-image: url("6.jpg");
-    }
-    .f7::after {
-      background-image: url("7.jpg");
-    }
-    .fix-traslate::after {
-      transform: translateX(-12px) scale(1.1);
-    }
-    .fix-traslate-scale::after {
-      transform: translate(-12px, -5px) rotate(1deg) scale(1.1);
-    }
-    #sun {
+
+    #main .leaf {
       position: absolute;
-      top: -15vh;
-      left: -15vh;
-      width: 30vh;
-      animation: var(--animation);
-      animation-name: sunSpin;
-    }
-    @keyframes sunSpin {
-      to { transform: rotate(180deg); }
-    }
-    .leaf {
-      position: absolute;
-      top: 54vh;
-      right: -73px;
-      width: 200px;
+      bottom: 45%;
+      right: -14.5%;
+      width: 40%;
       transform-origin: right center;
       animation: leafRotate 800ms alternate infinite ease-in-out;
     }
-    .l2 {
-      right: -93px;
+
+    #main .l2 {
+      right: -18%;
       transform: rotate(-19deg);
       animation-name: leafRotate2;
       animation-delay: 200ms;
     }
+
     @keyframes leafRotate {
-      to   { transform: rotateZ(-3deg); }
+      to {
+        transform: rotateZ(-3deg);
+      }
     }
+
     @keyframes leafRotate2 {
-      to   { transform: rotateZ(-16deg); }
+      to {
+        transform: rotateZ(-16deg);
+      }
     }
-    .heart {
-      display: block;
-      background-image: url("heart.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      width: 12px;
-      height: 12px;
+
+    #main h1 {
+      font-size: 6rem;
+      line-height: 7rem;
+      color: white;
+      font-weight: 100;
+      font-family: 'hugs_and_kisses';
+      position: absolute;
+      left: 15%;
+      top: 30%;
+      margin: 0;
+      text-align: left;
     }
-    .backdrop {
+
+    #main .backdrop {
       position: absolute;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(180deg, #0000 50%, rgba(0,0,0,.5) 100%);
+      background-image: linear-gradient(270deg, #0000 29%, rgba(0, 0, 0, .29) 100%);
     }
-    #footer {
-      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
-      font-size: 1.1rem;
-      letter-spacing: .8px;
-      color: white;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      padding: 20px;
+
+    /* ---- Main END   ---- */
+
+    #countdown {
+      padding: 20px 10px;
+      color: #5a6068;
       box-sizing: border-box;
-      white-space: nowrap;
-      width: 100%;
-    }
-    #footer > * {
-      display: inline-block;
-    }
-    #footer > *+* {
-      margin-left: 0.5rem;
-    }
-    h1 {
-      font-size: 7rem;
-      line-height: 6.8rem;
-      font-weight: 100;
-      font-family: 'hugs_and_kisses';
-      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+      margin-top: -116px;
+      height: 116px;
+      background: #fefefe;
       position: relative;
     }
-    h1 .heart {
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      right: 20px;
-      top: 0;
+
+    #countdown li {
+      font-size: .7em;
+      width: 19%;
+      max-width: 180px;
+      list-style-type: none;
+      text-transform: uppercase;
     }
-    .pulse {
-      animation: pulse .4s ease-in-out alternate infinite;
+
+    #countdown span {
+      font-family: 'hugs_and_kisses';
+      display: block;
+      font-size: 4rem;
+      line-height: 4rem;
     }
-    @keyframes pulse {
-      to { transform: scale(0.95); }
+
+    section:not(#main) {
+      max-width: 900px;
+      padding: 100px 20px;
+      margin: 0 auto;
     }
-    h4, h5 {
-      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
+
+    section h1 {
       font-size: 2rem;
-      margin: 3rem 0;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
-    h5 {
+
+    input {
+      display: inline-block;
+      width: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      border: none;
+      border-bottom: 2px lightgray solid;
+      background: #fcfcfc;
+      padding: 5px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #notice {
+      font-size: .9rem;
+      font-style: italic;
+    }
+
+    #rooms {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 20px 0;
+    }
+
+    .room {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+      margin-top: 40px;
+      color: inherit;
+    }
+
+    .room+.room {
+      margin-left: 5px;
+    }
+
+    .room .title {
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .room lazy-image {
+      height: 150px;
+    }
+
+    .room .total {
+      position: absolute;
       font-size: 1.4rem;
+      line-height: 150px;
+      color: white;
+      text-shadow: 0 0 2px #000010;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 5px;
+      box-sizing: border-box;
+      background-image: linear-gradient(0, #0000 0%, rgba(0, 0, 0, .5) 100%);
     }
-    h3 {
-      font-size: 3rem;
-      color: black;
-      font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, sans-serif;
+
+    .room .total span {
+      font-size: 2rem;
+      vertical-align: bottom;
     }
-    a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #00a0c0;
+
+    #rsvpForm {
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 20px;
+      margin: 10px auto;
+      position: relative;
     }
-    @media (min-width: 600px) {
-      aside {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 50%;
+
+    #rsvpForm>*+* {
+      margin-top: 12px;
+    }
+
+    #rsvpForm input {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .horizontal {
+      display: flex;
+      flex-direction: row;
+    }
+
+    #rsvpForm label {
+      width: 100%;
+    }
+
+    #rsvpForm select {
+      display: block;
+      margin: auto;
+      margin-top: 5px;
+    }
+
+    #rsvpForm button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: white;
+      border: 1px solid lightgray;
+      font-size: 1rem;
+    }
+
+    #rsvpForm:invalid button {
+      pointer-events: none;
+      background: white;
+      color: darkgray;
+      border-color: #eee;
+    }
+
+    #sentMsg {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      bottom: 50px;
+      background: white;
+      border: 1px solid lightgray;
+      border-radius: 15px;
+      padding: 20px;
+      box-sizing: border-box;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity .5s, transform .5s;
+    }
+
+    #sentMsg.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 740px) {
+      #rooms {
+        display: block;
       }
-      section {
-        width: 50%;
+
+      .room+.room {
+        margin-left: 0;
+        margin-top: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #main h1 {
+        font-size: 4rem;
+      }
+
+      #countdown li {
+        font-size: .5em;
+      }
+
+      #countdown span {
+        font-size: 2.8rem;
       }
     }
   </style>
 </head>
+
 <body>
-  <aside>
-    <div class="frame-container">
-      <div class="frame f1"></div>
-      <div class="frame f2"></div>
-      <div class="frame f3"></div>
-      <div class="frame f4"></div>
-      <div class="frame f5 fix-traslate"></div>
-      <div class="frame f6 fix-traslate"></div>
-      <div class="frame f7 fix-traslate-scale"></div>
-    </div>
-    <img id="sun" src="sun.png">
+  <header>
+    <a href="#">A &amp; V</a>
+    <a href="#rsvp">RSVP</a>
+    <a href="#resort">Resort</a>
+    <a href="#contact">Contact</a>
+  </header>
+  <section id="main">
+    <lazy-image src="2.jpg"></lazy-image>
     <div class="backdrop"></div>
-    <div id="footer">
-      <div>Anna &amp; Valdrin</div>
-      <div class="heart"></div>
-      <div>11.30.2019</div>
-      <!-- <div class="heart"></div>
-      <div>Dominican Republic</div> -->
-    </div>
+    <h1>Anna<br>&amp; Valdrin</h1>
     <img class="leaf l1" src="leaf.svg">
     <img class="leaf l2" src="leaf.svg">
-  </aside>
-  <section id="main">
-    <h1>Save the Date <span class="heart pulse"></span></h1>
-    <h4>Saturday, November 30th<br>05:00 PM</h4>
-    <p id="countdown"></p>
-    <h5>Anna &amp; Valdrin</h5>
-    <p>at the
-      <a target="_blank" rel="noopener noreferrer" 
-         href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-        Royalton Bávaro Resort &amp; Spa All Inclusive</a>,<br>
-        Punta Cana, Dominican Republic
-      
-    </p>
   </section>
-  <section id="more">
-    <h3>Wait, there's more!</h3>
-    <p>We are reserving a block of rooms at the
-        <a target="_blank" rel="noopener noreferrer" 
+  <ul id="countdown">
+    <li><span id="months">&nbsp;</span>months</li>
+    <li><span id="days">&nbsp;</span>days</li>
+    <li><span id="hours">&nbsp;</span>Hours</li>
+    <li><span id="minutes">&nbsp;</span>Minutes</li>
+    <li><span id="seconds">&nbsp;</span>Seconds</li>
+  </ul>
+  <section id="rsvp">
+    <h1>RSVP</h1>
+    <form id="rsvpForm">
+      <input type="text" name="name" required placeholder="Your Full Name">
+      <input type="email" name="email" required placeholder="Your Email">
+      <input type="tel" name="phone" placeholder="Your Phone Number">
+      <div class="horizontal">
+        <label>Guests:
+          <select name="guests" required>
+            <option value="">--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </label>
+        <label>Attending?
+          <select name="attending" required>
+            <option value="">--</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+      </div>
+      <button name="send">Send RSVP</button>
+      <div id="sentMsg"></div>
+    </form>
+  </section>
+  <section id="resort">
+    <h1>Resort</h1>
+    <p><a target="_blank" rel="noopener noreferrer"
         href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-        Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a>,
+      Punta Cana, Dominican Republic</p>
+    <h3>Packages</h3>
+    <ul>
+      <li>Exclusive Group Discount</li>
+      <li>Low Deposits $150 Per Person</li>
+      <li>0% Interest Payment Plans</li>
+      <li>Round-trip Hotel Shuttle</li>
+      <li>Split Payments Allowed</li>
+    </ul>
+    <p>The packages are All Inclusive, with <b>Round-trip Hotel Shuttle</b>, unlimited dining, beverages (alcoholic &
+      non-alcoholic), activities, entertainment, taxes and fees.</p>
+    Show prices for
+    <label>
+      <input type="number" id="adults" value="2" pattern="\d+" min="1" max="4">
+      adult<span class="plural">s</span>
+    </label>
+    and
+    <label>
+      <input type="number" id="children" value="0" pattern="\d+" min="0" max="4">
+      child<span class="plural">ren</span> age 2-12,</label>
+    <label>
+      staying
+      <input type="number" id="nights" value="3" pattern="\d+" min="3" max="14">
+      nights:</label>
+    <p id="notice" hidden>
+      Note: Child rates only applicable if sharing a room with 2 adults.
     </p>
-    <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
-    <p>Formal invitation to follow.</p>
+    <div id="rooms">
+      <a id="swimOut" class="room" target="_blank" rel="noopener noreferrer"
+        href="https://destify.com/reservation/?r=36791258">
+        <lazy-image src="http://annavaldrinwedding.com/images/package2.jpg"></lazy-image>
+        <div class="title">Luxury Junior Suite Swim-Out</div>
+        <div class="total"></div>
+      </a>
+      <a id="oceanView" class="room" target="_blank" rel="noopener noreferrer"
+        href="https://destify.com/reservation/?r=36791258">
+        <lazy-image src="http://annavaldrinwedding.com/images/package1.jpg"></lazy-image>
+        <div class="title">Luxury Junior Suite Ocean View</div>
+        <div class="total"></div>
+      </a>
+      <a id="familySuite" class="room" target="_blank" rel="noopener noreferrer"
+        href="https://destify.com/reservation/?r=36791258">
+        <lazy-image src="http://annavaldrinwedding.com/images/package3.jpg"></lazy-image>
+        <div class="title">Luxury Family Suite</div>
+        <div class="total"></div>
+      </a>
+    </div>
+  </section>
+  <section>
+    <h1>Things to do</h1>
+
+    <h3>Eat and drink</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
+      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+
+    <h3>Play</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
+      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+
+    <h3>Explore</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
+      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+
+    <h2>Schedule of activities</h2>
+    <p>Work in progress, keep an eye on this</p>
+  </section>
+  <section id="contact">
+    <h1>Questions?</h1>
+    <p>Contact the agent today!</p>
+    <p>Ben Herrmann, <a href="mailto:ben@destify.com">ben@destify.com</a></p>
+    <p>Call: <a href="tel:(773) 800-2960">(773) 800-2960</a></p>
+    <p>Text: <a href="sms:(224) 225-5564">(224) 225-5564</a></p>
   </section>
   <script>
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (iOS) {
-      // We listen to the resize event
-      window.addEventListener('resize', onResize);
+    // HACK to get countdown.js to work
+    window.module = { exports: true };
+  </script>
+  <script src="https://www.unpkg.com/countdown@2.6.0/countdown.js"></script>
+  <script type="module">
+    import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
+
+    const countdown = window.module.exports;
+    const finalDiscount = 200;
+    const rates = {
+      familySuite: {
+        adults: {
+          1: 245,
+          2: 165,
+          3: 152,
+          4: 145,
+        },
+        children: 86,
+      },
+      oceanView: {
+        adults: {
+          1: 245,
+          2: 165,
+          3: 152,
+          4: 145,
+        },
+        children: 86,
+      },
+      swimOut: {
+        adults: {
+          1: 218,
+          2: 148,
+          3: 137,
+          4: 131,
+        },
+        children: 78,
+      }
+    };
+    const adultsEl = document.getElementById('adults');
+    const childrenEl = document.getElementById('children');
+    const nightsEl = document.getElementById('nights');
+    const countdownEl = document.getElementById('countdown');
+    const noticeEl = document.getElementById('notice');
+    document.addEventListener('change', calculatePrices);
+    calculatePrices();
+    countdownLoop('2019/11/30 05:00:00 PM');
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      addEventListener('resize', onResize);
       onResize();
     }
     function onResize() {
-      // We execute the same script as before
-      document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);
+      document.documentElement.style.setProperty('--height', `${innerHeight}px`);
     }
-    countdown('2019/11/30 05:00:00 PM'); 
-    function countdown(endDate) {
-      const endTime = new Date(endDate).getTime();
-      const countdown = document.getElementById('countdown');
-      if (Number.isFinite(endTime)) {
-        calculate();
+    function calculatePrices() {
+      let adultsCount = getValueAsNumber(adultsEl);
+      let childrenCount = getValueAsNumber(childrenEl);
+      if (childrenCount > 0 && adultsCount === 1) {
+        childrenCount--;
+        adultsCount++;
+        noticeEl.hidden = false;
+      } else {
+        noticeEl.hidden = true;
       }
+      const nightsCount = getValueAsNumber(nightsEl);
+      for (const roomType in rates) {
+        const totalEl = document.querySelector(`#${roomType} .total`);
+        if (adultsCount + childrenCount > 4) {
+          totalEl.textContent = 'Max 4 guests';
+        } else {
+          const roomRates = rates[roomType];
+          const adultRate = roomRates.adults[adultsCount];
+          const childRate = roomRates.children;
+          const nightRate = adultRate * adultsCount + childRate * childrenCount;
+          let total = nightRate * nightsCount - finalDiscount;
+          if (total >= 1000) {
+            total = (total / 1000).toFixed(3).replace('.', ',');
+          }
+          totalEl.innerHTML = `Total: <span>\$${total}</span>`;
+        }
+      }
+    }
+
+    function getValueAsNumber(el) {
+      let num = Math.floor(Math.min(Math.max(el.valueAsNumber || 0, el.min), el.max));
+      el.value = num;
+      const plurEl = el.nextElementSibling;
+      if (plurEl && plurEl.classList.contains('plural')) {
+        plurEl.hidden = num === 1;
+      }
+      return num;
+    }
+
+    function countdownLoop(endDate) {
+      const endTime = new Date(endDate).getTime();
+      if (!Number.isFinite(endTime)) {
+        return;
+      }
+      const monthsEl = countdownEl.querySelector('#months');
+      const daysEl = countdownEl.querySelector('#days');
+      const hoursEl = countdownEl.querySelector('#hours');
+      const minutesEl = countdownEl.querySelector('#minutes');
+      const secondsEl = countdownEl.querySelector('#seconds');
+      calculate();
       function calculate() {
-        const t = endTime - Date.parse(new Date());
-        if (!Math.floor((t/1000))) {
-          countdown.textContent = '👰🤵';
+        const { months, days, hours, minutes, seconds } = countdown(new Date(), endTime, countdown.MONTHS |
+          countdown.DAYS |
+          countdown.HOURS |
+          countdown.MINUTES |
+          countdown.SECONDS);
+        monthsEl.textContent = format(months);
+        daysEl.textContent = format(days);
+        hoursEl.textContent = format(hours);
+        minutesEl.textContent = format(minutes);
+        secondsEl.textContent = format(seconds);
+        if (!months && !days && !hours && !minutes && !seconds) {
+          countdownEl.innerHTML = '👰🤵';
           return;
         }
-        const seconds = Math.floor((t/1000) % 60);
-        const minutes = Math.floor((t/1000/60) % 60);
-        const hours =   Math.floor((t/(1000*60*60)) % 24);
-        const days =    Math.floor(t/(1000*60*60*24));
-        const months =  Math.floor(t/(1000*60*60*24*30));
-        let msg = '-';
-        if (months > 0) msg += `${months} months (`;
-        msg += `${days} days, ${('0' + hours).slice(-2)}h ${('0' + minutes).slice(-2)}m ${('0' + seconds).slice(-2)}s`;
-        if (months > 0) msg += ')';
-        countdown.textContent = msg;
         setTimeout(calculate, 1000);
+
+        function format(t) {
+          return ('0' + t).slice(-2);
+        }
+      }
+    }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA8xC3DKEyRDDFhmiRf2eo_eGXGxTO1doA",
+      authDomain: "annavaldrinwebsite.firebaseapp.com",
+      databaseURL: "https://annavaldrinwebsite.firebaseio.com",
+      projectId: "annavaldrinwebsite",
+      storageBucket: "annavaldrinwebsite.appspot.com",
+      messagingSenderId: "802447335363",
+      appId: "1:802447335363:web:94aec04029668ab3"
+    };
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = app.firestore();
+    const rsvpRef = db.collection('rsvps');
+    let rsvpId = null;
+    try {
+      rsvpId = localStorage.getItem('rsvpId');
+    } catch (e) {
+    }
+
+    const rsvpEl = document.getElementById('rsvpForm');
+    const sentMsg = document.getElementById('sentMsg');
+    rsvpEl.addEventListener('submit', onSubmit);
+    function onSubmit(event) {
+      event.preventDefault();
+      const {
+        name,
+        email,
+        attending,
+        guests,
+        phone,
+      } = event.target.elements;
+      const data = {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        attending: attending.value === 'yes',
+        guests: guests.valueAsNumber || 1,
+      };
+      rsvpEl.send.disabled = true;
+      sendRsvp(data).then(() => {
+        rsvpEl.send.disabled = false;
+        rsvpEl.reset();
+        sentMsg.textContent = '📬 RSVP sent, thank you!';
+      }, () => {
+        sentMsg.textContent = '⚠️ Something went wrong, please try again!';
+        rsvpEl.send.disabled = false;
+      }).then(() => {
+        sentMsg.classList.add('show');
+        setTimeout(() => sentMsg.classList.remove('show'), 4000);
+      });
+    }
+    async function sendRsvp(data) {
+      if (!rsvpId) {
+        data.createdAt = new Date();
+        rsvpId = (await rsvpRef.add(data)).id;
+        try {
+          localStorage.setItem('rsvpId', rsvpId);
+        } catch (e) {
+        }
+      } else {
+        data.modifiedAt = new Date();
+        try {
+          await rsvpRef.doc(rsvpId).update(data);
+        } catch (e) {
+          rsvpId = null;
+          data.modifiedAt = null;
+          delete data.modifiedAt;
+          await sendRsvp(data);
+        }
       }
     }
   </script>
 </body>
+
 </html>

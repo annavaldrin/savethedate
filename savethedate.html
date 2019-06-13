@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Save the date! 11/30/2019</title>
+  <style>
+    @font-face {
+      font-family: 'hugs_and_kisses';
+      src: url('hugs_and_kisses.woff2') format('woff2'),
+          url('hugs_and_kisses.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      margin: 0;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      text-align: center;
+      --animation: none 2.4s steps(7) infinite;
+    }
+    section {
+      box-sizing: border-box;
+      padding: 1rem;
+      background-color: white;
+    }
+    section:nth-of-type(even) {
+      background-color: rgb(254, 246, 228);
+    }
+    aside {
+      display: block;
+      contain: content;
+      overflow: hidden;
+      height: var(--height, 100vh);
+      position: relative;
+    }
+    .frame-container {
+      filter: contrast(1.3);
+      will-change: transform;
+      animation: var(--animation);
+      animation-name: scrollDown;
+    }
+    @keyframes scrollDown {
+      to { transform: translateY(-100%); }
+    }
+    .frame {
+      overflow: hidden;
+      height: var(--height, 100vh);
+      position: relative;
+    }
+    .frame::after {
+      content: '';
+      display: block;
+      height: 100%;
+      transform: scale(1.1);
+      transform-origin: center 90%;
+      background-repeat: no-repeat;
+      background-position: center 90%;
+      background-size: cover;
+    }
+    .f1::after {
+      background-image: url("1.jpg");
+    }
+    .f2::after {
+      background-image: url("2.jpg");
+    }
+    .f3::after {
+      background-image: url("3.jpg");
+    }
+    .f4::after {
+      background-image: url("4.jpg");
+    }
+    .f5::after {
+      background-image: url("5.jpg");
+    }
+    .f6::after {
+      background-image: url("6.jpg");
+    }
+    .f7::after {
+      background-image: url("7.jpg");
+    }
+    .fix-traslate::after {
+      transform: translateX(-12px) scale(1.1);
+    }
+    .fix-traslate-scale::after {
+      transform: translate(-12px, -5px) rotate(1deg) scale(1.1);
+    }
+    #sun {
+      position: absolute;
+      top: -15vh;
+      left: -15vh;
+      width: 30vh;
+      animation: var(--animation);
+      animation-name: sunSpin;
+    }
+    @keyframes sunSpin {
+      to { transform: rotate(180deg); }
+    }
+    .leaf {
+      position: absolute;
+      top: 54vh;
+      right: -73px;
+      width: 200px;
+      transform-origin: right center;
+      animation: leafRotate 800ms alternate infinite ease-in-out;
+    }
+    .l2 {
+      right: -93px;
+      transform: rotate(-19deg);
+      animation-name: leafRotate2;
+      animation-delay: 200ms;
+    }
+    @keyframes leafRotate {
+      to   { transform: rotateZ(-3deg); }
+    }
+    @keyframes leafRotate2 {
+      to   { transform: rotateZ(-16deg); }
+    }
+    .heart {
+      display: block;
+      background-image: url("heart.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 12px;
+      height: 12px;
+    }
+    .backdrop {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(180deg, #0000 50%, rgba(0,0,0,.5) 100%);
+    }
+    #footer {
+      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
+      font-size: 1.1rem;
+      letter-spacing: .8px;
+      color: white;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      width: 100%;
+    }
+    #footer > * {
+      display: inline-block;
+    }
+    #footer > *+* {
+      margin-left: 0.5rem;
+    }
+    h1 {
+      font-size: 7rem;
+      line-height: 6.8rem;
+      font-weight: 100;
+      font-family: 'hugs_and_kisses';
+      margin-bottom: 0;
+      position: relative;
+    }
+    h1 .heart {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 20px;
+      top: 0;
+    }
+    .pulse {
+      animation: pulse .4s ease-in-out alternate infinite;
+    }
+    @keyframes pulse {
+      to { transform: scale(0.95); }
+    }
+    h4, h5 {
+      font-family: 'Bodoni 72 Smallcaps', 'Bodoni', Georgia, serif;
+      font-size: 2rem;
+      margin: 3rem 0;
+    }
+    h5 {
+      font-size: 1.4rem;
+    }
+    h3 {
+      font-size: 3rem;
+      color: black;
+      font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, sans-serif;
+    }
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #00a0c0;
+    }
+    @media (min-width: 600px) {
+      aside {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+      }
+      section {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <div class="frame-container">
+      <div class="frame f1"></div>
+      <div class="frame f2"></div>
+      <div class="frame f3"></div>
+      <div class="frame f4"></div>
+      <div class="frame f5 fix-traslate"></div>
+      <div class="frame f6 fix-traslate"></div>
+      <div class="frame f7 fix-traslate-scale"></div>
+    </div>
+    <img id="sun" src="sun.png">
+    <div class="backdrop"></div>
+    <div id="footer">
+      <div>Anna &amp; Valdrin</div>
+      <div class="heart"></div>
+      <div>11.30.2019</div>
+      <!-- <div class="heart"></div>
+      <div>Dominican Republic</div> -->
+    </div>
+    <img class="leaf l1" src="leaf.svg">
+    <img class="leaf l2" src="leaf.svg">
+  </aside>
+  <section id="main">
+    <h1>Save the Date <span class="heart pulse"></span></h1>
+    <h4>Saturday, November 30th<br>05:00 PM</h4>
+    <p id="countdown"></p>
+    <h5>Anna &amp; Valdrin</h5>
+    <p>at the
+      <a target="_blank" rel="noopener noreferrer" 
+         href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a>,<br>
+        Punta Cana, Dominican Republic
+      
+    </p>
+  </section>
+  <section id="more">
+    <h3>Wait, there's more!</h3>
+    <p>We are reserving a block of rooms at the
+        <a target="_blank" rel="noopener noreferrer" 
+        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a> in Punta Cana, Dominican Republic.
+    </p>
+    <p>We'll be sharing our wedding website shortly with more details on how to book rooms at a discounted rate. Keep an eye out for our next email!</p>
+    <p>Formal invitation to follow.</p>
+  </section>
+  <script>
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (iOS) {
+      // We listen to the resize event
+      window.addEventListener('resize', onResize);
+      onResize();
+    }
+    function onResize() {
+      // We execute the same script as before
+      document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);
+    }
+    countdown('2019/11/30 05:00:00 PM'); 
+    function countdown(endDate) {
+      const endTime = new Date(endDate).getTime();
+      const countdown = document.getElementById('countdown');
+      if (Number.isFinite(endTime)) {
+        calculate();
+      }
+      function calculate() {
+        const t = endTime - Date.parse(new Date());
+        if (!Math.floor((t/1000))) {
+          countdown.textContent = '👰🤵';
+          return;
+        }
+        const seconds = Math.floor((t/1000) % 60);
+        const minutes = Math.floor((t/1000/60) % 60);
+        const hours =   Math.floor((t/(1000*60*60)) % 24);
+        const days =    Math.floor(t/(1000*60*60*24));
+        const months =  Math.floor(t/(1000*60*60*24*30));
+        let msg = '-';
+        if (months > 0) msg += `${months} months (`;
+        msg += `${days} days, ${('0' + hours).slice(-2)}h ${('0' + minutes).slice(-2)}m ${('0' + seconds).slice(-2)}s`;
+        if (months > 0) msg += ')';
+        countdown.textContent = msg;
+        setTimeout(calculate, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
