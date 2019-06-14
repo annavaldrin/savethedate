@@ -46,7 +46,7 @@
       text-align: left;
     }
 
-    header>a {
+    header a {
       font-family: "brandon-grotesque", sans-serif;
       font-weight: 400;
       font-style: normal;
@@ -56,8 +56,145 @@
       color: #5a6068;
     }
 
-    header>a+a {
+    header #side {
+      display: contents;
+    }
+
+    header .hamburger {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: none;
+    }
+
+    header a+a {
       margin-left: 40px;
+    }
+
+    .hamburger {
+      padding: 15px 15px;
+      display: inline-block;
+      cursor: pointer;
+      transition-property: opacity, filter;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
+      font: inherit;
+      color: inherit;
+      outline: none;
+      text-transform: none;
+      background-color: transparent;
+      border: 0;
+      margin: 0;
+      overflow: visible;
+    }
+
+    .hamburger:hover {
+      opacity: 0.7;
+    }
+
+    .hamburger.is-active:hover {
+      opacity: 0.7;
+    }
+
+    .hamburger.is-active .hamburger-inner,
+    .hamburger.is-active .hamburger-inner::before,
+    .hamburger.is-active .hamburger-inner::after {
+      background-color: #000;
+    }
+
+    .hamburger-box {
+      width: 30px;
+      height: 20px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hamburger-inner {
+      display: block;
+      top: 50%;
+      margin-top: -1px;
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      width: 30px;
+      height: 2px;
+      background-color: #000;
+      border-radius: 4px;
+      position: absolute;
+      transition-property: transform;
+      transition-duration: 0.15s;
+      transition-timing-function: ease;
+    }
+
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      content: "";
+      display: block;
+    }
+
+    .hamburger-inner::before {
+      top: -8px;
+    }
+
+    .hamburger-inner::after {
+      bottom: -8px;
+    }
+
+    .hamburger--3dx .hamburger-box {
+      perspective: 80px;
+    }
+
+    .hamburger--3dx .hamburger-inner {
+      transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .hamburger--3dx .hamburger-inner::before,
+    .hamburger--3dx .hamburger-inner::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .hamburger--3dx.is-active .hamburger-inner {
+      background-color: transparent !important;
+      transform: rotateY(180deg);
+    }
+
+    .hamburger--3dx.is-active .hamburger-inner::before {
+      transform: translate3d(0, 8px, 0) rotate(45deg);
+    }
+
+    .hamburger--3dx.is-active .hamburger-inner::after {
+      transform: translate3d(0, -8px, 0) rotate(-45deg);
+    }
+
+    /*
+   * 3DX Reverse
+   */
+    .hamburger--3dx-r .hamburger-box {
+      perspective: 80px;
+    }
+
+    .hamburger--3dx-r .hamburger-inner {
+      transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .hamburger--3dx-r .hamburger-inner::before,
+    .hamburger--3dx-r .hamburger-inner::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .hamburger--3dx-r.is-active .hamburger-inner {
+      background-color: transparent !important;
+      transform: rotateY(-180deg);
+    }
+
+    .hamburger--3dx-r.is-active .hamburger-inner::before {
+      transform: translate3d(0, 10px, 0) rotate(45deg);
+    }
+
+    .hamburger--3dx-r.is-active .hamburger-inner::after {
+      transform: translate3d(0, -10px, 0) rotate(-45deg);
     }
 
     lazy-image {
@@ -83,6 +220,7 @@
       padding: 0;
       height: var(--height, 100vh);
       position: relative;
+      overflow: hidden;
     }
 
     #main lazy-image {
@@ -130,6 +268,7 @@
       margin: 0;
       text-align: left;
     }
+
     #main h2 {
       color: white;
       position: absolute;
@@ -330,7 +469,7 @@
       width: 100%;
       height: 150px;
     }
-  
+
     .map {
       border: 0;
       height: 300px;
@@ -360,6 +499,37 @@
     }
 
     @media (max-width: 480px) {
+      header #side {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        height: var(--height, 100vh);
+        padding: 10px;
+        box-sizing: border-box;
+        background: white;
+        transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+      }
+
+      header #side>a {
+        margin: 0;
+        padding: 20px;
+      }
+
+      header .hamburger:not(.is-active)+#side {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      header .hamburger {
+        display: block;
+        z-index: 1;
+      }
+
       #main h1 {
         font-size: 4rem;
         line-height: 5rem;
@@ -388,10 +558,18 @@
 <body>
   <header>
     <a href="#">A &amp; V</a>
-    <a href="#rsvp">RSVP</a>
-    <a href="#resort">Accomodations</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+    <button class="hamburger hamburger--3dx" type="button">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+    <div id="side">
+      <a href="#main">Home</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#resort">Accomodations</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
   </header>
   <section id="main">
     <lazy-image src="2.jpg"></lazy-image>
@@ -464,7 +642,7 @@
       We secured a block of rooms at the
       <a target="_blank" rel="noopener noreferrer" href="https://www.royaltonresorts.com/royalton-bavaro">Royalton
         Bávaro Resort &amp; Spa All Inclusive</a> in
-        Punta Cana, Dominican Republic.
+      Punta Cana, Dominican Republic.
     </p>
     <iframe class="map"
       src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824551.8372207391!2d-69.55630110866662!3d18.77380919994668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ebbfad2b3771%3A0xc65d0ca12cc2fb7a!2sRoyalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive!5e0!3m2!1sen!2sus!4v1560488529114!5m2!1sen!2sus"
@@ -750,6 +928,14 @@
     const nightsEl = document.getElementById('nights');
     const countdownEl = document.getElementById('countdown');
     const noticeEl = document.getElementById('notice');
+    const hamburgerEl = document.querySelector('.hamburger');
+    document.addEventListener('click', () => {
+      hamburgerEl.classList.remove('is-active');
+    });
+    hamburgerEl.addEventListener('click', (event) => {
+      hamburgerEl.classList.toggle('is-active');
+      event.stopPropagation();
+    });
     document.addEventListener('change', calculatePrices);
     calculatePrices();
     countdownLoop('2019/11/30 05:00:00 PM');
