@@ -126,9 +126,17 @@
       font-family: 'hugs_and_kisses';
       position: absolute;
       left: 15%;
-      top: 30%;
+      bottom: 45%;
       margin: 0;
       text-align: left;
+    }
+    #main h2 {
+      color: white;
+      position: absolute;
+      left: 15%;
+      bottom: 30%;
+      margin: 0;
+      font-weight: 100;
     }
 
     #main .backdrop {
@@ -322,15 +330,21 @@
       width: 100%;
       height: 150px;
     }
+  
+    .map {
+      border: 0;
+      height: 300px;
+      width: 100%;
+    }
 
     .topCounter {
       counter-reset: number;
       list-style-type: none;
     }
 
-    .topCounter > *::before {
+    .topCounter>*::before {
       counter-increment: number;
-      content: "~ " counter(number) " ~";
+      content: "~ "counter(number) " ~";
       margin-top: 40px;
       margin-bottom: 10px;
       display: block;
@@ -348,6 +362,16 @@
     @media (max-width: 480px) {
       #main h1 {
         font-size: 4rem;
+        line-height: 5rem;
+        text-align: center;
+        left: 0;
+        right: 0;
+      }
+
+      #main h2 {
+        text-align: center;
+        left: 0;
+        right: 0;
       }
 
       #countdown li {
@@ -365,7 +389,8 @@
   <header>
     <a href="#">A &amp; V</a>
     <a href="#rsvp">RSVP</a>
-    <a href="#resort">Resort</a>
+    <a href="#resort">Accomodations</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </header>
   <section id="main">
@@ -400,7 +425,7 @@
     We have hired a booking agent to make your travel planning easy. Please checkout below for more
     information about pricing and booking.
     <p>
-      <a href="#resort">Resort &amp; packages</a>
+      <a href="#resort">Guest Accomodations &amp; Travel</a>
     </p>
   </section>
   <section id="rsvp">
@@ -434,24 +459,23 @@
     </form>
   </section>
   <section id="resort">
-    <h1>Resort</h1>
-    <h3>Where</h3>
+    <h1>Guest Accomodations and Travel</h1>
     <p>
-      <a target="_blank" rel="noopener noreferrer"
-        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-        Royalton Bávaro Resort &amp; Spa All Inclusive</a>,
-      Punta Cana, Dominican Republic
+      We secured a block of rooms at the
+      <a target="_blank" rel="noopener noreferrer" href="https://www.royaltonresorts.com/royalton-bavaro">Royalton
+        Bávaro Resort &amp; Spa All Inclusive</a> in
+        Punta Cana, Dominican Republic.
     </p>
+    <iframe class="map"
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824551.8372207391!2d-69.55630110866662!3d18.77380919994668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ebbfad2b3771%3A0xc65d0ca12cc2fb7a!2sRoyalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive!5e0!3m2!1sen!2sus!4v1560488529114!5m2!1sen!2sus"
+      allowfullscreen></iframe>
     <div class="resortPhotos">
       <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg" alt="">
       <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro2.jpg" alt="">
       <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro3.jpg" alt="">
     </div>
-    <h3>Guest Accomodations and Travel</h3>
-    <h4>Hotel</h4>
     <p>
-      We secured a block of rooms at the Royalton Bavaro. The packages are All Inclusive, with <b>Round-trip Hotel
-        Shuttle from PUJ airport</b>, unlimited dining,
+      The packages are All Inclusive, with <b>Round-trip Hotel Shuttle from PUJ airport</b>, unlimited dining,
       beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.
       Minimum length of stay is 3 nights.
       Please note that resorts (including Royalton Bavaro) charge an entry fee ($100+) if you are not a guest of the
@@ -511,16 +535,22 @@
     <h1>Things to do</h1>
 
     <h3>Eat and drink</h3>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
-      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+    <p>TODO. Royalton Bavaro Resort: restaurants <a
+        href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants</a>
+      <br>Bars and entertainment <a
+        href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment</a>
+    </p>
 
     <h3>Play</h3>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
-      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+    <p>TODO. Royalton Bavaro Resort: Beach games, Night Events, Night Club.
+      <br>Beach party <a
+        href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party</a>
+      <br>Casino <a
+        href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino</a>
+    </p>
 
     <h3>Explore</h3>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, atque! Alias pariatur dolor sint non, laboriosam
-      eaque quia animi ipsa, aperiam libero architecto beatae aliquid ad dolore magnam? Maxime, cumque!</p>
+    <p>TODO. Off-road tours with ATV 4x4, Snorkeling, River Cave, Catamaran, Deep-sea fishing.</p>
 
     <h2>Schedule of activities</h2>
     <p>Work in progress, keep an eye on this</p>
