@@ -81,8 +81,6 @@
     #main {
       max-width: 100%;
       padding: 0;
-      contain: content;
-      overflow: hidden;
       height: var(--height, 100vh);
       position: relative;
     }
@@ -196,23 +194,18 @@
     }
 
     #rooms {
-      display: flex;
-      justify-content: space-evenly;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 5px;
       margin: 20px 0;
     }
 
     .room {
       width: 100%;
-      text-align: center;
-      display: inline-block;
       position: relative;
       margin-top: 40px;
       color: inherit;
       cursor: pointer;
-    }
-
-    .room+.room {
-      margin-left: 5px;
     }
 
     .room .title {
@@ -318,14 +311,37 @@
       transform: none;
     }
 
+    .resortPhotos {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 5px;
+    }
+
+    .resortPhotos img {
+      object-fit: cover;
+      width: 100%;
+      height: 150px;
+    }
+
+    .topCounter {
+      counter-reset: number;
+      list-style-type: none;
+    }
+
+    .topCounter > *::before {
+      counter-increment: number;
+      content: "~ " counter(number) " ~";
+      margin-top: 40px;
+      margin-bottom: 10px;
+      display: block;
+      color: #5a6068;
+      font-size: .8rem;
+      letter-spacing: 2px;
+    }
+
     @media (max-width: 740px) {
       #rooms {
-        display: block;
-      }
-
-      .room+.room {
-        margin-left: 0;
-        margin-top: 40px;
+        grid-template-columns: 1fr;
       }
     }
 
@@ -426,9 +442,11 @@
         Royalton Bávaro Resort &amp; Spa All Inclusive</a>,
       Punta Cana, Dominican Republic
     </p>
-    <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg" alt="">
-    <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro2.jpg" alt="">
-    <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro3.jpg" alt="">
+    <div class="resortPhotos">
+      <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg" alt="">
+      <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro2.jpg" alt="">
+      <img src="http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro3.jpg" alt="">
+    </div>
     <h3>Guest Accomodations and Travel</h3>
     <h4>Hotel</h4>
     <p>
@@ -507,6 +525,19 @@
     <h2>Schedule of activities</h2>
     <p>Work in progress, keep an eye on this</p>
   </section>
+  <section>
+    <h1>Gifts</h1>
+    <p>We don't need you to bring us gifts – we know plane tickets are expensive and your presence at the wedding is
+      enough! If you really want to give us something, a contribution to our honeymoon fund would be awesome.</p>
+    <p>Here's how you can get the money to us:
+      <ol class="topCounter">
+        <li>Hand-deliver a cheque to us at the wedding</li>
+        <li>Contribute to our PayPal fund here</li>
+        <li>Venmo, Square Cash, or whatever other electronic payment method you want to template.placeholder@gmail.com
+        </li>
+      </ol>
+    </p>
+  </section>
   <section id="faq">
     <h1>Frequently Asked Questions</h1>
     <h2>What is included in the rate?</h2>
@@ -575,15 +606,10 @@
     <p>Call: <a href="tel:(773) 800-2960">(773) 800-2960</a></p>
     <p>Text: <a href="sms:(224) 225-5564">(224) 225-5564</a></p>
   </section>
-  <script>
-    // HACK to get countdown.js to work
-    window.module = { exports: true };
-  </script>
-  <script src="https://www.unpkg.com/countdown@2.6.0/countdown.js"></script>
   <script type="module">
+    import countdown from './countdown.js';
     import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
 
-    const countdown = window.module.exports;
     const finalDiscount = 200;
     var data = {
       "websiteInfo": {
