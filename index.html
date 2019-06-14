@@ -479,6 +479,7 @@
     .topCounter {
       counter-reset: number;
       list-style-type: none;
+      padding: 0;
     }
 
     .topCounter>*::before {
@@ -945,9 +946,10 @@
     onResize();
     function onResize() {
       onResize._id && cancelAnimationFrame(onResize._id);
-      onResize._id = requestAnimationFrame(() =>
-        document.documentElement.style.setProperty('--height', `${innerHeight}px`)
-      );
+      onResize._id = requestAnimationFrame(() => {
+        const height = innerHeight + 'px';
+        document.documentElement.style.setProperty('--height', height);
+      });
     }
     function calculatePrices() {
       let adultsCount = getValueAsNumber(adultsEl);
