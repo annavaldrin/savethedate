@@ -231,9 +231,9 @@
 
     #palm {
       position: fixed;
-      top: 40%;
-      right: -14.5%;
-      width: 40%;
+      top: calc(50% - 70px);
+      right: -110px;
+      width: 300px;
       z-index: 10;
       transform-origin: right center;
       will-change: transform;
@@ -249,7 +249,7 @@
     }
 
     #main .l2 {
-      left: 8%;
+      left: 10%;
       transform: rotate(-19deg);
       animation-name: leafRotate2;
       animation-delay: 200ms;
@@ -511,6 +511,12 @@
       #rooms {
         grid-template-columns: 1fr;
       }
+
+      #palm {
+        top: calc(50% - 70px);
+        right: -90px;
+        width: 200px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -565,6 +571,12 @@
 
       #countdown span {
         font-size: 2.8rem;
+      }
+
+      #palm {
+        top: calc(50% - 60px);
+        right: -60px;
+        width: 140px;
       }
     }
   </style>
