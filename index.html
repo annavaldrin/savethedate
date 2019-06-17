@@ -825,31 +825,31 @@
     var data = {
       "websiteInfo": {
         "package1": {
-          "title1_c": "Luxury Junior Suite Ocean View",
+          "title_c": "Luxury Junior Suite Ocean View",
           "singlePrice": 245,
           "doublePrice": 165,
           "triplePrice": 152,
           "type": "<!--pt1-->/person/night<!--pt1end-->",
           "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package1.jpg",
-          "child_Price": 86
+          "child_price": 86
         },
         "package2": {
-          "title2_c": "Luxury Junior Suite Swim-Out",
+          "title_c": "Luxury Junior Suite Swim-Out",
           "singlePrice": 218,
           "doublePrice": 148,
           "triplePrice": 137,
           "type": "<!--pt2-->/person/night<!--pt2end-->",
           "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package2.jpg",
-          "child_Price": 78
+          "child_price": 78
         },
         "package3": {
-          "title3_c": "Luxury Family Suite",
+          "title_c": "Luxury Family Suite",
           "singlePrice": 245,
           "doublePrice": 165,
           "triplePrice": 152,
           "type": "<!--pt3-->/person/night<!--pt3end-->",
           "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package3.jpg",
-          "child_Price": 86
+          "child_price": 86
         },
         "minimum_nights": 3,
         "destination": "Dominican Republic",
@@ -871,10 +871,10 @@
       var hotelImageLink = info['hotel_image'];
 
       var pkg = info['package' + num] || {};
-      var title_c = pkg['title1_c'] || '';
-      var single_price = pkg['singlePrice'] || '';
-      var double_price = pkg['doublePrice'] || '';
-      var triple_price = pkg['triplePrice'] || '';
+      var title_c = pkg['title_c'] || '';
+      var singlePrice = pkg['singlePrice'] || '';
+      var doublePrice = pkg['doublePrice'] || '';
+      var triplePrice = pkg['triplePrice'] || '';
       var type = pkg['type'] || '';
       var imageLink = pkg['image_link'] || '';
       var child_price = pkg['child_price'] || '';
@@ -885,9 +885,9 @@
         '&destination=' + destination +
         '&deposits_person=' + deposits_person +
         '&hotel=' + hotel +
-        '&singlePrice=' + single_price +
-        '&doublePrice=' + double_price +
-        '&triplePrice=' + triple_price +
+        '&singlePrice=' + singlePrice +
+        '&doublePrice=' + doublePrice +
+        '&triplePrice=' + triplePrice +
         '&theme=' + theme +
         '&type=' + type +
         '&imageLink=' + imageLink +
