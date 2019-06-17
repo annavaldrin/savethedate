@@ -229,17 +229,27 @@
       height: 100%;
     }
 
-    #main .leaf {
-      position: absolute;
-      bottom: 45%;
+    #palm {
+      position: fixed;
+      top: 40%;
       right: -14.5%;
       width: 40%;
+      z-index: 10;
+      transform-origin: right center;
+      will-change: transform;
+      transition: transform 300ms ease-out;
+    }
+
+    #main .leaf {
+      left: 0;
+      position: absolute;
+      width: 100%;
       transform-origin: right center;
       animation: leafRotate 800ms alternate infinite ease-in-out;
     }
 
     #main .l2 {
-      right: -18%;
+      left: 8%;
       transform: rotate(-19deg);
       animation-name: leafRotate2;
       animation-delay: 200ms;
@@ -588,8 +598,10 @@
       <li><span id="minutes">&nbsp;</span>Minutes</li>
       <li><span id="seconds">&nbsp;</span>Seconds</li>
     </ul>
-    <img class="leaf l1" src="leaf.svg">
-    <img class="leaf l2" src="leaf.svg">
+    <div id="palm">
+      <img class="leaf l1" src="leaf.svg">
+      <img class="leaf l2" src="leaf.svg">
+    </div>
   </section>
   <section>
     We're getting married on November 30, 2019 at
@@ -983,6 +995,17 @@
         mainEl.style.maxHeight = innerHeight + 'px';
       }
     });
+    const palmEl = document.getElementById('palm');
+    let lastScroll = 0;
+    let debounceId;
+    addEventListener('scroll', () => {
+      const scrollTop = document.scrollingElement.scrollTop;
+      const angle = Math.max(-10, Math.min(10, scrollTop - lastScroll));
+      lastScroll = scrollTop;
+      palmEl.style.transform = `rotateZ(${angle}deg)`;
+      debounceId && clearTimeout(debounceId);
+      setTimeout(() => palmEl.style.transform = '', 200);
+    }, { passive: true });
     function calculatePrices() {
       let adultsCount = getValueAsNumber(adultsEl);
       let childrenCount = getValueAsNumber(childrenEl);
