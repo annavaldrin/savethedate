@@ -218,7 +218,7 @@
     #main {
       max-width: 100%;
       padding: 0;
-      height: var(--height, 100vh);
+      height: 100vh;
       position: relative;
       overflow: hidden;
     }
@@ -329,12 +329,6 @@
       padding: 5px;
     }
 
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
     #notice {
       font-size: .9rem;
       font-style: italic;
@@ -343,48 +337,56 @@
     #rooms {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 5px;
-      margin: 20px 0;
+      grid-gap: 15px;
     }
 
     .room {
       width: 100%;
       position: relative;
-      margin-top: 40px;
       color: inherit;
-      cursor: pointer;
     }
 
     .room .title {
-      position: absolute;
-      bottom: 100%;
+      margin-top: 30px;
       margin-bottom: 10px;
-      width: 100%;
     }
 
     .room lazy-image {
       height: 150px;
     }
 
+    .room .price {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 10px;
+    }
+
     .room .total {
-      position: absolute;
       font-size: 1.4rem;
-      line-height: 150px;
-      color: white;
-      text-shadow: 0 0 2px #000010;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       text-align: center;
       padding: 5px;
       box-sizing: border-box;
-      background-image: linear-gradient(0, #0000 0%, rgba(0, 0, 0, .5) 100%);
     }
 
-    .room .total span {
-      font-size: 2rem;
-      vertical-align: bottom;
+    .button {
+      display: inline-block;
+      background: white;
+      border: 1px solid lightgray;
+      font-size: 1rem;
+      color: inherit;
+      padding: 10px 15px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:disabled,
+    form:invalid .button {
+      pointer-events: none;
+      background: white;
+      color: darkgray;
+      border-color: #eee;
     }
 
     #rsvpForm {
@@ -424,17 +426,6 @@
     #rsvpForm button {
       display: block;
       width: 100%;
-      padding: 10px;
-      background: white;
-      border: 1px solid lightgray;
-      font-size: 1rem;
-    }
-
-    #rsvpForm:invalid button {
-      pointer-events: none;
-      background: white;
-      color: darkgray;
-      border-color: #eee;
     }
 
     #sentMsg {
@@ -508,7 +499,7 @@
         right: 0;
         left: 0;
         top: 0;
-        height: var(--height, 100vh);
+        height: 100vh;
         padding: 10px;
         box-sizing: border-box;
         background: white;
@@ -595,7 +586,7 @@
     Punta Cana, Dominican Republic! We truly hope you can join our family
     in this special celebration.
     <p>
-      <a href="#rsvp">RSVP</a>
+      <a class="button" href="#rsvp">RSVP</a>
     </p>
     <p>
       We will be staying at the Royalton Bavaro from November 26th to December 4th, and we'll be planning several
@@ -604,7 +595,7 @@
     We have hired a booking agent to make your travel planning easy. Please checkout below for more
     information about pricing and booking.
     <p>
-      <a href="#resort">Guest Accomodations &amp; Travel</a>
+      <a class="button" href="#resort">Guest Accomodations &amp; Travel</a>
     </p>
   </section>
   <section id="rsvp">
@@ -633,7 +624,7 @@
           </select>
         </label>
       </div>
-      <button name="send">Send RSVP</button>
+      <button class="button" name="send">Send RSVP</button>
       <div id="sentMsg"></div>
     </form>
   </section>
@@ -664,44 +655,82 @@
       No worries if you don't know how long you can stay. You can
       secure the room with a $150 deposit.
     </p>
-    <p>Final payment is due by September 08, 2019. Changes to your booking can be made until then.</p>
+    <p>Final payment is due by <b>September 08, 2019</b>. Changes to your booking can be made until then, at no charge.
+    </p>
     <p>
       Several types of rooms are available, so rates will vary. You
       can calculate the cost and book your room below.
     </p>
     Show prices for
     <label>
-      <input type="number" id="adults" value="2" pattern="\d+" min="1" max="4">
+      <select name="adults" id="adults">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
       adult<span class="plural">s</span>
     </label>
     and
     <label>
-      <input type="number" id="children" value="0" pattern="\d+" min="0" max="4">
+      <select name="children" id="children">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
       child<span class="plural">ren</span> age 2-12,</label>
     <label>
       staying
-      <input type="number" id="nights" value="3" pattern="\d+" min="3" max="14">
+      <select name="nights" id="nights">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+      </select>
       nights:</label>
     <p id="notice" hidden>
       Note: Child rates only applicable if sharing a room with 2 adults.
     </p>
     <div id="rooms">
-      <a id="swimOut" class="room" target="_blank" rel="noopener noreferrer" onclick="getWebsiteInfo(2)">
-        <lazy-image src="package2.jpg"></lazy-image>
+      <div id="swimOut" class="room">
         <div class="title">Luxury Junior Suite Swim-Out</div>
-        <div class="total"></div>
-      </a>
-      <a id="oceanView" class="room" target="_blank" rel="noopener noreferrer" onclick="getWebsiteInfo(1)">
-        <lazy-image src="package1.jpg"></lazy-image>
+        <lazy-image src="package2.jpg"></lazy-image>
+        <div class="price">
+          <span class="total"></span>
+          <button class="button" onclick="getWebsiteInfo(2)">Book now</button>
+        </div>
+      </div>
+      <div id="oceanView" class="room">
         <div class="title">Luxury Junior Suite Ocean View</div>
-        <div class="total"></div>
-      </a>
-      <a id="familySuite" class="room" target="_blank" rel="noopener noreferrer" onclick="getWebsiteInfo(3)">
-        <lazy-image src="package3.jpg"></lazy-image>
+        <lazy-image src="package1.jpg"></lazy-image>
+        <div class="price">
+          <span class="total"></span>
+          <button class="button" onclick="getWebsiteInfo(1)">Book now</button>
+        </div>
+      </div>
+      <div id="familySuite" class="room">
         <div class="title">Luxury Family Suite</div>
-        <div class="total"></div>
-      </a>
+        <lazy-image src="package3.jpg"></lazy-image>
+        <div class="price">
+          <span class="total"></span>
+          <button class="button" onclick="getWebsiteInfo(3)">Book now</button>
+        </div>
+      </div>
     </div>
+    <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
+    <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
+      Make a balance payment
+    </a>
     <h4>Flights</h4>
     <p>We suggest to fly to Punta Cana International Airport (PUJ). It is 30min away from the resort, and the
       Round-trip Hotel Shuttle is already provided in the package.</p>
@@ -830,7 +859,7 @@
           "doublePrice": 165,
           "triplePrice": 152,
           "type": "<!--pt1-->/person/night<!--pt1end-->",
-          "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package1.jpg",
+          "image_link": "http://annavaldrinwedding.com/images/package1.jpg",
           "child_price": 86
         },
         "package2": {
@@ -839,7 +868,7 @@
           "doublePrice": 148,
           "triplePrice": 137,
           "type": "<!--pt2-->/person/night<!--pt2end-->",
-          "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package2.jpg",
+          "image_link": "http://annavaldrinwedding.com/images/package2.jpg",
           "child_price": 78
         },
         "package3": {
@@ -848,7 +877,7 @@
           "doublePrice": 165,
           "triplePrice": 152,
           "type": "<!--pt3-->/person/night<!--pt3end-->",
-          "image_link": "https://zapagents.com/websites/annavaldrinwedding.com/images/package3.jpg",
+          "image_link": "http://annavaldrinwedding.com/images/package3.jpg",
           "child_price": 86
         },
         "minimum_nights": 3,
@@ -857,7 +886,7 @@
         "hotel": "Royalton Bavaro",
         "reservation": 36791258,
         "theme": "LillyTheme",
-        "hotel_image": "https://zapagents.com/websites/annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg"
+        "hotel_image": "http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg"
       }
     };
     window.getWebsiteInfo = function getWebsiteInfo(num) {
@@ -888,8 +917,8 @@
         '&singlePrice=' + singlePrice +
         '&doublePrice=' + doublePrice +
         '&triplePrice=' + triplePrice +
-        '&theme=' + theme +
-        '&type=' + type +
+        // '&theme=' + theme +
+        // '&type=' + type +
         '&imageLink=' + imageLink +
         '&hotelImageLink=' + hotelImageLink +
         '&child_price=' + child_price, '_blank');
@@ -942,15 +971,13 @@
     document.addEventListener('change', calculatePrices);
     calculatePrices();
     countdownLoop('2019/11/30 05:00:00 PM');
-    addEventListener('resize', onResize);
-    onResize();
-    function onResize() {
-      onResize._id && cancelAnimationFrame(onResize._id);
-      onResize._id = requestAnimationFrame(() => {
-        const height = innerHeight + 'px';
-        document.documentElement.style.setProperty('--height', height);
-      });
-    }
+    requestAnimationFrame(() => {
+      const mainEl = document.getElementById('main');
+      if (innerHeight < mainEl.offsetHeight) {
+        console.log('set #main height to' + innerHeight);
+        mainEl.style.maxHeight = innerHeight + 'px';
+      }
+    });
     function calculatePrices() {
       let adultsCount = getValueAsNumber(adultsEl);
       let childrenCount = getValueAsNumber(childrenEl);
@@ -966,7 +993,9 @@
         const totalEl = document.querySelector(`#${roomType} .total`);
         if (adultsCount + childrenCount > 4) {
           totalEl.textContent = 'Max 4 guests';
+          totalEl.nextElementSibling.disabled = true;
         } else {
+          totalEl.nextElementSibling.disabled = false;
           const roomRates = rates[roomType];
           // We assume people are gonna input the same # of nights in destify page.
           const pkg = data['websiteInfo']['package' + roomRates.index];
@@ -981,14 +1010,13 @@
           if (total >= 1000) {
             total = (total / 1000).toFixed(3).replace('.', ',');
           }
-          totalEl.innerHTML = `Total: <span>\$${total}</span>`;
+          totalEl.innerHTML = `Total: \$${total}`;
         }
       }
     }
 
     function getValueAsNumber(el) {
-      let num = Math.floor(Math.min(Math.max(el.valueAsNumber || 0, el.min), el.max));
-      el.value = num;
+      const num = Number(el.value);
       const plurEl = el.nextElementSibling;
       if (plurEl && plurEl.classList.contains('plural')) {
         plurEl.hidden = num === 1;
