@@ -385,6 +385,60 @@
       box-sizing: border-box;
     }
 
+    #bookingWrapper {
+      position: fixed;
+      top: 20px;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 100;
+      background: white;
+      box-sizing: border-box;
+      outline: 20px solid #0005;
+      transition: transform .3s, opacity .3s;
+    }
+
+    #bookingWrapper:not(.show) {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    #booking {
+      width: 100%;
+      height: 100%;
+    }
+
+    #bookingWrapper .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      border-bottom: 1px solid lightgray;
+      padding: 10px;
+      box-sizing: border-box;
+      height: 90px;
+      background: white;
+    }
+
+    #bookingWrapper button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(10px, -10px);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgb(70, 70, 70);
+      border: 1px solid white;
+      color: white;
+      font-size: 1rem;
+    }
+
     select {
       background: white;
       border: 1px solid lightgray;
@@ -478,9 +532,7 @@
       grid-gap: 5px;
     }
 
-    .resortPhotos img {
-      object-fit: cover;
-      width: 100%;
+    .resortPhotos>* {
       height: 150px;
     }
 
@@ -677,17 +729,17 @@
       src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824551.8372207391!2d-69.55630110866662!3d18.77380919994668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ebbfad2b3771%3A0xc65d0ca12cc2fb7a!2sRoyalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive!5e0!3m2!1sen!2sus!4v1560488529114!5m2!1sen!2sus"
       allowfullscreen></iframe>
     <div class="resortPhotos">
-      <img src="RoyaltonBavaro1.jpg" alt="">
-      <img src="RoyaltonBavaro2.jpg" alt="">
-      <img src="RoyaltonBavaro3.jpg" alt="">
+      <lazy-image src="RoyaltonBavaro1.jpg"></lazy-image>
+      <lazy-image src="RoyaltonBavaro2.jpg"></lazy-image>
+      <lazy-image src="RoyaltonBavaro3.jpg"></lazy-image>
     </div>
     <p>
       The packages are All Inclusive, with <b>round-trip shuttle from PUJ airport to Royalton Bavaro</b>, unlimited
       dining,
       beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.
       Minimum length of stay is 3 nights.
-      Please note that resorts (including Royalton Bavaro) charge an entry fee (&dollar;100+) if you are not a guest of the
-      resort.
+      Please note that resorts (including Royalton Bavaro) charge an entry fee (&dollar;100+) if you are not a guest of
+      the resort.
     </p>
     <p>
       No worries if you don't know how long you can stay. You can
@@ -740,7 +792,7 @@
         <lazy-image src="package2.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(2)">Book now</button>
+          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
         </div>
       </div>
       <div id="oceanView" class="room">
@@ -748,7 +800,7 @@
         <lazy-image src="package1.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(1)">Book now</button>
+          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
         </div>
       </div>
       <div id="familySuite" class="room">
@@ -756,9 +808,14 @@
         <lazy-image src="package3.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(3)">Book now</button>
+          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
         </div>
       </div>
+    </div>
+    <div id="bookingWrapper">
+      <iframe id="booking" frameborder="0"></iframe>
+      <div class="header"></div>
+      <button onclick="closeBooking()">╳</button>
     </div>
     <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
     <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
@@ -882,81 +939,39 @@
     import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
 
     const finalDiscount = 200;
-    var data = {
-      "websiteInfo": {
-        "package1": {
-          "title_c": "Luxury Junior Suite Ocean View",
-          "singlePrice": 245,
-          "doublePrice": 165,
-          "triplePrice": 152,
-          "type": "<!--pt1-->/person/night<!--pt1end-->",
-          "image_link": "http://annavaldrinwedding.com/images/package1.jpg",
-          "child_price": 86
-        },
-        "package2": {
-          "title_c": "Luxury Junior Suite Swim-Out",
-          "singlePrice": 218,
-          "doublePrice": 148,
-          "triplePrice": 137,
-          "type": "<!--pt2-->/person/night<!--pt2end-->",
-          "image_link": "http://annavaldrinwedding.com/images/package2.jpg",
-          "child_price": 78
-        },
-        "package3": {
-          "title_c": "Luxury Family Suite",
-          "singlePrice": 245,
-          "doublePrice": 165,
-          "triplePrice": 152,
-          "type": "<!--pt3-->/person/night<!--pt3end-->",
-          "image_link": "http://annavaldrinwedding.com/images/package3.jpg",
-          "child_price": 86
-        },
-        "minimum_nights": 3,
-        "destination": "Dominican Republic",
-        "deposits_person": "$150",
-        "hotel": "Royalton Bavaro",
-        "reservation": 36791258,
-        "theme": "LillyTheme",
-        "hotel_image": "http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg"
-      }
+    const info = {
+      "packages": [{
+        "title_c": "Luxury Junior Suite Ocean View",
+        "singlePrice": 245,
+        "doublePrice": 165,
+        "triplePrice": 152,
+        "image_link": "http://annavaldrinwedding.com/images/package1.jpg",
+        "child_price": 86
+      }, {
+        "title_c": "Luxury Junior Suite Swim-Out",
+        "singlePrice": 218,
+        "doublePrice": 148,
+        "triplePrice": 137,
+        "image_link": "http://annavaldrinwedding.com/images/package2.jpg",
+        "child_price": 78
+      }, {
+        "title_c": "Luxury Family Suite",
+        "singlePrice": 245,
+        "doublePrice": 165,
+        "triplePrice": 152,
+        "image_link": "http://annavaldrinwedding.com/images/package3.jpg",
+        "child_price": 86
+      }],
+      "minimum_nights": 3,
+      "destination": "Dominican Republic",
+      "deposits_person": "$150",
+      "hotel": "Royalton Bavaro",
+      "reservation": 36791258,
+      "hotel_image": "http://annavaldrinwedding.com/assets/img/Royalton%20Bavaro1.jpg"
     };
-    window.getWebsiteInfo = function getWebsiteInfo(num) {
-      var info = data['websiteInfo'];
-      var minimum_nights = info['minimum_nights'];
-      var destination = info['destination'];
-      var deposits_person = info['deposits_person'];
-      var hotel = info['hotel'];
-      var reservation = info['reservation'];
-      var theme = info['theme'];
-      var hotelImageLink = info['hotel_image'];
-
-      var pkg = info['package' + num] || {};
-      var title_c = pkg['title_c'] || '';
-      var singlePrice = pkg['singlePrice'] || '';
-      var doublePrice = pkg['doublePrice'] || '';
-      var triplePrice = pkg['triplePrice'] || '';
-      var type = pkg['type'] || '';
-      var imageLink = pkg['image_link'] || '';
-      var child_price = pkg['child_price'] || '';
-
-      window.open('https://destify.com/reservation/redirect.php/?r=' + reservation +
-        '&title_c=' + title_c +
-        '&minimum_nights=' + minimum_nights +
-        '&destination=' + destination +
-        '&deposits_person=' + deposits_person +
-        '&hotel=' + hotel +
-        '&singlePrice=' + singlePrice +
-        '&doublePrice=' + doublePrice +
-        '&triplePrice=' + triplePrice +
-        // '&theme=' + theme +
-        // '&type=' + type +
-        '&imageLink=' + imageLink +
-        '&hotelImageLink=' + hotelImageLink +
-        '&child_price=' + child_price, '_blank');
-    }
     const rates = {
       familySuite: {
-        index: 3,
+        index: 2,
         adults: {
           1: 245,
           2: 165,
@@ -966,7 +981,7 @@
         children: 86,
       },
       oceanView: {
-        index: 1,
+        index: 0,
         adults: {
           1: 245,
           2: 165,
@@ -976,7 +991,7 @@
         children: 86,
       },
       swimOut: {
-        index: 2,
+        index: 1,
         adults: {
           1: 218,
           2: 148,
@@ -992,6 +1007,14 @@
     const countdownEl = document.getElementById('countdown');
     const noticeEl = document.getElementById('notice');
     const hamburgerEl = document.querySelector('.hamburger');
+    const bookingWrapperEl = document.getElementById('bookingWrapper');
+    const palmEl = document.getElementById('palm');
+    let lastScroll = 0;
+    let scrollDebounceId;
+
+    window.getWebsiteInfo = getWebsiteInfo;
+    window.closeBooking = closeBooking;
+
     document.addEventListener('click', () => {
       hamburgerEl.classList.remove('is-active');
     });
@@ -999,9 +1022,13 @@
       hamburgerEl.classList.toggle('is-active');
       event.stopPropagation();
     });
+
     document.addEventListener('change', calculatePrices);
     calculatePrices();
+
     countdownLoop('2019/11/30 05:00:00 PM');
+
+
     requestAnimationFrame(() => {
       const mainEl = document.getElementById('main');
       if (innerHeight < mainEl.offsetHeight) {
@@ -1009,17 +1036,16 @@
         mainEl.style.maxHeight = innerHeight + 'px';
       }
     });
-    const palmEl = document.getElementById('palm');
-    let lastScroll = 0;
-    let debounceId;
+
     addEventListener('scroll', () => {
       const scrollTop = document.scrollingElement.scrollTop;
       const angle = Math.max(-10, Math.min(10, scrollTop - lastScroll));
       lastScroll = scrollTop;
       palmEl.style.transform = `rotateZ(${angle}deg)`;
-      debounceId && clearTimeout(debounceId);
+      scrollDebounceId && clearTimeout(scrollDebounceId);
       setTimeout(() => palmEl.style.transform = '', 200);
     }, { passive: true });
+
     function calculatePrices() {
       let adultsCount = getValueAsNumber(adultsEl);
       let childrenCount = getValueAsNumber(childrenEl);
@@ -1040,7 +1066,7 @@
           totalEl.nextElementSibling.disabled = false;
           const roomRates = rates[roomType];
           // We assume people are gonna input the same # of nights in destify page.
-          const pkg = data['websiteInfo']['package' + roomRates.index];
+          const pkg = info.packages[roomRates.index];
           pkg.singlePrice = roomRates.adults[1] - finalDiscount / nightsCount;
           pkg.doublePrice = roomRates.adults[2] - finalDiscount / (2 * nightsCount);
           pkg.triplePrice = roomRates.adults[3] - finalDiscount / (3 * nightsCount);
@@ -1098,6 +1124,59 @@
           return ('0' + t).slice(-2);
         }
       }
+    }
+
+    function getWebsiteInfo(element) {
+      const room = element.closest('.room');
+      const i = rates[room.id].index;
+      const {
+        minimum_nights,
+        destination,
+        deposits_person,
+        hotel,
+        reservation,
+        hotelImageLink,
+        packages,
+      } = info;
+      const {
+        title_c,
+        singlePrice,
+        doublePrice,
+        triplePrice,
+        child_price,
+        imageLink,
+      } = packages[i];
+
+      const url = 'https://destify.com/reservation/redirect.php/?r=' + reservation +
+        '&minimum_nights=' + minimum_nights +
+        '&destination=' + destination +
+        '&deposits_person=' + deposits_person +
+        '&hotel=' + hotel +
+        '&hotelImageLink=' + hotelImageLink +
+        '&title_c=' + title_c +
+        '&singlePrice=' + singlePrice +
+        '&doublePrice=' + doublePrice +
+        '&triplePrice=' + triplePrice +
+        '&child_price=' + child_price +
+        '&imageLink=' + imageLink;
+
+      bookingWrapperEl.querySelector('iframe').src = url;
+
+      const adultsCount = getValueAsNumber(adultsEl);
+      const childrenCount = getValueAsNumber(childrenEl);
+      const nightsCount = getValueAsNumber(nightsEl);
+      const total = room.querySelector('.total').textContent;
+      const adults = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
+      const kids = childrenCount ? ' + ' + childrenCount + ' kid' + (childrenCount === 1 ? '' : 's') : '';
+      const header = `<span>${title_c}</span><span>${adults}${kids}, ${nightsCount} nights</span><span>Deposit: $150, <b>${total}</b></span>`;
+      bookingWrapperEl.querySelector('.header').innerHTML = header;
+
+      bookingWrapperEl.classList.add('show');
+    }
+
+    function closeBooking() {
+      bookingWrapperEl.querySelector('iframe').removeAttribute('src');
+      bookingWrapperEl.classList.remove('show');
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
