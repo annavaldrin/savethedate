@@ -36,6 +36,7 @@
       justify-content: space-between;
       z-index: 10;
       background: #fefefe;
+      border-bottom: 1px solid lightgray;
       padding: 20px;
       box-sizing: border-box;
       color: #5a6068;
@@ -387,26 +388,35 @@
 
     #bookingWrapper {
       position: fixed;
-      top: 20px;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      z-index: 100;
-      background: white;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(0, 0, 0, .5);
       box-sizing: border-box;
-      outline: 20px solid #0005;
-      transition: transform .3s, opacity .3s;
+      padding: 20px;
+      transition: opacity .4s, visibility .4s;
     }
 
     #bookingWrapper:not(.show) {
       pointer-events: none;
       opacity: 0;
-      transform: translateY(50px);
+      visibility: hidden;
     }
 
-    #booking {
+    #bookingWrapper #booking {
       width: 100%;
       height: 100%;
+      background: white;
+    }
+
+    #bookingWrapper>* {
+      transition: transform .3s ease-out;
+    }
+
+    #bookingWrapper:not(.show)>* {
+      transform: translateY(50px);
     }
 
     #bookingWrapper .header {
@@ -414,6 +424,7 @@
       top: 0;
       left: 0;
       right: 0;
+      margin: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -427,9 +438,8 @@
 
     #bookingWrapper button {
       position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(10px, -10px);
+      top: 4px;
+      right: 4px;
       width: 34px;
       height: 34px;
       border-radius: 50%;
@@ -813,7 +823,7 @@
       </div>
     </div>
     <div id="bookingWrapper">
-      <iframe id="booking" frameborder="0"></iframe>
+      <iframe id="booking" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
       <div class="header"></div>
       <button onclick="closeBooking()">╳</button>
     </div>
