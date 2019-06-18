@@ -823,7 +823,7 @@
       </div>
     </div>
     <div id="bookingWrapper">
-      <iframe id="booking" frameborder="0"></iframe>
+      <iframe id="booking" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
       <div class="header"></div>
       <button onclick="closeBooking()">╳</button>
     </div>
@@ -1169,18 +1169,18 @@
         '&child_price=' + child_price +
         '&imageLink=' + imageLink;
 
-      bookingWrapperEl.querySelector('iframe').src = url;
+      window.open(url, '_blank');
+      // bookingWrapperEl.querySelector('iframe').src = url;
 
-      const adultsCount = getValueAsNumber(adultsEl);
-      const childrenCount = getValueAsNumber(childrenEl);
-      const nightsCount = getValueAsNumber(nightsEl);
-      const total = room.querySelector('.total').textContent;
-      const adults = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
-      const kids = childrenCount ? ' + ' + childrenCount + ' kid' + (childrenCount === 1 ? '' : 's') : '';
-      const header = `<span>${title_c}</span><span>${adults}${kids}, ${nightsCount} nights</span><span>Deposit: $150, <b>${total}</b></span>`;
-      bookingWrapperEl.querySelector('.header').innerHTML = header;
-
-      bookingWrapperEl.classList.add('show');
+      // const adultsCount = getValueAsNumber(adultsEl);
+      // const childrenCount = getValueAsNumber(childrenEl);
+      // const nightsCount = getValueAsNumber(nightsEl);
+      // const total = room.querySelector('.total').textContent;
+      // const adults = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
+      // const kids = childrenCount ? ' + ' + childrenCount + ' kid' + (childrenCount === 1 ? '' : 's') : '';
+      // const header = `<span>${title_c}</span><span>${adults}${kids}, ${nightsCount} nights</span><span>Deposit: $150, <b>${total}</b></span>`;
+      // bookingWrapperEl.querySelector('.header').innerHTML = header;
+      // bookingWrapperEl.classList.add('show');
     }
 
     function closeBooking() {
