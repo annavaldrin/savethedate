@@ -1037,6 +1037,7 @@
     const palmEl = document.getElementById('palm');
     let lastScroll = 0;
     let scrollDebounceId;
+    let thirdPartyCookiesEnabled;
 
     window.getWebsiteInfo = getWebsiteInfo;
     window.closeBooking = closeBooking;
@@ -1060,6 +1061,7 @@
         console.log('set #main height to' + innerHeight);
         mainEl.style.maxHeight = innerHeight + 'px';
       }
+      checkThirdPartyCookies();
     });
 
     addEventListener('scroll', () => {
@@ -1185,6 +1187,11 @@
         '&child_price=' + child_price +
         '&imageLink=' + imageLink;
 
+      // Requires 3rd party cookies enabled.
+      if (!thirdPartyCookiesEnabled) {
+        window.open(url, '_blank');
+        return;
+      }
 
       const adultsCount = getValueAsNumber(adultsEl);
       const childrenCount = getValueAsNumber(childrenEl);
@@ -1203,7 +1210,6 @@
       bookingWrapperEl.offsetHeight;
       bookingWrapperEl.classList.add('show');
 
-      // Requires 3rd party cookies enabled.
       bookingWrapperEl.querySelector('iframe').src = url;
     }
 
@@ -1214,6 +1220,24 @@
         bookingWrapperEl.querySelector('iframe').removeAttribute('src');
         bookingWrapperEl.style.display = '';
       }, { once: true });
+    }
+
+    function checkThirdPartyCookies() {
+      const f = document.createElement('iframe');
+      addEventListener('message', function onPostMessage(event) {
+        const msg = event.data + '';
+        if (msg.startsWith('cookieEnabled=')) {
+          thirdPartyCookiesEnabled = msg === 'cookieEnabled=true'; 
+          removeEventListener('message', onPostMessage);
+          f.parentNode.removeChild(f);
+        }
+      });
+      f.style.opacity = 0;
+      f.style.position = 'fixed';
+      f.style.top = '-10px';
+      f.style.height = '1px';
+      f.src = 'https://adorable-faucet.glitch.me/';
+      document.body.appendChild(f);
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
