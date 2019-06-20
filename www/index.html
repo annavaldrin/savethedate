@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
 
+  <!-- brandon-grotesque font -->
   <style rel=stylesheet href="https://use.typekit.net/hiz3qle.css"></style>
   <style>
     @font-face {
@@ -396,18 +397,27 @@
       background: rgba(0, 0, 0, .5);
       box-sizing: border-box;
       padding: 20px;
-      transition: opacity .4s, visibility .4s;
+      transition: opacity .4s;
     }
 
     #bookingWrapper:not(.show) {
+      display: none;
       pointer-events: none;
       opacity: 0;
-      visibility: hidden;
     }
 
-    #bookingWrapper #booking {
+    #bookingWrapper .content {
       width: 100%;
       height: 100%;
+      position: relative;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #bookingWrapper iframe {
+      width: 100%;
+      /* fixes double scrollbars */
+      height: calc(100% - 4px);
       background: white;
     }
 
@@ -432,12 +442,15 @@
       border-bottom: 1px solid lightgray;
       padding: 10px;
       box-sizing: border-box;
-      height: 90px;
+      height: 110px;
       background: white;
     }
 
     #bookingWrapper button {
       position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       top: 4px;
       right: 4px;
       width: 34px;
@@ -823,7 +836,9 @@
       </div>
     </div>
     <div id="bookingWrapper">
-      <iframe id="booking" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+      <div class="content">
+        <iframe frameborder="0" sandbox="allow-scripts allow-forms"></iframe>
+      </div>
       <div class="header"></div>
       <button onclick="closeBooking()">╳</button>
     </div>
@@ -1169,24 +1184,35 @@
         '&child_price=' + child_price +
         '&imageLink=' + imageLink;
 
-      // TODO discover why reservations don't work on mobile.
-      // window.open(url, '_blank');
 
-      bookingWrapperEl.querySelector('iframe').src = url;
       const adultsCount = getValueAsNumber(adultsEl);
       const childrenCount = getValueAsNumber(childrenEl);
       const nightsCount = getValueAsNumber(nightsEl);
       const total = room.querySelector('.total').textContent;
       const adults = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
       const kids = childrenCount ? ' + ' + childrenCount + ' kid' + (childrenCount === 1 ? '' : 's') : '';
-      const header = `<span>${title_c}</span><span>${adults}${kids}, ${nightsCount} nights</span><span>Deposit: $150, <b>${total}</b></span>`;
+      const header = `<span>${title_c}</span>
+      <span>${adults}${kids}, ${nightsCount} nights</span>
+      <span>Deposit: $150, <b>${total}</b></span>
+      <span><i>Problems? <a rel="noopener noreferrer" href="${url}" target="_blank" onclick="closeBooking()">Book on destify.com</a></i></span>`;
       bookingWrapperEl.querySelector('.header').innerHTML = header;
+
+      document.body.style.overflow = 'hidden';
+      bookingWrapperEl.style.display = 'block';
+      bookingWrapperEl.offsetHeight;
       bookingWrapperEl.classList.add('show');
+
+      // Requires 3rd party cookies enabled.
+      bookingWrapperEl.querySelector('iframe').src = url;
     }
 
     function closeBooking() {
-      bookingWrapperEl.querySelector('iframe').removeAttribute('src');
+      document.body.style.overflow = '';
       bookingWrapperEl.classList.remove('show');
+      bookingWrapperEl.addEventListener('transitionend', () => {
+        bookingWrapperEl.querySelector('iframe').removeAttribute('src');
+        bookingWrapperEl.style.display = '';
+      }, { once: true });
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
