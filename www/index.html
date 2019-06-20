@@ -1038,6 +1038,7 @@
     let lastScroll = 0;
     let scrollDebounceId;
     let thirdPartyCookiesEnabled;
+    areThirdPartyCookiesEnabled().then((bool) => thirdPartyCookiesEnabled = bool);
 
     window.getWebsiteInfo = getWebsiteInfo;
     window.closeBooking = closeBooking;
@@ -1061,7 +1062,6 @@
         console.log('set #main height to' + innerHeight);
         mainEl.style.maxHeight = innerHeight + 'px';
       }
-      checkThirdPartyCookies();
     });
 
     addEventListener('scroll', () => {
@@ -1222,22 +1222,26 @@
       }, { once: true });
     }
 
-    function checkThirdPartyCookies() {
-      const f = document.createElement('iframe');
-      addEventListener('message', function onPostMessage(event) {
-        const msg = event.data + '';
-        if (msg.startsWith('cookieEnabled=')) {
-          thirdPartyCookiesEnabled = msg === 'cookieEnabled=true'; 
-          removeEventListener('message', onPostMessage);
-          f.parentNode.removeChild(f);
-        }
+    function areThirdPartyCookiesEnabled() {
+      return new Promise((resolve) => {
+        const f = document.createElement('iframe');
+        window.addEventListener('message', function onPostMessage(event) {
+          const msg = event.data + '';
+          if (msg.startsWith('cookieEnabled=')) {
+            window.removeEventListener('message', onPostMessage);
+            f.parentNode.removeChild(f);
+            resolve(msg === 'cookieEnabled=true');
+          }
+        });
+        f.style.opacity = 0;
+        f.style.position = 'fixed';
+        f.style.top = '-10px';
+        f.style.height = '1px';
+        f.onerror = () => resolve(false);
+        setTimeout(() => resolve(false), 5000);
+        f.src = 'https://adorable-faucet.glitch.me/';
+        document.body.appendChild(f);
       });
-      f.style.opacity = 0;
-      f.style.position = 'fixed';
-      f.style.top = '-10px';
-      f.style.height = '1px';
-      f.src = 'https://adorable-faucet.glitch.me/';
-      document.body.appendChild(f);
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
