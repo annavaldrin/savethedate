@@ -4,7 +4,7 @@
 <head>
   <title>Anna &amp; Valdrin</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
 
   <!-- brandon-grotesque font -->
@@ -407,17 +407,18 @@
     }
 
     #bookingWrapper .content {
-      width: 100%;
-      height: 100%;
-      position: relative;
+      position: absolute;
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
       overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
 
     #bookingWrapper iframe {
       width: 100%;
-      /* fixes double scrollbars */
-      height: calc(100% - 4px);
+      height: 100%;
+      border: none;
+      vertical-align: top;
       background: white;
     }
 
