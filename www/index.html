@@ -962,6 +962,7 @@
   </footer>
   <script type="module">
     import countdown from './countdown.js';
+    import {areThirdPartyCookiesEnabled} from 'https://adorable-faucet.glitch.me/third-party-cookies.js';
     import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
 
     const finalDiscount = 200;
@@ -1220,28 +1221,6 @@
         bookingWrapperEl.querySelector('iframe').removeAttribute('src');
         bookingWrapperEl.style.display = '';
       }, { once: true });
-    }
-
-    function areThirdPartyCookiesEnabled() {
-      return new Promise((resolve) => {
-        const f = document.createElement('iframe');
-        window.addEventListener('message', function onPostMessage(event) {
-          const msg = event.data + '';
-          if (msg.startsWith('cookieEnabled=')) {
-            window.removeEventListener('message', onPostMessage);
-            f.parentNode.removeChild(f);
-            resolve(msg === 'cookieEnabled=true');
-          }
-        });
-        f.style.opacity = 0;
-        f.style.position = 'fixed';
-        f.style.top = '-10px';
-        f.style.height = '1px';
-        f.onerror = () => resolve(false);
-        setTimeout(() => resolve(false), 5000);
-        f.src = 'https://adorable-faucet.glitch.me/';
-        document.body.appendChild(f);
-      });
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
