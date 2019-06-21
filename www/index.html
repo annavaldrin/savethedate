@@ -962,7 +962,7 @@
   </footer>
   <script type="module">
     import countdown from './countdown.js';
-    import {areThirdPartyCookiesEnabled} from 'https://adorable-faucet.glitch.me/third-party-cookies.js';
+    import { areThirdPartyCookiesEnabled } from 'https://adorable-faucet.glitch.me/third-party-cookies.js';
     import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
 
     const finalDiscount = 200;
@@ -1036,9 +1036,22 @@
     const hamburgerEl = document.querySelector('.hamburger');
     const bookingWrapperEl = document.getElementById('bookingWrapper');
     const palmEl = document.getElementById('palm');
+    const rsvpEl = document.getElementById('rsvpForm');
+    const sentMsg = document.getElementById('sentMsg');
+
     let lastScroll = 0;
-    let scrollDebounceId;
+    let scrollDebounceId = null;
+    let rsvpRef = null;
+    let rsvpId = null;
     let thirdPartyCookiesEnabled;
+
+    try {
+      rsvpId = localStorage.getItem('rsvpId');
+    } catch (e) {
+    }
+
+    rsvpEl.addEventListener('submit', onSubmit);
+
     areThirdPartyCookiesEnabled().then((bool) => thirdPartyCookiesEnabled = bool);
 
     window.getWebsiteInfo = getWebsiteInfo;
@@ -1211,6 +1224,7 @@
       bookingWrapperEl.offsetHeight;
       bookingWrapperEl.classList.add('show');
 
+      // TODO check if payment goes through when cookies enabled.
       bookingWrapperEl.querySelector('iframe').src = url;
     }
 
@@ -1222,34 +1236,8 @@
         bookingWrapperEl.style.display = '';
       }, { once: true });
     }
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
-  <script>
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyA8xC3DKEyRDDFhmiRf2eo_eGXGxTO1doA",
-      authDomain: "annavaldrinwebsite.firebaseapp.com",
-      databaseURL: "https://annavaldrinwebsite.firebaseio.com",
-      projectId: "annavaldrinwebsite",
-      storageBucket: "annavaldrinwebsite.appspot.com",
-      messagingSenderId: "802447335363",
-      appId: "1:802447335363:web:94aec04029668ab3"
-    };
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = app.firestore();
-    const rsvpRef = db.collection('rsvps');
-    let rsvpId = null;
-    try {
-      rsvpId = localStorage.getItem('rsvpId');
-    } catch (e) {
-    }
 
-    const rsvpEl = document.getElementById('rsvpForm');
-    const sentMsg = document.getElementById('sentMsg');
-    rsvpEl.addEventListener('submit', onSubmit);
-    function onSubmit(event) {
+    async function onSubmit(event) {
       event.preventDefault();
       const {
         name,
@@ -1266,30 +1254,31 @@
         guests: guests.valueAsNumber || 1,
       };
       rsvpEl.send.disabled = true;
-      sendRsvp(data).then(() => {
-        rsvpEl.send.disabled = false;
+      try {
+        await sendRsvp(data);
         rsvpEl.reset();
         sentMsg.textContent = '📬 RSVP sent, thank you!';
-      }, () => {
+      } catch (e) {
         sentMsg.textContent = '⚠️ Something went wrong, please try again!';
-        rsvpEl.send.disabled = false;
-      }).then(() => {
-        sentMsg.classList.add('show');
-        setTimeout(() => sentMsg.classList.remove('show'), 4000);
-      });
+      }
+      sentMsg.classList.add('show');
+      await new Promise((r) => setTimeout(r, 4000));
+      sentMsg.classList.remove('show')
+      rsvpEl.send.disabled = false;
     }
+
     async function sendRsvp(data) {
+      const ref = await getRsvpRef();
       if (!rsvpId) {
         data.createdAt = new Date();
-        rsvpId = (await rsvpRef.add(data)).id;
+        rsvpId = (await ref.add(data)).id;
         try {
           localStorage.setItem('rsvpId', rsvpId);
-        } catch (e) {
-        }
+        } catch (e) { }
       } else {
         data.modifiedAt = new Date();
         try {
-          await rsvpRef.doc(rsvpId).update(data);
+          await ref.doc(rsvpId).update(data);
         } catch (e) {
           rsvpId = null;
           data.modifiedAt = null;
@@ -1297,6 +1286,44 @@
           await sendRsvp(data);
         }
       }
+    }
+
+    async function getRsvpRef() {
+      rsvpRef = rsvpRef || getRsvpRefPromise();
+      return rsvpRef;
+    }
+
+    async function getRsvpRefPromise() {
+      const srcs = [
+        'https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js',
+        'https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js'
+      ];
+      for (const src of srcs) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.onload = () => {
+            script.parentNode.removeChild(script);
+            resolve();
+          };
+          script.onerror = (error) => {
+            script.parentNode.removeChild(script);
+            reject(error);
+          };
+          script.src = src;
+          document.head.appendChild(script);
+        });
+      }
+      // Your web app's Firebase configuration
+      const db = firebase.initializeApp({
+        apiKey: "AIzaSyA8xC3DKEyRDDFhmiRf2eo_eGXGxTO1doA",
+        authDomain: "annavaldrinwebsite.firebaseapp.com",
+        databaseURL: "https://annavaldrinwebsite.firebaseio.com",
+        projectId: "annavaldrinwebsite",
+        storageBucket: "annavaldrinwebsite.appspot.com",
+        messagingSenderId: "802447335363",
+        appId: "1:802447335363:web:94aec04029668ab3"
+      }).firestore();
+      return db.collection('rsvps');
     }
   </script>
 </body>
