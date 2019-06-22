@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "annavaldrin",
     "public": "www",
     "ignore": [
       "firebase.json",
