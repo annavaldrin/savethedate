@@ -347,10 +347,6 @@
       font-style: italic;
     }
 
-    #calculator {
-      line-height: 1.6rem;
-    }
-
     #rooms {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -373,18 +369,23 @@
     }
 
     .room .price {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
       margin-top: 10px;
+      margin-bottom: 20px;
     }
 
-    .room .total {
+    .room .price>* {
+      margin: 0 auto;
+    }
+
+    .room .rate {
       font-size: 1.4rem;
-      text-align: center;
-      padding: 5px;
-      box-sizing: border-box;
+    }
+
+    .room .rates::after {
+      content: '$200 discounted on final payment';
+      display: block;
+      font-style: italic;
+      margin: 12px 0;
     }
 
     select {
@@ -507,7 +508,7 @@
       letter-spacing: 2px;
     }
 
-    @media (max-width: 740px) {
+    @media (max-width: 850px) {
       #rooms {
         grid-template-columns: 1fr;
       }
@@ -519,7 +520,17 @@
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 850px) and (min-width: 640px) {
+      .room {
+        display: grid;
+        grid-template-columns: 4fr 3fr;
+        grid-gap: 10px;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    @media (max-width: 540px) {
       header #side {
         display: flex;
         flex-direction: column;
@@ -699,6 +710,9 @@
       Several types of rooms are available, so rates will vary. You
       can calculate the cost and book your room below.
     </p>
+    <p>
+      <i>Note: child rates apply if sharing a room with 2 adults, max 4 guests per room</i>
+    </p>
     <div id="calculator">
       Show prices for
       <select name="adults" id="adults">
@@ -707,56 +721,46 @@
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
-      adult<span class="plural">s</span> and
-      <select name="children" id="children">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-      child<span class="plural">ren</span> age 2-12, staying
-      <select name="nights" id="nights">
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-      </select>
-      nights
+      adult<span class="plural">s</span>
     </div>
-    <p id="notice" hidden>
-      Note: Child rates only applicable if sharing a room with 2 adults.
-    </p>
     <div id="rooms">
       <div id="swimOut" class="room">
-        <div class="title">Luxury Junior Suite Swim-Out</div>
-        <lazy-image src="package2.jpg"></lazy-image>
+        <div>
+          <div class="title">Luxury Junior Suite Swim-Out</div>
+          <lazy-image src="package2.jpg"></lazy-image>
+        </div>
         <div class="price">
-          <span class="total"></span>
-          <button class="button">Book now</button>
+          <div class="rates">
+            <span class="rate">$148</span>/adult/night<span class="child">, <span
+                class="rate">$78</span>/child/night</span>
+          </div>
+          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
       </div>
       <div id="oceanView" class="room">
-        <div class="title">Luxury Junior Suite Ocean View</div>
-        <lazy-image src="package1.jpg"></lazy-image>
+        <div>
+          <div class="title">Luxury Junior Suite Ocean View</div>
+          <lazy-image src="package1.jpg"></lazy-image>
+        </div>
         <div class="price">
-          <span class="total"></span>
-          <button class="button">Book now</button>
+          <div class="rates">
+            <span class="rate">$165</span>/adult/night<span class="child">, <span
+                class="rate">$86</span>/child/night</span>
+          </div>
+          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
       </div>
       <div id="familySuite" class="room">
-        <div class="title">Luxury Family Suite</div>
-        <lazy-image src="package3.jpg"></lazy-image>
+        <div>
+          <div class="title">Luxury Family Suite</div>
+          <lazy-image src="package3.jpg"></lazy-image>
+        </div>
         <div class="price">
-          <span class="total"></span>
-          <button class="button">Book now</button>
+          <div class="rates">
+            <span class="rate">$165</span>/adult/night<span class="child">, <span
+                class="rate">$86</span>/child/night</span>
+          </div>
+          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
       </div>
     </div>
@@ -882,49 +886,10 @@
     import countdown from './countdown.js';
 
     const finalDiscount = 200;
-    const info = {
-      "packages": [{
-        "title_c": "Luxury Junior Suite Ocean View",
-        "singlePrice": 245,
-        "doublePrice": 165,
-        "triplePrice": 152,
-        "imageLink": "https://annavaldrinwebsite.web.app/package1.jpg",
-        "child_price": 86
-      }, {
-        "title_c": "Luxury Junior Suite Swim-Out",
-        "singlePrice": 218,
-        "doublePrice": 148,
-        "triplePrice": 137,
-        "imageLink": "https://annavaldrinwebsite.web.app/package2.jpg",
-        "child_price": 78
-      }, {
-        "title_c": "Luxury Family Suite",
-        "singlePrice": 245,
-        "doublePrice": 165,
-        "triplePrice": 152,
-        "imageLink": "https://annavaldrinwebsite.web.app/package3.jpg",
-        "child_price": 86
-      }],
-      "minimum_nights": 3,
-      "destination": "Dominican Republic",
-      "deposits_person": "$150",
-      "hotel": "Royalton Bavaro",
-      "reservation": 36791258,
-      "hotelImageLink": "https://annavaldrinwebsite.web.app/Royalton%20Bavaro1.jpg"
-    };
     const rates = {
-      familySuite: {
-        index: 2,
-        adults: {
-          1: 245,
-          2: 165,
-          3: 152,
-          4: 145,
-        },
-        children: 86,
-      },
       oceanView: {
-        index: 0,
+        title: 'Luxury Junior Ocean View',
+        image: window.origin + '/package1.jpg',
         adults: {
           1: 245,
           2: 165,
@@ -934,7 +899,8 @@
         children: 86,
       },
       swimOut: {
-        index: 1,
+        title: 'Luxury Junior Suite Swim-Out',
+        image: window.origin + '/package2.jpg',
         adults: {
           1: 218,
           2: 148,
@@ -942,11 +908,20 @@
           4: 131,
         },
         children: 78,
-      }
+      },
+      familySuite: {
+        title: 'Luxury Family Suite',
+        image: window.origin + '/package3.jpg',
+        adults: {
+          1: 245,
+          2: 165,
+          3: 152,
+          4: 145,
+        },
+        children: 86,
+      },
     };
     const adultsEl = document.getElementById('adults');
-    const childrenEl = document.getElementById('children');
-    const nightsEl = document.getElementById('nights');
     const countdownEl = document.getElementById('countdown');
     const noticeEl = document.getElementById('notice');
     const hamburgerEl = document.querySelector('.hamburger');
@@ -981,9 +956,9 @@
     countdownLoop('2019/11/30 05:00:00 PM');
 
     roomsEl.querySelectorAll('.room').forEach((roomEl) => {
-      const button = roomEl.querySelector('.price .button');
-      const i = rates[roomEl.id].index;
-      button.onclick = () => getWebsiteInfo(i);
+      const room = rates[roomEl.id];
+      roomEl.querySelector('a.button').href = getBookingUrl(room);
+      roomEl.querySelector('.child .rate').textContent = '$' + room.children;
     });
 
     requestAnimationFrame(() => {
@@ -1005,38 +980,11 @@
 
     function calculatePrices() {
       let adultsCount = getValueAsNumber(adultsEl);
-      let childrenCount = getValueAsNumber(childrenEl);
-      if (childrenCount > 0 && adultsCount === 1) {
-        childrenCount--;
-        adultsCount++;
-        noticeEl.hidden = false;
-      } else {
-        noticeEl.hidden = true;
-      }
-      const nightsCount = getValueAsNumber(nightsEl);
       for (const roomType in rates) {
-        const totalEl = document.querySelector(`#${roomType} .total`);
-        if (adultsCount + childrenCount > 4) {
-          totalEl.textContent = 'Max 4 guests';
-          totalEl.nextElementSibling.disabled = true;
-        } else {
-          totalEl.nextElementSibling.disabled = false;
-          const roomRates = rates[roomType];
-          // We assume people are gonna input the same # of nights in destify page.
-          const pkg = info.packages[roomRates.index];
-          pkg.singlePrice = roomRates.adults[1] - finalDiscount / nightsCount;
-          pkg.doublePrice = roomRates.adults[2] - finalDiscount / (2 * nightsCount);
-          pkg.triplePrice = roomRates.adults[3] - finalDiscount / (3 * nightsCount);
-
-          const adultRate = roomRates.adults[adultsCount];
-          const childRate = roomRates.children;
-          const nightRate = adultRate * adultsCount + childRate * childrenCount;
-          let total = nightRate * nightsCount - finalDiscount;
-          if (total >= 1000) {
-            total = (total / 1000).toFixed(3).replace('.', ',');
-          }
-          totalEl.textContent = `Total: \$${total}`;
-        }
+        const roomRates = rates[roomType];
+        const adultRate = roomRates.adults[adultsCount];
+        document.querySelector(`#${roomType} .rates > .rate`).textContent = '$' + adultRate;
+        document.querySelector(`#${roomType} .child`).hidden = adultsCount === 4;
       }
     }
 
@@ -1083,39 +1031,19 @@
       }
     }
 
-    function getWebsiteInfo(i) {
-      const {
-        minimum_nights,
-        destination,
-        deposits_person,
-        hotel,
-        reservation,
-        hotelImageLink,
-        packages,
-      } = info;
-      const {
-        title_c,
-        singlePrice,
-        doublePrice,
-        triplePrice,
-        child_price,
-        imageLink,
-      } = packages[i];
-
-      const url = 'https://destify.com/reservation/redirect.php/?r=' + reservation +
-        '&minimum_nights=' + minimum_nights +
-        '&destination=' + destination +
-        '&deposits_person=' + deposits_person +
-        '&hotel=' + hotel +
-        '&hotelImageLink=' + hotelImageLink +
-        '&title_c=' + title_c +
-        '&singlePrice=' + singlePrice +
-        '&doublePrice=' + doublePrice +
-        '&triplePrice=' + triplePrice +
-        '&child_price=' + child_price +
-        '&imageLink=' + imageLink;
-
-      window.open(url, '_blank', 'noopener noreferrer');
+    function getBookingUrl({ title, image, adults, children }) {
+      return 'https://destify.com/reservation/redirect.php/?r=36791258' +
+        '&title_c=' + title +
+        '&singlePrice=' + adults[1] +
+        '&doublePrice=' + adults[2] +
+        '&triplePrice=' + adults[3] +
+        '&child_price=' + children +
+        '&deposits_person=$150' +
+        '&minimum_nights=3' +
+        '&destination=Dominican Republic' +
+        '&hotel=Royalton Bavaro' +
+        '&imageLink=' + image +
+        '&hotelImageLink=' + window.origin + '/Royalton%20Bavaro1.jpg';
     }
 
     async function onSubmit(event) {
