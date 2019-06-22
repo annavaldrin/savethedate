@@ -19,12 +19,11 @@
       color: #5a6068
     }
 
-    p,
-    ol {
+    p {
       margin-top: 4px;
       margin-left: auto;
       margin-right: auto;
-      padding: 0 20px;
+      padding: 0 16px;
       max-width: 410px;
       box-sizing: border-box;
       color: #7a828c;
@@ -44,15 +43,7 @@
       box-sizing: border-box;
     }
 
-    ol {
-      counter-reset: number;
-      list-style-type: none;
-      padding: 0;
-    }
-
-    ol>li::before {
-      counter-increment: number;
-      content: "- "counter(number) " ⎯";
+    .number {
       margin-top: 10px;
       margin-bottom: 2px;
       display: block;
@@ -67,18 +58,18 @@
   <!-- <img src="savethedate.gif"> -->
   <!-- <p>Hello! <br>We would like to share more details about the wedding.</p> -->
   <h3>What's new</h3>
-  <ol>
-    <li>Anna chose her dress! 👰 Valdrin didn't see it yet 😇</li>
-    <li>We built a website where you can RSVP and book your room <a target="_blank" rel="noopener noreferrer"
-        href="https://annavaldrin.web.app/">https://annavaldrin.web.app/</a></li>
-    <li>We hired a booking agent to make your travel planning easier</li>
-    <li>We secured a block of rooms at the <a target="_blank" rel="noopener noreferrer"
+  <p>
+    <span class="number">- 1 -</span><span>Anna chose her dress! 👰 Valdrin didn't see it yet 😇</span>
+    <span class="number">- 2 -</span><span>We built a website where you can RSVP and book your room ➡️<a target="_blank" rel="noopener noreferrer"
+        href="https://annavaldrin.web.app/">annavaldrin.web.app</a></span>
+    <span class="number">- 3 -</span><span>We hired a booking agent to make your travel planning easier</span>
+    <span class="number">- 4 -</span><span>We secured a block of rooms at the <a target="_blank" rel="noopener noreferrer"
         href="https://www.royaltonresorts.com/royalton-bavaro/">Royalton Bávaro
         Resort &amp; Spa All Inclusive</a> with locked prices and All-Inclusive packages
-      (minimum 3 nights stay). A $200 discount will be applied to each room, on us 🥂</li>
-    <li>You can secure a room with a $150 deposit or paying in full. You can change travel dates until September 8th
-      at no cost. Make sure your passport will be valid at least 6+ months past your travel dates 🛂</li>
-  </ol>
+      (minimum 3 nights stay). A $200 discount will be applied to each room, on us 🥂</span>
+    <span class="number">- 5 -</span><span>You can secure a room with a $150 deposit or paying in full. You can change travel dates until September 8th
+      at no cost. Make sure your passport will be valid at least 6+ months past your travel dates 🛂</span>
+  </p>
   <h3>When &amp; Where</h3>
   <p>
     <a target="_blank" rel="noopener noreferrer"
