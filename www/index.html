@@ -387,82 +387,6 @@
       box-sizing: border-box;
     }
 
-    #bookingWrapper {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      background: rgba(0, 0, 0, .5);
-      box-sizing: border-box;
-      padding: 20px;
-      transition: opacity .4s;
-    }
-
-    #bookingWrapper:not(.show) {
-      display: none;
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    #bookingWrapper .content {
-      position: absolute;
-      width: calc(100% - 40px);
-      height: calc(100% - 40px);
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    #bookingWrapper iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      vertical-align: top;
-      background: white;
-    }
-
-    #bookingWrapper>* {
-      transition: transform .3s ease-out;
-    }
-
-    #bookingWrapper:not(.show)>* {
-      transform: translateY(50px);
-    }
-
-    #bookingWrapper .header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: column;
-      border-bottom: 1px solid lightgray;
-      padding: 10px;
-      box-sizing: border-box;
-      height: 110px;
-      background: white;
-    }
-
-    #bookingWrapper button {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: 4px;
-      right: 4px;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgb(70, 70, 70);
-      border: 1px solid white;
-      color: white;
-      font-size: 1rem;
-    }
-
     select {
       background: white;
       border: 1px solid lightgray;
@@ -702,7 +626,7 @@
       <a class="button" href="#rsvp">RSVP</a>
     </p>
     <p>
-      We will be staying at the Royalton Bavaro from November 26th to December 4th, and we'll be planning several
+      We will be staying at the Royalton Bávaro Resort from November 26th to December 4th, and we'll be planning several
       activities during our time there.
     </p>
     We have hired a booking agent to make your travel planning easy. Please checkout below for more
@@ -816,7 +740,7 @@
         <lazy-image src="package2.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
+          <button class="button">Book now</button>
         </div>
       </div>
       <div id="oceanView" class="room">
@@ -824,7 +748,7 @@
         <lazy-image src="package1.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
+          <button class="button">Book now</button>
         </div>
       </div>
       <div id="familySuite" class="room">
@@ -832,16 +756,9 @@
         <lazy-image src="package3.jpg"></lazy-image>
         <div class="price">
           <span class="total"></span>
-          <button class="button" onclick="getWebsiteInfo(this)">Book now</button>
+          <button class="button">Book now</button>
         </div>
       </div>
-    </div>
-    <div id="bookingWrapper">
-      <div class="content">
-        <iframe frameborder="0" sandbox="allow-scripts allow-forms"></iframe>
-      </div>
-      <div class="header"></div>
-      <button onclick="closeBooking()">╳</button>
     </div>
     <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
     <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
@@ -960,10 +877,9 @@
     <p>Contact our agent today! Ben Herrmann, <a href="mailto:ben@destify.com">ben@destify.com</a></p>
     <p>Call: <a href="tel:(773) 800-2960">(773) 800-2960</a>, Text: <a href="sms:(224) 225-5564">(224) 225-5564</a></p>
   </footer>
+  <script type="module" src="https://unpkg.com/@power-elements/lazy-image/lazy-image.js"></script>
   <script type="module">
     import countdown from './countdown.js';
-    import { areThirdPartyCookiesEnabled } from 'https://adorable-faucet.glitch.me/third-party-cookies.js';
-    import 'https://unpkg.com/@power-elements/lazy-image/lazy-image.js';
 
     const finalDiscount = 200;
     const info = {
@@ -1034,16 +950,15 @@
     const countdownEl = document.getElementById('countdown');
     const noticeEl = document.getElementById('notice');
     const hamburgerEl = document.querySelector('.hamburger');
-    const bookingWrapperEl = document.getElementById('bookingWrapper');
     const palmEl = document.getElementById('palm');
     const rsvpEl = document.getElementById('rsvpForm');
     const sentMsg = document.getElementById('sentMsg');
+    const roomsEl = document.getElementById('rooms');
 
     let lastScroll = 0;
     let scrollDebounceId = null;
     let rsvpRef = null;
     let rsvpId = null;
-    let thirdPartyCookiesEnabled;
 
     try {
       rsvpId = localStorage.getItem('rsvpId');
@@ -1051,11 +966,6 @@
     }
 
     rsvpEl.addEventListener('submit', onSubmit);
-
-    areThirdPartyCookiesEnabled().then((bool) => thirdPartyCookiesEnabled = bool);
-
-    window.getWebsiteInfo = getWebsiteInfo;
-    window.closeBooking = closeBooking;
 
     document.addEventListener('click', () => {
       hamburgerEl.classList.remove('is-active');
@@ -1069,6 +979,12 @@
     calculatePrices();
 
     countdownLoop('2019/11/30 05:00:00 PM');
+
+    roomsEl.querySelectorAll('.room').forEach((roomEl) => {
+      const button = roomEl.querySelector('.price .button');
+      const i = rates[roomEl.id].index;
+      button.onclick = () => getWebsiteInfo(i);
+    });
 
     requestAnimationFrame(() => {
       const mainEl = document.getElementById('main');
@@ -1167,9 +1083,7 @@
       }
     }
 
-    function getWebsiteInfo(element) {
-      const room = element.closest('.room');
-      const i = rates[room.id].index;
+    function getWebsiteInfo(i) {
       const {
         minimum_nights,
         destination,
@@ -1201,40 +1115,7 @@
         '&child_price=' + child_price +
         '&imageLink=' + imageLink;
 
-      // Requires 3rd party cookies enabled.
-      if (!thirdPartyCookiesEnabled) {
-        window.open(url, '_blank');
-        return;
-      }
-
-      const adultsCount = getValueAsNumber(adultsEl);
-      const childrenCount = getValueAsNumber(childrenEl);
-      const nightsCount = getValueAsNumber(nightsEl);
-      const total = room.querySelector('.total').textContent;
-      const adults = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
-      const kids = childrenCount ? ' + ' + childrenCount + ' kid' + (childrenCount === 1 ? '' : 's') : '';
-      const header = `<span>${title_c}</span>
-      <span>${adults}${kids}, ${nightsCount} nights</span>
-      <span>Deposit: $150, <b>${total}</b></span>
-      <span><i>Problems? <a rel="noopener noreferrer" href="${url}" target="_blank" onclick="closeBooking()">Book on destify.com</a></i></span>`;
-      bookingWrapperEl.querySelector('.header').innerHTML = header;
-
-      document.body.style.overflow = 'hidden';
-      bookingWrapperEl.style.display = 'block';
-      bookingWrapperEl.offsetHeight;
-      bookingWrapperEl.classList.add('show');
-
-      // TODO check if payment goes through when cookies enabled.
-      bookingWrapperEl.querySelector('iframe').src = url;
-    }
-
-    function closeBooking() {
-      document.body.style.overflow = '';
-      bookingWrapperEl.classList.remove('show');
-      bookingWrapperEl.addEventListener('transitionend', () => {
-        bookingWrapperEl.querySelector('iframe').removeAttribute('src');
-        bookingWrapperEl.style.display = '';
-      }, { once: true });
+      window.open(url, '_blank', 'noopener noreferrer');
     }
 
     async function onSubmit(event) {
