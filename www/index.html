@@ -886,39 +886,39 @@
     import countdown from './countdown.js';
 
     const finalDiscount = 200;
-    const rates = {
+    const bookingData = {
       oceanView: {
         title: 'Luxury Junior Ocean View',
-        image: window.origin + '/package1.jpg',
-        adults: {
+        image: 'package1.jpg',
+        price: {
           1: 245,
           2: 165,
           3: 152,
           4: 145,
         },
-        children: 86,
+        childPrice: 86,
       },
       swimOut: {
         title: 'Luxury Junior Suite Swim-Out',
-        image: window.origin + '/package2.jpg',
-        adults: {
+        image: 'package2.jpg',
+        price: {
           1: 218,
           2: 148,
           3: 137,
           4: 131,
         },
-        children: 78,
+        childPrice: 78,
       },
       familySuite: {
         title: 'Luxury Family Suite',
-        image: window.origin + '/package3.jpg',
-        adults: {
+        image: 'package3.jpg',
+        price: {
           1: 245,
           2: 165,
           3: 152,
           4: 145,
         },
-        children: 86,
+        childPrice: 86,
       },
     };
     const adultsEl = document.getElementById('adults');
@@ -956,9 +956,9 @@
     countdownLoop('2019/11/30 05:00:00 PM');
 
     roomsEl.querySelectorAll('.room').forEach((roomEl) => {
-      const room = rates[roomEl.id];
+      const room = bookingData[roomEl.id];
       roomEl.querySelector('a.button').href = getBookingUrl(room);
-      roomEl.querySelector('.child .rate').textContent = '$' + room.children;
+      roomEl.querySelector('.child .rate').textContent = '$' + room.childPrice;
     });
 
     requestAnimationFrame(() => {
@@ -982,8 +982,7 @@
       const adultsCount = getValueAsNumber(adultsEl);
       const childrenCount = getValueAsNumber(childrenEl);
       for (const roomEl of roomsEl.children) {
-        const roomRates = rates[roomEl.id];
-        const adultRate = roomRates.adults[adultsCount];
+        const adultRate = bookingData[roomEl.id].price[adultsCount];
         roomEl.querySelector(`.rates > .rate`).textContent = '$' + adultRate;
         roomEl.querySelector(`.child`).hidden = childrenCount === 0;
       }
@@ -1021,7 +1020,8 @@
         minutesEl.textContent = format(minutes);
         secondsEl.textContent = format(seconds);
         if (!months && !days && !hours && !minutes && !seconds) {
-          countdownEl.innerHTML = '👰🤵';
+          countdownEl.innerHTML = 'It\'s official 👰🤵';
+          countdownEl.style.fontSize = '3rem';
           return;
         }
         setTimeout(calculate, 1000);
@@ -1032,19 +1032,19 @@
       }
     }
 
-    function getBookingUrl({ title, image, adults, children }) {
+    function getBookingUrl({ title, image, price, childPrice }) {
       return 'https://destify.com/reservation/redirect.php/?r=36791258' +
         '&title_c=' + title +
-        '&singlePrice=' + adults[1] +
-        '&doublePrice=' + adults[2] +
-        '&triplePrice=' + adults[3] +
-        '&child_price=' + children +
+        '&singlePrice=' + price[1] +
+        '&doublePrice=' + price[2] +
+        '&triplePrice=' + price[3] +
+        '&child_price=' + childPrice +
         '&deposits_person=$150' +
         '&minimum_nights=3' +
-        '&destination=Dominican Republic' +
-        '&hotel=Royalton Bavaro' +
-        '&imageLink=' + image +
-        '&hotelImageLink=' + window.origin + '/Royalton%20Bavaro1.jpg';
+        '&destination=Dominican+Republic' +
+        '&hotel=Royalton+Bavaro' +
+        '&imageLink=https://zapagents.com/websites/annavaldrin.web.app/' + image +
+        '&hotelImageLink=https://zapagents.com/websites/annavaldrin.web.app/Royalton%20Bavaro1.jpg';
     }
 
     async function onSubmit(event) {
