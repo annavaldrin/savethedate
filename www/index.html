@@ -345,6 +345,7 @@
     #notice {
       font-size: .9rem;
       font-style: italic;
+      margin-top: 10px;
     }
 
     #rooms {
@@ -379,13 +380,6 @@
 
     .room .rate {
       font-size: 1.4rem;
-    }
-
-    .room .rates::after {
-      content: '$200 discounted on final payment';
-      display: block;
-      font-style: italic;
-      margin: 12px 0;
     }
 
     select {
@@ -590,6 +584,10 @@
         width: 140px;
       }
     }
+
+    [hidden] {
+      display: none !important;
+    }
   </style>
 </head>
 
@@ -710,9 +708,6 @@
       Several types of rooms are available, so rates will vary. You
       can calculate the cost and book your room below.
     </p>
-    <p>
-      <i>Note: child rates apply if sharing a room with 2 adults, max 4 guests per room</i>
-    </p>
     <div id="calculator">
       Show prices for
       <select name="adults" id="adults">
@@ -721,7 +716,17 @@
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
-      adult<span class="plural">s</span>
+      adult<span class="plural">s</span> and
+      <select name="children" id="children">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      child<span class="plural">ren</span> age 2-12
+      <div id="notice">
+        Note: child rates apply if sharing a room with 2 adults, max 4 guests per room
+      </div>
     </div>
     <div id="rooms">
       <div id="swimOut" class="room">
@@ -731,8 +736,9 @@
         </div>
         <div class="price">
           <div class="rates">
-            <span class="rate">$148</span>/adult/night<span class="child">, <span
+            <span class="rate">$148</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$78</span>/child/night</span>
+            <p><span class="rate">$200</span> discount on final payment</p>
           </div>
           <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
@@ -744,8 +750,9 @@
         </div>
         <div class="price">
           <div class="rates">
-            <span class="rate">$165</span>/adult/night<span class="child">, <span
+            <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$86</span>/child/night</span>
+            <p><span class="rate">$200</span> discount on final payment</p>
           </div>
           <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
@@ -757,8 +764,9 @@
         </div>
         <div class="price">
           <div class="rates">
-            <span class="rate">$165</span>/adult/night<span class="child">, <span
+            <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$86</span>/child/night</span>
+            <p><span class="rate">$200</span> discount on final payment</p>
           </div>
           <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
         </div>
@@ -922,8 +930,8 @@
       },
     };
     const adultsEl = document.getElementById('adults');
+    const childrenEl = document.getElementById('children');
     const countdownEl = document.getElementById('countdown');
-    const noticeEl = document.getElementById('notice');
     const hamburgerEl = document.querySelector('.hamburger');
     const palmEl = document.getElementById('palm');
     const rsvpEl = document.getElementById('rsvpForm');
@@ -964,7 +972,7 @@
     requestAnimationFrame(() => {
       const mainEl = document.getElementById('main');
       if (innerHeight < mainEl.offsetHeight) {
-        console.log('set #main height to' + innerHeight);
+        console.log('set #main height to ' + innerHeight);
         mainEl.style.maxHeight = innerHeight + 'px';
       }
     });
@@ -979,12 +987,13 @@
     }, { passive: true });
 
     function calculatePrices() {
-      let adultsCount = getValueAsNumber(adultsEl);
-      for (const roomType in rates) {
-        const roomRates = rates[roomType];
+      const adultsCount = getValueAsNumber(adultsEl);
+      const childrenCount = getValueAsNumber(childrenEl);
+      for (const roomEl of roomsEl.children) {
+        const roomRates = rates[roomEl.id];
         const adultRate = roomRates.adults[adultsCount];
-        document.querySelector(`#${roomType} .rates > .rate`).textContent = '$' + adultRate;
-        document.querySelector(`#${roomType} .child`).hidden = adultsCount === 4;
+        roomEl.querySelector(`.rates > .rate`).textContent = '$' + adultRate;
+        roomEl.querySelector(`.child`).hidden = childrenCount === 0;
       }
     }
 
