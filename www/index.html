@@ -1069,7 +1069,7 @@
         email: email.value,
         phone: phone.value,
         attending: attending.value === 'yes',
-        guests: guests.valueAsNumber || 1,
+        guests: Number(guests.value) || 1,
       };
       rsvpEl.send.disabled = true;
       try {
