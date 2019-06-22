@@ -21,6 +21,7 @@
     html {
       text-align: center;
       font-family: Helvetica, Arial, sans-serif;
+      scroll-behavior: smooth;
       --lazy-image-fit: cover;
     }
 
@@ -885,7 +886,8 @@
   <script type="module">
     import countdown from './countdown.js';
 
-    const finalDiscount = 200;
+    /* Variables */
+
     const bookingData = {
       oceanView: {
         title: 'Luxury Junior Ocean View',
@@ -921,6 +923,7 @@
         childPrice: 86,
       },
     };
+    const mainEl = document.getElementById('main');
     const adultsEl = document.getElementById('adults');
     const childrenEl = document.getElementById('children');
     const countdownEl = document.getElementById('countdown');
@@ -933,15 +936,28 @@
     let lastScroll = 0;
     let scrollDebounceId = null;
     let rsvpRef = null;
-    let rsvpId = null;
 
-    try {
-      rsvpId = localStorage.getItem('rsvpId');
-    } catch (e) {
-    }
+    /* Initialization */
+
+    countdownLoop('2019/11/30 05:00:00 PM');
+    roomsEl.querySelectorAll('.room').forEach((roomEl) => {
+      const room = bookingData[roomEl.id];
+      roomEl.querySelector('a.button').href = getBookingUrl(room);
+      roomEl.querySelector('.child .rate').textContent = '$' + room.childPrice;
+    });
+    calculatePrices();
+
+    requestAnimationFrame(() => {
+      if (innerHeight < mainEl.offsetHeight) {
+        console.log('set #main height to ' + innerHeight);
+        mainEl.style.maxHeight = innerHeight + 'px';
+      }
+    });
+
+    /* Listeners */
 
     rsvpEl.addEventListener('submit', onSubmit);
-
+    document.addEventListener('change', calculatePrices);
     document.addEventListener('click', () => {
       hamburgerEl.classList.remove('is-active');
     });
@@ -949,27 +965,7 @@
       hamburgerEl.classList.toggle('is-active');
       event.stopPropagation();
     });
-
-    document.addEventListener('change', calculatePrices);
-    calculatePrices();
-
-    countdownLoop('2019/11/30 05:00:00 PM');
-
-    roomsEl.querySelectorAll('.room').forEach((roomEl) => {
-      const room = bookingData[roomEl.id];
-      roomEl.querySelector('a.button').href = getBookingUrl(room);
-      roomEl.querySelector('.child .rate').textContent = '$' + room.childPrice;
-    });
-
-    requestAnimationFrame(() => {
-      const mainEl = document.getElementById('main');
-      if (innerHeight < mainEl.offsetHeight) {
-        console.log('set #main height to ' + innerHeight);
-        mainEl.style.maxHeight = innerHeight + 'px';
-      }
-    });
-
-    addEventListener('scroll', () => {
+    window.addEventListener('scroll', () => {
       const scrollTop = document.scrollingElement.scrollTop;
       const angle = Math.max(-10, Math.min(10, scrollTop - lastScroll));
       lastScroll = scrollTop;
@@ -977,6 +973,8 @@
       scrollDebounceId && clearTimeout(scrollDebounceId);
       setTimeout(() => palmEl.style.transform = '', 200);
     }, { passive: true });
+
+    /* Methods */
 
     function calculatePrices() {
       const adultsCount = getValueAsNumber(adultsEl);
@@ -1078,23 +1076,28 @@
     }
 
     async function sendRsvp(data) {
+      const changeTime = new Date();
       const ref = await getRsvpRef();
+      let rsvpId = null;
+      try {
+        rsvpId = localStorage.getItem('rsvpId');
+      } catch (e) {
+      }
+      if (rsvpId) {
+        try {
+          await ref.doc(rsvpId).update({ ...data, modifiedAt: changeTime });
+        } catch (e) {
+          try {
+            localStorage.removeItem('rsvpId');
+          } catch (e) { }
+          rsvpId = null;
+        }
+      }
       if (!rsvpId) {
-        data.createdAt = new Date();
-        rsvpId = (await ref.add(data)).id;
+        rsvpId = (await ref.add({ ...data, createdAt: changeTime })).id;
         try {
           localStorage.setItem('rsvpId', rsvpId);
         } catch (e) { }
-      } else {
-        data.modifiedAt = new Date();
-        try {
-          await ref.doc(rsvpId).update(data);
-        } catch (e) {
-          rsvpId = null;
-          data.modifiedAt = null;
-          delete data.modifiedAt;
-          await sendRsvp(data);
-        }
       }
     }
 
