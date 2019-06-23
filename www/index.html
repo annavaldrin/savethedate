@@ -10,14 +10,6 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Roboto:700&display=swap"
     rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'hugs_and_kisses';
-      src: url('hugs_and_kisses.woff2') format('woff2'),
-        url('hugs_and_kisses.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     html {
       text-align: center;
       font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
@@ -46,6 +38,7 @@
       border-bottom: 1px solid #ccc;
       box-sizing: border-box;
       color: #5a6068;
+      background: #fffc;
     }
 
     header a {
@@ -63,7 +56,6 @@
       justify-content: space-between;
       max-width: 640px;
       box-sizing: border-box;
-      background: white;
     }
 
     header .hamburger {
@@ -239,14 +231,16 @@
     #main {
       max-width: 100%;
       padding: 0;
+      padding-top: 60px;
       height: 100vh;
+      box-sizing: border-box;
       position: relative;
       overflow: hidden;
     }
 
     #main lazy-image {
       width: 100%;
-      height: 100%;
+      height: calc(100% - 112px);
     }
 
     #palm {
@@ -292,10 +286,6 @@
       color: white;
       font-weight: 100;
       font-family: 'Roboto', sans-serif;
-      position: absolute;
-      left: 0;
-      width: 100%;
-      top: 12%;
       margin: 0;
     }
 
@@ -305,26 +295,25 @@
     }
 
     #main h2 {
-      left: 0;
-      right: 0;
       color: white;
-      position: absolute;
-      bottom: 25%;
+      font-weight: 300;
       margin: 0;
-      font-weight: 100;
     }
 
     #main .backdrop {
       position: absolute;
       left: 0;
-      top: 0;
+      top: 60px;
       width: 100%;
-      height: 100%;
-      background-image: linear-gradient(270deg, #0000 29%, rgba(0, 0, 0, .29) 100%);
+      height: calc(100% - 60px - 112px);
+      background-image: linear-gradient(180deg, #0000 29%, rgba(0, 0, 0, .29) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
     }
 
     #countdown {
-      padding: 20px 10px;
+      padding: 10px;
       color: #5a6068;
       box-sizing: border-box;
       display: flex;
@@ -346,7 +335,6 @@
     }
 
     #countdown span {
-      font-family: 'hugs_and_kisses';
       display: block;
       font-size: 4rem;
       line-height: 4rem;
@@ -372,36 +360,52 @@
     }
 
     #rooms {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 10px;
       margin: 30px 0;
+      position: relative;
+      z-index: 10;
     }
 
     .room {
-      width: 100%;
       position: relative;
       color: inherit;
       background: white;
       border: 1px solid #eee;
+      display: grid;
+      grid-template-columns: 4fr 3fr;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      align-items: stretch;
+      text-align: right;
     }
 
     .room .title {
-      margin-bottom: 30px;
-      font-weight: bold;
+      margin-top: 0;
     }
 
     .room lazy-image {
-      min-height: 150px;
+      min-height: 250px;
     }
 
     .room .price {
-      margin: 10px;
-      margin-bottom: 20px;
+      margin: 15px;
     }
 
-    .room .rate {
+    .price>div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 15px;
+    }
+
+    .room .total {
+      margin-top: 10px;
       font-size: 1.4rem;
+    }
+
+    .room .afterdiscount {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
     }
 
     .rates p {
@@ -430,6 +434,7 @@
       font-weight: lighter;
       min-height: 44px;
       box-sizing: border-box;
+      border: 0;
     }
 
     #rsvpForm {
@@ -526,25 +531,10 @@
     }
 
     @media (max-width: 920px) {
-      #rooms {
-        grid-template-columns: 1fr;
-      }
-
       #palm {
         top: calc(50% - 70px);
         right: -90px;
         width: 200px;
-      }
-    }
-
-    @media (max-width: 920px) and (min-width: 640px) {
-      .room {
-        display: grid;
-        grid-template-columns: 4fr 3fr;
-        grid-gap: 10px;
-        justify-content: space-between;
-        align-items: stretch;
-        text-align: right;
       }
     }
 
@@ -601,6 +591,10 @@
         right: -60px;
         width: 140px;
       }
+
+      .room {
+        display: block;
+      }
     }
 
     [hidden] {
@@ -626,9 +620,10 @@
   </header>
   <section id="main">
     <lazy-image src="2.jpg"></lazy-image>
-    <div class="backdrop"></div>
-    <h1>Anna<span>&amp;</span>Valdrin</h1>
-    <h2>November 30, 2019</h2>
+    <div class="backdrop">
+      <h1>Anna<span>&amp;</span>Valdrin</h1>
+      <h2>November 30, 2019</h2>
+    </div>
     <ul id="countdown">
       <li><span id="months">&nbsp;</span>months</li>
       <li><span id="days">&nbsp;</span>days</li>
@@ -745,49 +740,27 @@
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
-      child<span class="plural">ren</span> age 2-12
+      child<span class="plural">ren</span> age 2-12, staying
+      <select name="nights" id="nights">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+      </select>
+      nights
       <div id="notice">
         Note: child rates apply if sharing a room with 2 adults, max 4 guests per room
       </div>
     </div>
-    <div id="rooms">
-      <div id="swimOut" class="room">
-        <lazy-image src="package2.jpg"></lazy-image>
-        <div class="price">
-          <div class="title">Luxury Junior Suite Swim-Out</div>
-          <div class="rates">
-            <span class="rate">$148</span>/adult/night<span class="child" hidden>, <span
-                class="rate">$78</span>/child/night</span>
-            <p><span class="rate">$200</span> discount on final payment</p>
-          </div>
-          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
-        </div>
-      </div>
-      <div id="oceanView" class="room">
-        <lazy-image src="package1.jpg"></lazy-image>
-        <div class="price">
-          <div class="title">Luxury Junior Suite Ocean View</div>
-          <div class="rates">
-            <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
-                class="rate">$86</span>/child/night</span>
-            <p><span class="rate">$200</span> discount on final payment</p>
-          </div>
-          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
-        </div>
-      </div>
-      <div id="familySuite" class="room">
-        <lazy-image src="package3.jpg"></lazy-image>
-        <div class="price">
-          <div class="title">Luxury Family Suite</div>
-          <div class="rates">
-            <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
-                class="rate">$86</span>/child/night</span>
-            <p><span class="rate">$200</span> discount on final payment</p>
-          </div>
-          <a class="button" rel="noopener noreferrer" target="_blank">Book now</a>
-        </div>
-      </div>
-    </div>
+    <div id="rooms"></div>
     <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
     <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
       Make a balance payment
@@ -941,6 +914,7 @@
     const mainEl = document.getElementById('main');
     const adultsEl = document.getElementById('adults');
     const childrenEl = document.getElementById('children');
+    const nightsEl = document.getElementById('nights');
     const countdownEl = document.getElementById('countdown');
     const hamburgerEl = document.querySelector('.hamburger');
     const palmEl = document.getElementById('palm');
@@ -955,11 +929,33 @@
     /* Initialization */
 
     countdownLoop('2019/11/30 05:00:00 PM');
-    roomsEl.querySelectorAll('.room').forEach((roomEl) => {
-      const room = bookingData[roomEl.id];
-      roomEl.querySelector('a.button').href = getBookingUrl(room);
-      roomEl.querySelector('.child .rate').textContent = '$' + room.childPrice;
-    });
+    for (const roomId in bookingData) {
+      const room = bookingData[roomId];
+      const template = document.createElement('template');
+      template.innerHTML = `
+<div id="${roomId}" class="room">
+  <lazy-image src="${room.image}"></lazy-image>
+  <div class="price">
+    <h3 class="title">${room.title}</h3>
+    <div>
+      Price per night:
+      <div style="text-align:right">
+        <span class="rate adult"></span>/adult<br>
+        <span class="rate">\$${room.childPrice}</span>/child
+      </div>
+    </div>
+    <div>
+      <div>Total for <span class="nightsCount"></span> nights:</div>
+      <span class="rate total"></span>
+    </div>
+    <div>
+      - \$200, on us: <span class="rate afterdiscount"></span>
+    </div>
+    <a class="button" rel="noopener noreferrer" target="_blank" href="${getBookingUrl(room)}">Book now</a>
+  </div>
+</div>`;
+      roomsEl.appendChild(template.content);
+    }
     calculatePrices();
 
     requestAnimationFrame(() => {
@@ -994,11 +990,28 @@
     function calculatePrices() {
       const adultsCount = getValueAsNumber(adultsEl);
       const childrenCount = getValueAsNumber(childrenEl);
+      const nightsCount = getValueAsNumber(nightsEl);
       for (const roomEl of roomsEl.children) {
-        const adultRate = bookingData[roomEl.id].price[adultsCount];
-        roomEl.querySelector(`.rates > .rate`).textContent = '$' + adultRate;
-        roomEl.querySelector(`.child`).hidden = childrenCount === 0;
+        const room = bookingData[roomEl.id];
+        const adultRate = room.price[adultsCount];
+        const nightRate = adultRate * adultsCount + room.childPrice * childrenCount;
+        const total = nightRate * nightsCount;
+        roomEl.querySelector('.nightsCount').textContent = nightsCount;
+        roomEl.querySelector('.total').textContent = toCurrency(total);
+        roomEl.querySelector('.afterdiscount').textContent = toCurrency(total - 200);
+        roomEl.querySelector('.rate.adult').textContent = toCurrency(adultRate);
       }
+    }
+
+    function toCurrency(num) {
+      if (num < 0) {
+        return '-';
+      }
+      const rest = num - Math.floor(num);
+      if (num >= 1000) {
+        num = (num / 1000).toFixed(3).replace('.', ',');
+      }
+      return '$' + num + (rest ? rest.toFixed(2).substring(1) : '');
     }
 
     function getValueAsNumber(el) {
