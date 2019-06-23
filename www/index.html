@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
 
-  <!-- brandon-grotesque font -->
-  <style rel=stylesheet href="https://use.typekit.net/hiz3qle.css"></style>
+  <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Roboto:700&display=swap"
+    rel="stylesheet">
   <style>
     @font-face {
       font-family: 'hugs_and_kisses';
@@ -20,7 +20,10 @@
 
     html {
       text-align: center;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
+      line-height: 1.8rem;
+      letter-spacing: 0.06rem;
+      color: #163E3A;
       scroll-behavior: smooth;
       --lazy-image-fit: cover;
     }
@@ -35,39 +38,35 @@
       left: 0;
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
       z-index: 10;
       background: #fefefe;
-      border-bottom: 1px solid lightgray;
-      padding: 20px;
+      border-bottom: 1px solid #ccc;
       box-sizing: border-box;
       color: #5a6068;
     }
 
-    header>*:first-child {
-      width: 100%;
-      text-align: left;
-      font-size: 1rem;
-    }
-
     header a {
-      font-family: "brandon-grotesque", sans-serif;
-      font-weight: 400;
+      font-family: "Nunito Sans", sans-serif;
+      font-weight: 700;
       font-style: normal;
-      text-transform: uppercase;
-      font-size: .8rem;
+      font-size: .9rem;
       text-decoration: none;
-      color: #5a6068;
+      color: #2F2E2E;
     }
 
     header #side {
-      display: contents;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 640px;
+      box-sizing: border-box;
+      background: white;
     }
 
     header .hamburger {
-      position: absolute;
-      right: 0;
-      top: 0;
       display: none;
     }
 
@@ -109,6 +108,7 @@
     .hamburger-box {
       width: 30px;
       height: 20px;
+      vertical-align: middle;
       display: inline-block;
       position: relative;
     }
@@ -172,9 +172,9 @@
       transform: translate3d(0, -8px, 0) rotate(-45deg);
     }
 
-    /*
-   * 3DX Reverse
-   */
+    /**
+     * 3DX Reverse
+     */
     .hamburger--3dx-r .hamburger-box {
       perspective: 80px;
     }
@@ -212,9 +212,26 @@
       margin: 0 auto;
     }
 
-    section h1 {
-      font-size: 2rem;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    h1 {
+      font-size: 1.6rem;
+      line-height: initial;
+      text-transform: uppercase;
+      letter-spacing: .3rem;
+      color: #2F2E2E;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      margin-bottom: 56px;
+    }
+
+    h2,
+    h4 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-top: 10px;
+      margin-bottom: 40px;
     }
 
     /* ---- Main START ---- */
@@ -243,7 +260,7 @@
       transition: transform 300ms ease-out;
     }
 
-    #main .leaf {
+    #palm .leaf {
       left: 0;
       position: absolute;
       width: 100%;
@@ -251,7 +268,7 @@
       animation: leafRotate 800ms alternate infinite ease-in-out;
     }
 
-    #main .l2 {
+    #palm .l2 {
       left: 10%;
       transform: rotate(-19deg);
       animation-name: leafRotate2;
@@ -272,22 +289,27 @@
 
     #main h1 {
       font-size: 6rem;
-      line-height: 7rem;
       color: white;
       font-weight: 100;
-      font-family: 'hugs_and_kisses';
+      font-family: 'Roboto', sans-serif;
       position: absolute;
-      left: 15%;
-      bottom: 45%;
+      left: 0;
+      width: 100%;
+      top: 12%;
       margin: 0;
-      text-align: left;
+    }
+
+    #main h1 span {
+      font-size: 9rem;
+      display: block;
     }
 
     #main h2 {
+      left: 0;
+      right: 0;
       color: white;
       position: absolute;
-      left: 15%;
-      bottom: 30%;
+      bottom: 25%;
       margin: 0;
       font-weight: 100;
     }
@@ -353,34 +375,37 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 10px;
+      margin: 30px 0;
     }
 
     .room {
       width: 100%;
       position: relative;
       color: inherit;
+      background: white;
+      border: 1px solid #eee;
     }
 
     .room .title {
-      margin-top: 30px;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
+      font-weight: bold;
     }
 
     .room lazy-image {
-      height: 150px;
+      min-height: 150px;
     }
 
     .room .price {
-      margin-top: 10px;
+      margin: 10px;
       margin-bottom: 20px;
-    }
-
-    .room .price>* {
-      margin: 0 auto;
     }
 
     .room .rate {
       font-size: 1.4rem;
+    }
+
+    .rates p {
+      margin-top: 0;
     }
 
     select {
@@ -392,22 +417,19 @@
     }
 
     .button {
-      display: inline-block;
-      background: white;
-      border: 1px solid lightgray;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(47, 46, 46, 1);
+      letter-spacing: .1rem;
       font-size: 1rem;
-      color: inherit;
-      padding: 10px 15px;
+      color: white;
+      padding: 10px 30px;
       cursor: pointer;
       text-decoration: none;
-    }
-
-    .button:disabled,
-    form:invalid .button {
-      pointer-events: none;
-      background: white;
-      color: darkgray;
-      border-color: #eee;
+      font-weight: lighter;
+      min-height: 44px;
+      box-sizing: border-box;
     }
 
     #rsvpForm {
@@ -503,7 +525,7 @@
       letter-spacing: 2px;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 920px) {
       #rooms {
         grid-template-columns: 1fr;
       }
@@ -515,17 +537,22 @@
       }
     }
 
-    @media (max-width: 850px) and (min-width: 640px) {
+    @media (max-width: 920px) and (min-width: 640px) {
       .room {
         display: grid;
         grid-template-columns: 4fr 3fr;
         grid-gap: 10px;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: stretch;
+        text-align: right;
       }
     }
 
-    @media (max-width: 540px) {
+    @media (max-width: 640px) {
+      header {
+        justify-content: flex-end;
+      }
+
       header #side {
         display: flex;
         flex-direction: column;
@@ -559,16 +586,6 @@
 
       #main h1 {
         font-size: 4rem;
-        line-height: 5rem;
-        text-align: center;
-        left: 0;
-        right: 0;
-      }
-
-      #main h2 {
-        text-align: center;
-        left: 0;
-        right: 0;
       }
 
       #countdown li {
@@ -594,7 +611,6 @@
 
 <body>
   <header>
-    <a href="#">A &amp; V</a>
     <button class="hamburger hamburger--3dx" type="button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -611,7 +627,7 @@
   <section id="main">
     <lazy-image src="2.jpg"></lazy-image>
     <div class="backdrop"></div>
-    <h1>Anna<br>&amp; Valdrin</h1>
+    <h1>Anna<span>&amp;</span>Valdrin</h1>
     <h2>November 30, 2019</h2>
     <ul id="countdown">
       <li><span id="months">&nbsp;</span>months</li>
@@ -620,18 +636,21 @@
       <li><span id="minutes">&nbsp;</span>Minutes</li>
       <li><span id="seconds">&nbsp;</span>Seconds</li>
     </ul>
-    <div id="palm">
-      <img class="leaf l1" src="leaf.svg">
-      <img class="leaf l2" src="leaf.svg">
-    </div>
   </section>
+  <div id="palm">
+    <img class="leaf l1" src="leaf.svg">
+    <img class="leaf l2" src="leaf.svg">
+  </div>
   <section>
-    We're getting married on November 30, 2019 at
-    <a target="_blank" rel="noopener noreferrer"
-      href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-      Royalton Bávaro Resort &amp; Spa All Inclusive</a> in
-    Punta Cana, Dominican Republic! We truly hope you can join our family
-    in this special celebration.
+    <h1>The wedding</h1>
+    <p>
+      We're getting married on November 30, 2019 at
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Royalton Bávaro Resort &amp; Spa All Inclusive</a> in
+      Punta Cana, Dominican Republic! We truly hope you can join our family
+      in this special celebration.
+    </p>
     <p>
       <a class="button" href="#rsvp">RSVP</a>
     </p>
@@ -639,10 +658,12 @@
       We will be staying at the Royalton Bávaro Resort from November 26th to December 4th, and we'll be planning several
       activities during our time there.
     </p>
-    We have hired a booking agent to make your travel planning easy. Please checkout below for more
-    information about pricing and booking.
     <p>
-      <a class="button" href="#resort">Guest Accomodations &amp; Travel</a>
+      We have hired a booking agent to make your travel planning easy. Please checkout below for more
+      information about pricing and booking.
+    </p>
+    <p>
+      <a class="button" href="#resort">Accomodations &amp; Travel</a>
     </p>
   </section>
   <section id="rsvp">
@@ -676,7 +697,7 @@
     </form>
   </section>
   <section id="resort">
-    <h1>Guest Accomodations and Travel</h1>
+    <h1>Accomodations and Travel</h1>
     <p>
       We secured a block of rooms at the
       <a target="_blank" rel="noopener noreferrer" href="https://www.royaltonresorts.com/royalton-bavaro">Royalton
@@ -731,11 +752,9 @@
     </div>
     <div id="rooms">
       <div id="swimOut" class="room">
-        <div>
-          <div class="title">Luxury Junior Suite Swim-Out</div>
-          <lazy-image src="package2.jpg"></lazy-image>
-        </div>
+        <lazy-image src="package2.jpg"></lazy-image>
         <div class="price">
+          <div class="title">Luxury Junior Suite Swim-Out</div>
           <div class="rates">
             <span class="rate">$148</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$78</span>/child/night</span>
@@ -745,11 +764,9 @@
         </div>
       </div>
       <div id="oceanView" class="room">
-        <div>
-          <div class="title">Luxury Junior Suite Ocean View</div>
-          <lazy-image src="package1.jpg"></lazy-image>
-        </div>
+        <lazy-image src="package1.jpg"></lazy-image>
         <div class="price">
+          <div class="title">Luxury Junior Suite Ocean View</div>
           <div class="rates">
             <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$86</span>/child/night</span>
@@ -759,11 +776,9 @@
         </div>
       </div>
       <div id="familySuite" class="room">
-        <div>
-          <div class="title">Luxury Family Suite</div>
-          <lazy-image src="package3.jpg"></lazy-image>
-        </div>
+        <lazy-image src="package3.jpg"></lazy-image>
         <div class="price">
+          <div class="title">Luxury Family Suite</div>
           <div class="rates">
             <span class="rate">$165</span>/adult/night<span class="child" hidden>, <span
                 class="rate">$86</span>/child/night</span>
