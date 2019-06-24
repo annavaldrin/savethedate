@@ -13,8 +13,8 @@
     html {
       text-align: center;
       font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
-      line-height: 1.8rem;
-      letter-spacing: 0.06rem;
+      line-height: 1.7rem;
+      letter-spacing: 0.04rem;
       color: #163E3A;
       scroll-behavior: smooth;
       --lazy-image-fit: cover;
@@ -24,15 +24,21 @@
       margin: 0;
     }
 
+    a {
+      text-decoration: none;
+      color: #00a0c0;
+    }
+
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       display: flex;
-      justify-content: center;
+      padding: 0 20px;
+      justify-content: space-around;
       align-items: center;
-      height: 60px;
+      height: 80px;
       z-index: 10;
       background: #fefefe;
       border-bottom: 1px solid #ccc;
@@ -45,16 +51,16 @@
       font-family: "Nunito Sans", sans-serif;
       font-weight: 700;
       font-style: normal;
-      font-size: .9rem;
-      text-decoration: none;
+      font-size: .8rem;
       color: #2F2E2E;
     }
+
 
     header #side {
       display: flex;
       flex-direction: row;
+      align-items: center;
       justify-content: space-between;
-      max-width: 640px;
       box-sizing: border-box;
     }
 
@@ -64,6 +70,10 @@
 
     header a+a {
       margin-left: 40px;
+    }
+
+    header .button+.button {
+      margin-left: 20px;
     }
 
     .hamburger {
@@ -200,8 +210,29 @@
     section {
       display: block;
       max-width: 900px;
-      padding: 70px 20px;
+      padding: 80px 20px;
+      padding-bottom: 0;
       margin: 0 auto;
+    }
+
+    section> :last-child {
+      margin-bottom: 0;
+    }
+
+    .flower {
+      margin-top: 10px;
+      height: 90px;
+      --lazy-image-fit: contain;
+    }
+
+    .fullwidth {
+      padding-left: 0;
+      padding-right: 0;
+      max-width: 100%;
+    }
+
+    .parallax lazy-image {
+      height: 100vh;
     }
 
     h1 {
@@ -212,7 +243,7 @@
       color: #2F2E2E;
       font-family: 'Lato', sans-serif;
       font-weight: 700;
-      margin-bottom: 56px;
+      margin-bottom: 30px;
     }
 
     h2,
@@ -222,28 +253,29 @@
     }
 
     p {
-      margin-top: 10px;
-      margin-bottom: 40px;
+      margin: 10px auto;
+      max-width: 525px;
     }
 
     /* ---- Main START ---- */
 
     #main {
-      max-width: 100%;
       padding: 0;
-      padding-top: 60px;
-      height: 100vh;
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
+      padding-top: 80px;
     }
 
     #main lazy-image {
-      width: 100%;
-      height: calc(100% - 112px);
+      height: 70vh;
+      pointer-events: none;
+      background: white;
+      /*TODO blur*/
+      /* background-image: url('data:image/png;base64,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');
+      background-size: contain; */
+      --lazy-image-fit: contain;
     }
 
     #palm {
+      display: none;
       position: fixed;
       top: calc(50% - 70px);
       right: -110px;
@@ -282,65 +314,61 @@
     }
 
     #main h1 {
-      font-size: 6rem;
-      color: white;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      height: 70vh;
+      font-size: 4rem;
       font-weight: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       font-family: 'Roboto', sans-serif;
       margin: 0;
+      color: lightgray;
     }
 
     #main h1 span {
-      font-size: 9rem;
+      font-size: 6.5rem;
       display: block;
+    }
+
+    #main p {
+      margin-bottom: 10px;
     }
 
     #main h2 {
-      color: white;
-      font-weight: 300;
       margin: 0;
-    }
-
-    #main .backdrop {
-      position: absolute;
-      left: 0;
-      top: 60px;
-      width: 100%;
-      height: calc(100% - 60px - 112px);
-      background-image: linear-gradient(180deg, #0000 29%, rgba(0, 0, 0, .29) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-    }
-
-    #countdown {
-      padding: 10px;
-      color: #5a6068;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: 0;
-      background: #fefefe;
-      position: absolute;
-    }
-
-    #countdown li {
-      font-size: .7em;
-      width: 19%;
-      max-width: 180px;
-      list-style-type: none;
       text-transform: uppercase;
     }
 
-    #countdown span {
-      display: block;
-      font-size: 4rem;
-      line-height: 4rem;
+    /* ---- Main END   ---- */
+
+    #rsvp h1 {
+      margin-bottom: 0;
     }
 
-    /* ---- Main END   ---- */
+    #rsvp h1+p {
+      margin-bottom: 25px;
+    }
+
+    #rsvp h3 {
+      margin-bottom: 0;
+    }
+
+    #rsvp h3+p {
+      margin-top: 0;
+    }
+
+    #rsvp h3+p::before {
+      content: '';
+      border-top: 1px solid gray;
+      display: block;
+      width: 20px;
+      margin: 6px auto;
+    }
 
     input {
       display: inline-block;
@@ -353,8 +381,46 @@
       padding: 5px;
     }
 
+    input[type="radio"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      display: inline-block;
+      position: relative;
+      background-color: #f1f1f1;
+      color: #666;
+      top: 8px;
+      height: 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 50px;
+      margin-right: 7px;
+      outline: none;
+    }
+
+    input[type="radio"]:checked::before {
+      position: absolute;
+      font: 10px/1 'Open Sans', sans-serif;
+      left: 7px;
+      top: 3px;
+      content: '\02143';
+      transform: rotate(40deg);
+    }
+
+    input[type="radio"]:hover {
+      background-color: #f7f7f7;
+    }
+
+    input[type="radio"]:checked {
+      background-color: #f1f1f1;
+    }
+
+    input::placeholder {
+      color: #797979;
+    }
+
     #notice {
-      font-size: .9rem;
+      font-size: .88rem;
       font-style: italic;
       margin-top: 10px;
     }
@@ -426,54 +492,68 @@
       align-items: center;
       background: rgba(47, 46, 46, 1);
       letter-spacing: .1rem;
-      font-size: 1rem;
+      font-size: .8rem;
       color: white;
-      padding: 10px 30px;
       cursor: pointer;
       text-decoration: none;
       font-weight: lighter;
-      min-height: 44px;
       box-sizing: border-box;
       border: 0;
+      font-family: "Nunito Sans", sans-serif;
+      height: 38px;
+      padding: 0 30px;
+      font-weight: 500;
+    }
+
+    .button:hover {
+      color: #eee;
     }
 
     #rsvpForm {
-      max-width: 450px;
+      max-width: 440px;
       width: 100%;
       box-sizing: border-box;
       padding: 0 20px;
-      margin: 10px auto;
+      margin: 0 auto;
+      margin-top: 20px;
       position: relative;
+      text-align: left;
     }
 
-    #rsvpForm>*+* {
-      margin-top: 12px;
-    }
-
-    #rsvpForm input {
+    #rsvpForm input:not([type="radio"]) {
       display: block;
       width: 100%;
+      margin: 12px 0;
       box-sizing: border-box;
+      text-align: left;
     }
 
-    .horizontal {
-      display: flex;
-      flex-direction: row;
-    }
-
-    #rsvpForm label {
-      width: 100%;
+    #rsvpForm .horizontal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 5px;
     }
 
     #rsvpForm select {
-      display: block;
-      margin: auto;
-      margin-top: 5px;
+      display: inline-block;
+      height: 32px;
     }
 
-    #rsvpForm button {
+    #rsvpForm .button {
       display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+
+    #rsvpForm textarea {
       width: 100%;
+      height: 100px;
+      font-size: 1rem;
+      border: none;
+      border-bottom: 2px lightgray solid;
+      background: #fcfcfc;
+      padding: 5px;
+      resize: none;
     }
 
     #sentMsg {
@@ -536,11 +616,9 @@
         right: -90px;
         width: 200px;
       }
-    }
 
-    @media (max-width: 640px) {
       header {
-        justify-content: flex-end;
+        justify-content: space-between;
       }
 
       header #side {
@@ -573,17 +651,11 @@
         display: block;
         z-index: 1;
       }
+    }
 
+    @media (max-width: 640px) {
       #main h1 {
         font-size: 4rem;
-      }
-
-      #countdown li {
-        font-size: .5em;
-      }
-
-      #countdown span {
-        font-size: 2.8rem;
       }
 
       #palm {
@@ -612,82 +684,97 @@
     </button>
     <div id="side">
       <a href="#main">Home</a>
-      <a href="#rsvp">RSVP</a>
+      <a href="#story">Our Story</a>
+      <a href="#rsvp">The Big Day</a>
       <a href="#resort">Accomodations</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
+    <div>
+      <a href="#rsvp" class="button">RSVP</a>
+      <a href="#resort" class="button">Book</a>
+    </div>
   </header>
   <section id="main">
-    <lazy-image src="2.jpg"></lazy-image>
-    <div class="backdrop">
-      <h1>Anna<span>&amp;</span>Valdrin</h1>
-      <h2>November 30, 2019</h2>
-    </div>
-    <ul id="countdown">
-      <li><span id="months">&nbsp;</span>months</li>
-      <li><span id="days">&nbsp;</span>days</li>
-      <li><span id="hours">&nbsp;</span>Hours</li>
-      <li><span id="minutes">&nbsp;</span>Minutes</li>
-      <li><span id="seconds">&nbsp;</span>Seconds</li>
-    </ul>
+    <h1>Anna<span>&amp;</span>Valdrin</h1>
+    <lazy-image src="main.png"></lazy-image>
+    <p>Are Getting Married</p>
+    <h2>November 30th, 2019</h2>
+    <a href="#story"><svg preserveAspectRatio="xMidYMid meet" data-bbox="6.443 47.497 187.114 105.008"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="6.442679405212402 47.49680709838867 187.1136474609375 105.00750732421875" role="img"
+        style="stroke-width: 0px; width: 15px">
+        <g>
+          <path
+            d="M174.476 51.261l-74.704 74.193L25.578 50.75c-4.287-4.316-11.566-4.341-15.882-.054s-4.341 11.565-.055 15.882l82.107 82.673c4.287 4.316 11.566 4.341 15.882.055l82.673-82.107c4.316-4.287 4.341-11.566.055-15.882s-11.235-4.342-15.882-.056z">
+          </path>
+        </g>
+      </svg>
+    </a>
   </section>
   <div id="palm">
     <img class="leaf l1" src="leaf.svg">
     <img class="leaf l2" src="leaf.svg">
   </div>
-  <section>
-    <h1>The wedding</h1>
-    <p>
-      We're getting married on November 30, 2019 at
-      <a target="_blank" rel="noopener noreferrer"
-        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
-        Royalton Bávaro Resort &amp; Spa All Inclusive</a> in
-      Punta Cana, Dominican Republic! We truly hope you can join our family
-      in this special celebration.
-    </p>
-    <p>
-      <a class="button" href="#rsvp">RSVP</a>
-    </p>
-    <p>
-      We will be staying at the Royalton Bávaro Resort from November 26th to December 4th, and we'll be planning several
-      activities during our time there.
-    </p>
-    <p>
-      We have hired a booking agent to make your travel planning easy. Please checkout below for more
-      information about pricing and booking.
-    </p>
-    <p>
-      <a class="button" href="#resort">Accomodations &amp; Travel</a>
-    </p>
+  <section id="story">
+    <lazy-image class="flower" src="flower1.png"></lazy-image>
+    <h1>Our story</h1>
+    <p>Two hearts and a pizza. We met over the best pizza in San Francisco. We had pizza all over Italy. We
+      make our own pizza, from Oakland to New York.</p>
+  </section>
+  <section class="fullwidth parallax">
+    <lazy-image src="3.jpg"></lazy-image>
   </section>
   <section id="rsvp">
-    <h1>RSVP</h1>
+    <lazy-image class="flower" src="flower2.png"></lazy-image>
+    <h1>The Big Day</h1>
+    <p>We truly hope you can join our family in this special celebration.</p>
+    <h3>When</h3>
+    <p>November 30th, 5:00 PM</p>
+    <h3>Where</h3>
+    <p>
+      Royalton Bávaro Resort &amp; Spa All Inclusive<br>
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://www.google.com/maps/search/?api=1&amp;query=Royalton%20B%C3%A1varo%20Resort%20%26%20Spa%20All%20Inclusive%2C%20B%C3%A1varo%20La%20Altagracia%2023301%20Dominican%20Republic&amp;query_place_id=ChIJcTcrrb_rqI4RevvCLKEMXcY">
+        Arena Gorda Beach road, Macao, Bávaro 23301,<br>
+        Dominican Republic
+      </a>
+    </p>
+    <h2>RSVP</h2>
     <form id="rsvpForm">
-      <input type="text" name="name" required placeholder="Your Full Name">
-      <input type="email" name="email" required placeholder="Your Email">
-      <input type="tel" name="phone" placeholder="Your Phone Number">
       <div class="horizontal">
-        <label>Guests:
-          <select name="guests" required>
-            <option value="">--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-          </select>
+        <label>
+          <input name="attending" type="radio" value="yes" checked>
+          I'm going
         </label>
-        <label>Attending?
-          <select name="attending" required>
-            <option value="">--</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+        <label>
+          <input name="attending" type="radio" value="no">
+          Not going
         </label>
       </div>
-      <button class="button" name="send">Send RSVP</button>
+      <input type="text" name="name" required placeholder="Your Full Name">
+      <input type="email" name="email" required placeholder="Your Email">
+      <p>
+        <input type="tel" name="phone" placeholder="Your Phone Number">
+        <label for="guests">Additional Guests:</label>
+        <select id="guests" name="guests">
+          <option value="0" selected>0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <input type="text" name="guest1name" hidden placeholder="Guest 1 Full Name">
+        <input type="text" name="guest2name" hidden placeholder="Guest 2 Full Name">
+        <input type="text" name="guest3name" hidden placeholder="Guest 3 Full Name">
+        <input type="text" name="guest4name" hidden placeholder="Guest 4 Full Name">
+        <input type="text" name="guest5name" hidden placeholder="Guest 5 Full Name">
+        <input type="text" name="guest6name" hidden placeholder="Guest 6 Full Name">
+        <textarea name="more" placeholder="Anything we should know?"></textarea>
+      </p>
+      <button class="button" name="send">RSVP</button>
       <div id="sentMsg"></div>
     </form>
   </section>
@@ -707,6 +794,14 @@
       <lazy-image src="RoyaltonBavaro2.jpg"></lazy-image>
       <lazy-image src="RoyaltonBavaro3.jpg"></lazy-image>
     </div>
+    <p>
+      We will be staying at the Royalton Bávaro Resort from November 26th to December 4th, and we'll be planning several
+      activities during our time there.
+    </p>
+    <p>
+      We have hired a booking agent to make your travel planning easy. More details on the Accomodations and Travel
+      section
+      👇</p>
     <p>
       The packages are All Inclusive, with <b>round-trip shuttle from PUJ airport to Royalton Bavaro</b>, unlimited
       dining,
@@ -872,8 +967,6 @@
   </footer>
   <script type="module" src="https://unpkg.com/@power-elements/lazy-image/lazy-image.js"></script>
   <script type="module">
-    import countdown from './countdown.js';
-
     /* Variables */
 
     const bookingData = {
@@ -915,7 +1008,6 @@
     const adultsEl = document.getElementById('adults');
     const childrenEl = document.getElementById('children');
     const nightsEl = document.getElementById('nights');
-    const countdownEl = document.getElementById('countdown');
     const hamburgerEl = document.querySelector('.hamburger');
     const palmEl = document.getElementById('palm');
     const rsvpEl = document.getElementById('rsvpForm');
@@ -928,7 +1020,6 @@
 
     /* Initialization */
 
-    countdownLoop('2019/11/30 05:00:00 PM');
     for (const roomId in bookingData) {
       const room = bookingData[roomId];
       const template = document.createElement('template');
@@ -968,7 +1059,8 @@
     /* Listeners */
 
     rsvpEl.addEventListener('submit', onSubmit);
-    document.addEventListener('change', calculatePrices);
+    rsvpEl.addEventListener('change', onRsvpChange);
+    roomsEl.addEventListener('change', calculatePrices);
     document.addEventListener('click', () => {
       hamburgerEl.classList.remove('is-active');
     });
@@ -986,6 +1078,21 @@
     }, { passive: true });
 
     /* Methods */
+
+    function onRsvpChange() {
+      const attending = rsvpEl.elements.attending.value === 'yes';
+      const guests = rsvpEl.elements.guests;
+      const container = guests.parentNode;
+      container.hidden = !attending;
+      let count = attending ? Number(guests.value) : 0;
+      for (let i = 1; i <= 6; i++) {
+        const hidden = Boolean(count <= 0);
+        const inputEl = rsvpEl.elements[`guest${i}name`];
+        inputEl.hidden = hidden;
+        inputEl.required = !inputEl.hidden;
+        count--;
+      }
+    }
 
     function calculatePrices() {
       const adultsCount = getValueAsNumber(adultsEl);
