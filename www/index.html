@@ -260,6 +260,14 @@
       margin-bottom: 20px;
     }
 
+    h3 {
+      color: black;
+      font-weight: 300;
+      letter-spacing: 0.1rem;
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+
     p,
     li {
       margin: 10px auto;
@@ -355,23 +363,27 @@
 
     /* ---- Main END   ---- */
 
-    #rsvp h1 {
+    #story {
+      padding-bottom: 40px;
+    }
+
+    #bigday h1 {
       margin-bottom: 0;
     }
 
-    #rsvp h1+p {
+    #bigday h1+p {
       margin-bottom: 25px;
     }
 
-    #rsvp h3 {
+    #bigday h3 {
       margin-bottom: 0;
     }
 
-    #rsvp h3+p {
+    #bigday h3+p {
       margin-top: 0;
     }
 
-    #rsvp h3+p::before {
+    #bigday h3+p::before {
       content: '';
       border-top: 1px solid gray;
       display: block;
@@ -388,6 +400,8 @@
       border-bottom: 2px lightgray solid;
       background: #fcfcfc;
       padding: 5px;
+      color: inherit;
+      font-family: inherit;
     }
 
     input[type="radio"] {
@@ -425,7 +439,8 @@
     }
 
     input::placeholder {
-      color: #797979;
+      color: inherit;
+      font-family: inherit;
     }
 
     #notice {
@@ -488,11 +503,16 @@
     }
 
     select {
-      background: white;
-      border: 1px solid lightgray;
-      padding: 4px;
       display: inline-block;
-      margin: 4px 2px;
+      background: white;
+      border: none;
+      padding: 5px;
+      height: 40px;
+      border-bottom: 2px solid lightgray;
+      font-family: inherit;
+      color: inherit;
+      font-size: inherit;
+      box-sizing: border-box;
     }
 
     .button {
@@ -519,7 +539,7 @@
     }
 
     #rsvpForm {
-      max-width: 440px;
+      max-width: 400px;
       width: 100%;
       box-sizing: border-box;
       padding: 0 20px;
@@ -529,10 +549,11 @@
       text-align: left;
     }
 
-    #rsvpForm input:not([type="radio"]) {
+    #rsvpForm input:not([type="radio"]),
+    #rsvpForm select {
       display: block;
       width: 100%;
-      margin: 12px 0;
+      margin: 20px 0;
       box-sizing: border-box;
       text-align: left;
     }
@@ -541,11 +562,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 5px;
-    }
-
-    #rsvpForm select {
-      display: inline-block;
-      height: 32px;
     }
 
     #rsvpForm .button {
@@ -563,6 +579,13 @@
       background: #fcfcfc;
       padding: 5px;
       resize: none;
+      color: inherit;
+      font-family: inherit;
+    }
+
+    textarea::placeholder {
+      color: inherit;
+      font-family: inherit;
     }
 
     #sentMsg {
@@ -589,11 +612,11 @@
     .resortPhotos {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 5px;
+      grid-gap: 10px;
     }
 
     .resortPhotos>* {
-      height: 150px;
+      height: 220px;
     }
 
     .section-content {
@@ -608,13 +631,13 @@
       width: 100%;
     }
 
-    .topCounter {
+    .top-counter {
       counter-reset: number;
       list-style-type: none;
       padding: 0;
     }
 
-    .topCounter>*::before {
+    .top-counter>*::before {
       counter-increment: number;
       content: "~ "counter(number) " ~";
       margin-top: 40px;
@@ -700,14 +723,14 @@
     <div id="side">
       <a href="#main">Home</a>
       <a href="#story">Our Story</a>
-      <a href="#rsvp">The Big Day</a>
+      <a href="#bigday">The Big Day</a>
       <a href="#resort">Accomodations</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
     <div>
       <a href="#rsvp" class="button">RSVP</a>
-      <a href="#resort" class="button">Book</a>
+      <a href="#book" class="button">Book</a>
     </div>
   </header>
   <div class="viewport">
@@ -739,12 +762,12 @@
         <p>Two hearts and a pizza. We met over the best pizza in San Francisco. We had pizza all over Italy. We
           make our own pizza, from Oakland to New York.</p>
       </section>
-      <lazy-image class="parallax" parallax="0.3" src="3.jpg"></lazy-image>
+      <lazy-image class="parallax" parallax="0.3" src="bg1.jpg"></lazy-image>
       <div class="parallaxspace"></div>
-      <section id="rsvp">
+      <section id="bigday">
         <lazy-image class="flower" src="flower2.png"></lazy-image>
         <h1>The Big Day</h1>
-        <p>We truly hope you can join our family in this special celebration.</p>
+        <!-- <p>We truly hope you can join our family in this special celebration.</p> -->
         <h3>When</h3>
         <p>November 30th, 5:00 PM</p>
         <h3>Where</h3>
@@ -756,7 +779,10 @@
             Dominican Republic
           </a>
         </p>
-        <h2>RSVP</h2>
+      </section>
+      <section id="rsvp">
+        <lazy-image class="flower" src="flower1.png"></lazy-image>
+        <h1>RSVP</h1>
         <form id="rsvpForm">
           <div class="horizontal">
             <label>
@@ -770,17 +796,16 @@
           </div>
           <input type="text" name="name" required placeholder="Your Full Name">
           <input type="email" name="email" required placeholder="Your Email">
-          <p>
+          <div>
             <input type="tel" name="phone" placeholder="Your Phone Number">
-            <label for="guests">Additional Guests:</label>
             <select id="guests" name="guests">
-              <option value="0" selected>0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
+              <option value="0" selected>0 Additional guests</option>
+              <option value="1">1 Additional guest</option>
+              <option value="2">2 Additional guests</option>
+              <option value="3">3 Additional guests</option>
+              <option value="4">4 Additional guests</option>
+              <option value="5">5 Additional guests</option>
+              <option value="6">6 Additional guests</option>
             </select>
             <input type="text" name="guest1name" hidden placeholder="Guest 1 Full Name">
             <input type="text" name="guest2name" hidden placeholder="Guest 2 Full Name">
@@ -789,7 +814,7 @@
             <input type="text" name="guest5name" hidden placeholder="Guest 5 Full Name">
             <input type="text" name="guest6name" hidden placeholder="Guest 6 Full Name">
             <textarea name="more" placeholder="Anything we should know?"></textarea>
-          </p>
+          </div>
           <button class="button" name="send">RSVP</button>
           <div id="sentMsg"></div>
         </form>
@@ -797,52 +822,61 @@
       <section id="resort">
         <div class="section-content">
           <h1>Accomodations and Travel</h1>
+          <h3>The Resort</h3>
           <p>
             We secured a block of rooms at the
             <a target="_blank" rel="noopener noreferrer" href="https://www.royaltonresorts.com/royalton-bavaro">Royalton
               Bávaro Resort &amp; Spa All Inclusive</a> in
             Punta Cana, Dominican Republic.
           </p>
-          <iframe class="map"
+          <!-- <iframe class="map"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824551.8372207391!2d-69.55630110866662!3d18.77380919994668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ebbfad2b3771%3A0xc65d0ca12cc2fb7a!2sRoyalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive!5e0!3m2!1sen!2sus!4v1560488529114!5m2!1sen!2sus"
-            allowfullscreen></iframe>
+            allowfullscreen></iframe> -->
           <div class="resortPhotos">
             <lazy-image src="RoyaltonBavaro1.jpg"></lazy-image>
             <lazy-image src="RoyaltonBavaro2.jpg"></lazy-image>
             <lazy-image src="RoyaltonBavaro3.jpg"></lazy-image>
           </div>
-          <p>
-            We will be staying at the Royalton Bávaro Resort from November 26th to December 4th, and we'll be planning
-            several
-            activities during our time there.
-          </p>
-          <p>
-            We have hired a booking agent to make your travel planning easy. More details on the Accomodations and
-            Travel
-            section
-            👇</p>
+          <h3>What's included?</h3>
           <p>
             The packages are All Inclusive, with <b>round-trip shuttle from PUJ airport to Royalton Bavaro</b>,
-            unlimited
-            dining,
-            beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.
-            Minimum length of stay is 3 nights.
-            Please note that resorts (including Royalton Bavaro) charge an entry fee (&dollar;100+) if you are not a
-            guest
-            of
-            the resort.
+            unlimited dining, beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.
+          </p>
+          <h3>Flight and Shuttle Service</h3>
+          <p>
+            We suggest to fly to Punta Cana International Airport (PUJ). It is a 30 min ride from the resort. A
+            round-trip shuttle via our Destify Agency service is included in the package price.
           </p>
           <p>
-            No worries if you don't know how long you can stay. You can
-            secure the room with a &dollar;150 deposit.
+            For a cheaper option you can opt to fly to Santo Domingo Airport (AILA-JFPG) but it takes up to 3 hours to
+            reach the resort. Round-trip with local bus service costs $20 per person, whereas with the Destify Shuttle
+            costs an extra $200 per person.
           </p>
-          <p>Final payment is due by <b>September 08, 2019</b>. Changes to your booking can be made until then, at no
-            charge.
-          </p>
+        </div>
+      </section>
+      <section id="book">
+        <div class="section-content">
+          <lazy-image class="flower" src="flower1.png"></lazy-image>
+          <h1>Book Your Room</h1>
+          <!-- <p>You can secure your room with a $150 deposit.</p>
+          <p>Changes to your booking can be made until September 08, 2019 at no charge (when the final payment is due).
+            <br>Several types of rooms are available, so rates will vary.</p>
+          <p>The minimum length of stay is 3 nights.</p>
+          <p>You can calculate the cost and book your room following the steps below.</p>-->
           <p>
-            Several types of rooms are available, so rates will vary. You
-            can calculate the cost and book your room below.
+            You can secure your room with a $150 deposit.
+
+            Changes to your booking can be made until September 08, 2019 at no charge (when the final payment is due).
+            Several types of rooms are available, so rates will vary.
+
+            The minimum length of stay is 3 nights.
+
+            You can calculate the cost and book your room following the steps below.
           </p>
+          <p>If you are thinking of staying at another resort, please note that many resorts (including Royalton Bavaro)
+            charge an entry fee ($100+/day) if you are not a guest of the resort.</p>
+          </p>
+
           <div id="calculator">
             Show prices for
             <select name="adults" id="adults">
@@ -927,7 +961,7 @@
         <p>We don't need you to bring us gifts – we know plane tickets are expensive and your presence at the wedding is
           enough! If you really want to give us something, a contribution to our honeymoon fund would be awesome.</p>
         <p>Here's how you can get the money to us:
-          <ol class="topCounter">
+          <ol class="top-counter">
             <li>Hand-deliver a cheque to us at the wedding</li>
             <li>Contribute to our PayPal fund here</li>
             <li>Venmo, Square Cash, or whatever other electronic payment method you want to
