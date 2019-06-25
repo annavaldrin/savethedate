@@ -1305,6 +1305,7 @@
       try {
         await sendRsvp(data);
         rsvpEl.reset();
+        onRsvpChange();
         sentMsg.textContent = '📬 RSVP sent, thank you!';
       } catch (e) {
         sentMsg.textContent = '⚠️ Something went wrong, please try again!';
