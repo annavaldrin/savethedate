@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Roboto:700&display=swap"
     rel="stylesheet">
   <style>
-    html {
+    html,
+    body {
       text-align: center;
       font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
       line-height: 1.7rem;
@@ -18,9 +19,6 @@
       color: #163E3A;
       scroll-behavior: smooth;
       --lazy-image-fit: cover;
-    }
-
-    body {
       margin: 0;
     }
 
@@ -231,8 +229,15 @@
       max-width: 100%;
     }
 
-    .parallax lazy-image {
+    .parallax {
       height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax lazy-image {
+      height: 100%;
+      will-change: transform;
     }
 
     h1 {
@@ -1013,6 +1018,7 @@
     const rsvpEl = document.getElementById('rsvpForm');
     const sentMsg = document.getElementById('sentMsg');
     const roomsEl = document.getElementById('rooms');
+    const calculatorEl = document.getElementById('calculator');
 
     let lastScroll = 0;
     let scrollDebounceId = null;
@@ -1042,7 +1048,8 @@
     <div>
       - \$200, on us: <span class="rate afterdiscount"></span>
     </div>
-    <a class="button" rel="noopener noreferrer" target="_blank" href="${getBookingUrl(room)}">Book now</a>
+    <a class="button" rel="noopener noreferrer" target="_blank"
+       href="${getBookingUrl(room)}">Book now</a>
   </div>
 </div>`;
       roomsEl.appendChild(template.content);
@@ -1060,24 +1067,28 @@
 
     rsvpEl.addEventListener('submit', onSubmit);
     rsvpEl.addEventListener('change', onRsvpChange);
-    roomsEl.addEventListener('change', calculatePrices);
-    document.addEventListener('click', () => {
-      hamburgerEl.classList.remove('is-active');
-    });
-    hamburgerEl.addEventListener('click', (event) => {
-      hamburgerEl.classList.toggle('is-active');
+    calculatorEl.addEventListener('change', calculatePrices);
+    hamburgerEl.addEventListener('click', onHamburgerClick);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* Methods */
+
+    function onHamburgerClick(event) {
       event.stopPropagation();
-    });
-    window.addEventListener('scroll', () => {
+      hamburgerEl.classList.toggle('is-active');
+      document.addEventListener('click', () => {
+        hamburgerEl.classList.remove('is-active');
+      }, { once: true });
+    }
+
+    function onScroll() {
       const scrollTop = document.scrollingElement.scrollTop;
       const angle = Math.max(-10, Math.min(10, scrollTop - lastScroll));
       lastScroll = scrollTop;
       palmEl.style.transform = `rotateZ(${angle}deg)`;
       scrollDebounceId && clearTimeout(scrollDebounceId);
       setTimeout(() => palmEl.style.transform = '', 200);
-    }, { passive: true });
-
-    /* Methods */
+    }
 
     function onRsvpChange() {
       const attending = rsvpEl.elements.attending.value === 'yes';
