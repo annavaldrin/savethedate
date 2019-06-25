@@ -818,7 +818,7 @@
             <input type="text" name="guest4name" hidden placeholder="Guest 4 Full Name">
             <input type="text" name="guest5name" hidden placeholder="Guest 5 Full Name">
             <input type="text" name="guest6name" hidden placeholder="Guest 6 Full Name">
-            <textarea name="more" placeholder="Anything we should know?"></textarea>
+            <textarea name="additionalinfo" placeholder="Anything we should know?"></textarea>
           </div>
           <button class="button" name="send">RSVP</button>
           <div id="sentMsg"></div>
@@ -1276,15 +1276,30 @@
         name,
         email,
         attending,
-        guests,
         phone,
+        guests,
+        guest1name,
+        guest2name,
+        guest3name,
+        guest4name,
+        guest5name,
+        guest6name,
+        additionalinfo,
       } = event.target.elements;
       const data = {
         name: name.value,
         email: email.value,
         phone: phone.value,
         attending: attending.value === 'yes',
-        guests: Number(guests.value) || 1,
+        additionalinfo: additionalinfo.value,
+        additionalguests: Number(guests.value) || 0,
+        guest1name: guest1name.value,
+        guest2name: guest2name.value,
+        guest3name: guest3name.value,
+        guest4name: guest4name.value,
+        guest5name: guest5name.value,
+        guest6name: guest6name.value,
+        origin: location.origin,
       };
       rsvpEl.send.disabled = true;
       try {
