@@ -1,5 +1,4 @@
-const isIntersecting = ({isIntersecting}) => isIntersecting;
-
+const isIntersecting = ({ isIntersecting }) => isIntersecting;
 const tagName = 'lazy-image';
 const template = document.createElement('template');
 template.innerHTML = `
@@ -51,7 +50,7 @@ class LazyImage extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src', 'alt'];
+    return ['src', 'alt', 'observe'];
   }
 
   /**
@@ -78,6 +77,18 @@ class LazyImage extends HTMLElement {
 
   get alt() {
     return this.getAttribute('alt');
+  }
+
+  get observe() {
+    return this.getAttribute('observe');
+  }
+
+  set observe(v) {
+    this.safeSetAttribute('observe', v);
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer.observe(this.getObservedNode());
+    }
   }
 
   set intersecting(value) {
@@ -107,7 +118,7 @@ class LazyImage extends HTMLElement {
   connectedCallback() {
     this.setAttribute('role', 'presentation');
     if (!this.shadowRoot) {
-      this.attachShadow({mode: 'open'});
+      this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       this.shadowImage = this.shadowRoot.getElementById('image');
       this.shadowPlaceholder = this.shadowRoot.getElementById('placeholder');
@@ -155,7 +166,7 @@ class LazyImage extends HTMLElement {
     const rootMargin = '10px';
     this.observer =
       new IntersectionObserver(this.observerCallback, { rootMargin });
-    this.observer.observe(this);
+    this.observer.observe(this.getObservedNode());
   }
 
 
@@ -168,6 +179,15 @@ class LazyImage extends HTMLElement {
     this.observer.disconnect();
     this.observer = null;
     delete this.observer;
+  }
+
+  getObservedNode() {
+    let observed;
+    const { observe } = this;
+    if (observe === 'nextElementSibling') {
+      observed = this.nextElementSibling;
+    }
+    return observed || this;
   }
 }
 
