@@ -20,6 +20,7 @@
       line-height: 1.7rem;
       letter-spacing: 0.04rem;
       color: #163E3A;
+      -webkit-font-smoothing: antialiased;
       --lazy-image-fit: cover;
     }
 
@@ -296,45 +297,6 @@
       --lazy-image-fit: contain;
     }
 
-    #palm {
-      display: none;
-      position: fixed;
-      top: calc(50% - 70px);
-      right: -110px;
-      width: 300px;
-      z-index: 10;
-      transform-origin: right center;
-      will-change: transform;
-      transition: transform 300ms ease-out;
-    }
-
-    #palm .leaf {
-      left: 0;
-      position: absolute;
-      width: 100%;
-      transform-origin: right center;
-      animation: leafRotate 800ms alternate infinite ease-in-out;
-    }
-
-    #palm .l2 {
-      left: 10%;
-      transform: rotate(-19deg);
-      animation-name: leafRotate2;
-      animation-delay: 200ms;
-    }
-
-    @keyframes leafRotate {
-      to {
-        transform: rotateZ(-3deg);
-      }
-    }
-
-    @keyframes leafRotate2 {
-      to {
-        transform: rotateZ(-16deg);
-      }
-    }
-
     #main h1 {
       position: absolute;
       top: 80px;
@@ -451,13 +413,8 @@
     #notice {
       font-size: .88rem;
       font-style: italic;
-      margin-top: 10px;
-    }
-
-    #rooms {
-      margin: 30px 0;
-      position: relative;
-      z-index: 10;
+      margin: 20px;
+      line-height: 1rem;
     }
 
     .room {
@@ -466,58 +423,131 @@
       background: white;
       border: 1px solid #eee;
       display: grid;
-      grid-template-columns: 4fr 3fr;
-      margin-bottom: 20px;
+      grid-template-columns: 1fr 1fr;
       justify-content: space-between;
       align-items: stretch;
       text-align: right;
     }
 
+    .room+.room {
+      margin-top: 20px;
+    }
+
+    .room-image {
+      position: relative;
+    }
+
     .room .title {
-      margin-top: 0;
-    }
-
-    .room lazy-image {
-      min-height: 250px;
-    }
-
-    .room .price {
-      margin: 15px;
-    }
-
-    .price>div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      color: white;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 15px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      margin: 0;
+      letter-spacing: 0;
+      font-size: 1.3rem;
+      z-index: 1;
+      background-image: linear-gradient(180deg, #0000 50%, rgba(0, 0, 0, .5) 100%);
     }
 
-    .room .total {
-      margin-top: 10px;
+    .room-image lazy-image {
+      min-height: 250px;
+      height: 100%;
+    }
+
+    .price {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .row {
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+
+    .price .row:last-of-type {
+      margin-top: -5px;
+    }
+
+    .row .button {
+      margin-top: 20px;
+    }
+
+    .rate {
+      letter-spacing: 0;
+    }
+
+    .rate:not(.secondary) {
+      font-weight: bold;
       font-size: 1.4rem;
     }
 
-    .room .afterdiscount {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+    .total {
+      text-decoration: line-through;
+      margin-right: 10px;
     }
 
-    .rates p {
-      margin-top: 0;
+    .discount {
+      line-height: 1.2rem;
+      font-size: .88rem;
+      max-width: 320px;
+      margin-left: auto;
     }
 
-    select {
-      display: inline-block;
-      background: white;
-      border: none;
-      padding: 5px;
-      height: 40px;
+    .rate.recap {
+      margin-top: -4px;
+    }
+
+    .rate.child,
+    .rate.recap {
+      font-weight: bold;
+      color: #5a6068;
+    }
+
+    .custom-select {
+      background-color: #fcfcfc;
       border-bottom: 2px solid lightgray;
+      display: inline-block;
+      position: relative;
+      height: 40px;
+    }
+
+    .custom-select::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: calc(50% - 12px);
+      right: 0;
+      background: url("data:image/svg+xml,%3Csvg%20width%3D%2210px%22%20height%3D%225px%22%20viewBox%3D%227%2010%2010%205%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20stroke%3D%22none%22%20fill%3D%22%23000%22%20fill-rule%3D%22evenodd%22%20opacity%3D%220.54%22%20points%3D%227%2010%2012%2015%2017%2010%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E") no-repeat center;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+    }
+
+    .custom-select select {
       font-family: inherit;
       color: inherit;
       font-size: inherit;
+      font-weight: inherit;
+      background-color: transparent;
+      padding: 5px;
+      padding-right: 30px;
       box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
     .button {
@@ -555,7 +585,7 @@
     }
 
     #rsvpForm input:not([type="radio"]),
-    #rsvpForm select {
+    #rsvpForm .custom-select {
       display: block;
       width: 100%;
       margin: 20px 0;
@@ -579,6 +609,7 @@
       width: 100%;
       height: 100px;
       font-size: 1rem;
+      box-sizing: border-box;
       border: none;
       border-bottom: 2px lightgray solid;
       background: #fcfcfc;
@@ -630,10 +661,50 @@
       margin-right: auto;
     }
 
-    .map {
-      border: 0;
-      height: 300px;
-      width: 100%;
+    #book {
+      padding: 80px 0;
+    }
+
+    #book .bg {
+      background-color: #fafafa;
+      padding: 20px;
+      margin: 30px 0;
+    }
+
+    #book .bg>h2 {
+      margin-top: 20px;
+    }
+
+    #book .section-content>p {
+      line-height: 1.3rem;
+      margin: 30px auto;
+    }
+
+    #book .section-content>p+p::before {
+      content: '❤';
+      color: #aaa;
+      display: block;
+      position: absolute;
+      left: calc(50%);
+      margin-top: -22px;
+      font-size: 0.7rem;
+    }
+
+    #calculator {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 15px;
+      max-width: 500px;
+      margin: 10px auto;
+    }
+
+    #calculator h3 {
+      margin: 0;
+    }
+
+    #calculator .custom-select {
+      font-weight: bold;
+      border-bottom-color: rgba(47, 46, 46, 1);
     }
 
     .top-counter {
@@ -654,12 +725,6 @@
     }
 
     @media (max-width: 920px) {
-      #palm {
-        top: calc(50% - 70px);
-        right: -90px;
-        width: 200px;
-      }
-
       header {
         justify-content: space-between;
       }
@@ -699,12 +764,6 @@
     @media (max-width: 640px) {
       #main h1 {
         font-size: 4rem;
-      }
-
-      #palm {
-        top: calc(50% - 60px);
-        right: -60px;
-        width: 140px;
       }
 
       .room {
@@ -757,10 +816,6 @@
           </svg>
         </a>
       </section>
-      <div id="palm">
-        <img class="leaf l1" src="leaf.svg">
-        <img class="leaf l2" src="leaf.svg">
-      </div>
       <section id="story">
         <lazy-image class="flower" src="flower1.png"></lazy-image>
         <h1>Our story</h1>
@@ -792,26 +847,29 @@
           <div class="horizontal">
             <label>
               <input name="attending" type="radio" value="yes" checked>
-              I'm going
+              I'm Going
             </label>
             <label>
               <input name="attending" type="radio" value="no">
-              Not going
+              Not Going
             </label>
           </div>
           <input type="text" name="name" required placeholder="Your Full Name">
           <input type="email" name="email" required placeholder="Your Email">
           <div>
             <input type="tel" name="phone" placeholder="Your Phone Number">
-            <select id="guests" name="guests">
-              <option value="0" selected>0 Additional guests</option>
-              <option value="1">1 Additional guest</option>
-              <option value="2">2 Additional guests</option>
-              <option value="3">3 Additional guests</option>
-              <option value="4">4 Additional guests</option>
-              <option value="5">5 Additional guests</option>
-              <option value="6">6 Additional guests</option>
-            </select>
+
+            <div class="custom-select">
+              <select id="guests" name="guests">
+                <option value="0" selected>0 Additional Guests</option>
+                <option value="1">1 Additional Guest</option>
+                <option value="2">2 Additional Guests</option>
+                <option value="3">3 Additional Guests</option>
+                <option value="4">4 Additional Guests</option>
+                <option value="5">5 Additional Guests</option>
+                <option value="6">6 Additional Guests</option>
+              </select>
+            </div>
             <input type="text" name="guest1name" hidden placeholder="Guest 1 Full Name">
             <input type="text" name="guest2name" hidden placeholder="Guest 2 Full Name">
             <input type="text" name="guest3name" hidden placeholder="Guest 3 Full Name">
@@ -865,185 +923,189 @@
         <div class="section-content">
           <lazy-image class="flower" src="flower1.png"></lazy-image>
           <h1>Book Your Room</h1>
-          <!-- <p>You can secure your room with a $150 deposit.</p>
+          <p>You can secure your room with a $150 deposit.</p>
           <p>Changes to your booking can be made until September 08, 2019 at no charge (when the final payment is due).
             <br>Several types of rooms are available, so rates will vary.</p>
           <p>The minimum length of stay is 3 nights.</p>
-          <p>You can calculate the cost and book your room following the steps below.</p>-->
-          <p>
-            You can secure your room with a $150 deposit.
-
-            Changes to your booking can be made until September 08, 2019 at no charge (when the final payment is due).
-            Several types of rooms are available, so rates will vary.
-
-            The minimum length of stay is 3 nights.
-
-            You can calculate the cost and book your room following the steps below.
-          </p>
+          <p>Calculate the cost and book your room following the steps below.</p>
           <p>If you are thinking of staying at another resort, please note that many resorts (including Royalton Bavaro)
-            charge an entry fee ($100+/day) if you are not a guest of the resort.</p>
+            charge an entry fee ($100+/day) if you are not a guest of the resort.
           </p>
-
-          <div id="calculator">
-            Show prices for
-            <select name="adults" id="adults">
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-            adult<span class="plural">s</span> and
-            <select name="children" id="children">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            child<span class="plural">ren</span> age 2-12, staying
-            <select name="nights" id="nights">
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-            </select>
-            nights
+          <div class="bg">
+            <h2>Choose and secure your room with a deposit</h2>
+            <div id="calculator">
+              <div>
+                <h3>Adults</h3>
+                <div class="custom-select">
+                  <select name="adults" id="adults">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <h3>Children</h3>
+                <div class="custom-select">
+                  <select name="children" id="children">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <h3>Nights</h3>
+                <div class="custom-select">
+                  <select name="nights" id="nights">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                  </select>
+                </div>
+              </div>
+            </div>
             <div id="notice">
               Note: child rates apply if sharing a room with 2 adults, max 4 guests per room
             </div>
+            <div id="rooms"></div>
           </div>
-          <div id="rooms"></div>
-          <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
-          <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
-            Make a balance payment
-          </a>
         </div>
-      </section>
-      <section>
-        <h1>Things to do</h1>
-
-        <h3>Eat and drink</h3>
-        <p>TODO. Royalton Bavaro Resort: restaurants <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants</a>
-          <br>Bars and entertainment <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment</a>
-        </p>
-
-        <h3>Play</h3>
-        <p>TODO. Royalton Bavaro Resort: Beach games, Night Events, Night Club.
-          <br>Beach party <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party</a>
-          <br>Casino <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino</a>
-        </p>
-
-        <h3>Explore</h3>
-        <p>TODO. Off-road tours with ATV 4x4, Snorkeling, River Cave, Catamaran, Deep-sea fishing.</p>
-
-        <h2>Schedule of activities</h2>
-        <p>Coming soon, keep an eye on this</p>
-        <!-- <iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;ctz=America%2FNew_York&amp;src=NzkwNmE0aWNwYmZ1ODc0OHVmNWw4Zmpsc2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;showTz=0&amp;showNav=1&amp;showTitle=0&amp;showDate=1&amp;showPrint=1&amp;showTabs=1&amp;showCalendars=0"
-      style="width:100%" height="600" frameborder="0" scrolling="no"></iframe> -->
-      </section>
-      <section>
-        <h1>Gifts</h1>
-        <p>We don't need you to bring us gifts – we know plane tickets are expensive and your presence at the wedding is
-          enough! If you really want to give us something, a contribution to our honeymoon fund would be awesome.</p>
-        <p>Here's how you can get the money to us:
-          <ol class="top-counter">
-            <li>Hand-deliver a cheque to us at the wedding</li>
-            <li>Contribute to our PayPal fund here</li>
-            <li>Venmo, Square Cash, or whatever other electronic payment method you want to
-              template.placeholder@gmail.com
-            </li>
-          </ol>
-        </p>
-      </section>
-      <section id="faq">
-        <h1>Frequently Asked Questions</h1>
-        <h2>What is included in the rate?</h2>
-        <p>The rate includes round-trip shuttle from PUJ airport to Royalton Bavaro, hotel room, unlimited dining,
-          beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.</p>
-
-        <h2>Do I have to use your travel coordinator?</h2>
-        <p>Our travel coordinator requests the rooms to be together and other small perks to make your stay comfortable.
-          When
-          booking with us, you're dealing with an expert in the US, so there's no miscommunication. In many cases, the
-          group
-          leaders are arranging something during your stay, and the reservations all have to be booked at one place to
-          be
-          valid. In order to secure the group discount, you'll need to book through Ben Herrmann. If comparing rates,
-          please
-          make sure to add the round trip shuttles to and from the hotel (most sites do not include that in the rate).
-        </p>
-
-        <h2>Do I have to pay for the trip all at once?</h2>
-        <p>No! One of the benefits of booking through Destify is that you can set up a payment plan. The earlier you
-          book,
-          the
-          more flexibility you will have. Full payment will be due by September 08, 2019.</p>
-        <h2>When do I have to make the final payment?</h2>
-        <p>Full payment is due by September 08, 2019.</p>
-
-        <h2>If I book my reservation now, can I add someone later?</h2>
-        <p>You can book your room today and add a person later in the future, but keep in mind the price may change in
-          the
-          future when you're adding someone to your room.</p>
-
-        <h2>Do I need a passport?</h2>
-        <p>Since this is an international trip, you do need a passport valid at least 6+ months past your travel dates.
-          Passport cards are not valid for international air travel. If you have a passport, be sure to check the
-          expiration
-          date. If you don't already have a passport, it is a good idea to apply early to be sure you receive it in time
-          for
-          your trip. Passports normally take 4-6 weeks to process. We suggest applying a minimum of 3 months in advance
-          as
-          a
-          precaution.</p>
-
-        <h2>Where/when do I get my boarding pass?</h2>
-        <p>Boarding passes are issued 24 hours prior to departure, and can be issued online directly through the
-          airline's
-          website or picked up at the airport during check in. If airfare is included in your package, please check your
-          travel documents for the airline confirmation code to check in. You should also print your itinerary that will
-          be
-          emailed to you prior to your trip for verification at the airport.</p>
-
-        <h2>How do I get to the resort and how do shuttles work?</h2>
-        <p>Airport shuttles will take you to and from your hotel. Upon arrival at your destination,
-          your shuttle will pick you up at the airport and take you to the resort. Before your last day, you'll have to
-          confirm your departure time with the shuttle company so they can retrieve you from the resort and take you to
-          the
-          airport for your flight. Our round trip airport shuttles do not pick up clients at their homes in the U.S. and
-          take
-          them to the home airport nor do they pick you up from the U.S airport and take you home. Shuttles are only
-          available
-          at our destinations to and from your chosen resort.</p>
-
-        <h2>Can I use American Dollars?</h2>
-        <p>Yes, but many resorts and stores won't take USD, so be sure to prepare your credit and debit cards. Call your
-          bank
-          and let them know the dates you will be gone. Charges made at the resort or elsewhere on your trip may be
-          subject to
-          a foreign transaction fee by your bank (normally 1-3%).</p>
-      </section>
-      <section id="contact">
-        <h1>Questions?</h1>
-        <p>Contact our agent today! Ben Herrmann, <a href="mailto:ben@destify.com">ben@destify.com</a></p>
-        <p>Call: <a href="tel:(773) 800-2960">(773) 800-2960</a>, Text: <a href="sms:(224) 225-5564">(224) 225-5564</a>
-        </p>
-      </section>
-      <footer>
-        With <span style="color:#f3867a">❤</span><br>Anna &amp; Valdrin
-      </footer>
+        <p>Already booked? Remember to make the final payment by September 08, 2019!</p>
+        <a class="button" rel="noopener noreferrer" target="_blank" href="https://destify.com/payment/?r=36791258">
+          Make a balance payment
+        </a>
     </div>
+    </section>
+    <section>
+      <h1>Things to do</h1>
+
+      <h3>Eat and drink</h3>
+      <p>TODO. Royalton Bavaro Resort: restaurants <a rel="noopener noreferrer" target="_blank"
+          href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants</a>
+        <br>Bars and entertainment <a rel="noopener noreferrer" target="_blank"
+          href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment</a>
+      </p>
+
+      <h3>Play</h3>
+      <p>TODO. Royalton Bavaro Resort: Beach games, Night Events, Night Club.
+        <br>Beach party <a rel="noopener noreferrer" target="_blank"
+          href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party</a>
+        <br>Casino <a rel="noopener noreferrer" target="_blank"
+          href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino</a>
+      </p>
+
+      <h3>Explore</h3>
+      <p>TODO. Off-road tours with ATV 4x4, Snorkeling, River Cave, Catamaran, Deep-sea fishing.</p>
+
+      <h2>Schedule of activities</h2>
+      <p>Coming soon, keep an eye on this</p>
+      <!-- <iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;ctz=America%2FNew_York&amp;src=NzkwNmE0aWNwYmZ1ODc0OHVmNWw4Zmpsc2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;showTz=0&amp;showNav=1&amp;showTitle=0&amp;showDate=1&amp;showPrint=1&amp;showTabs=1&amp;showCalendars=0"
+      style="width:100%" height="600" frameborder="0" scrolling="no"></iframe> -->
+    </section>
+    <section>
+      <h1>Gifts</h1>
+      <p>We don't need you to bring us gifts – we know plane tickets are expensive and your presence at the wedding is
+        enough! If you really want to give us something, a contribution to our honeymoon fund would be awesome.</p>
+      <p>Here's how you can get the money to us:
+        <ol class="top-counter">
+          <li>Hand-deliver a cheque to us at the wedding</li>
+          <li>Contribute to our PayPal fund here</li>
+          <li>Venmo, Square Cash, or whatever other electronic payment method you want to
+            template.placeholder@gmail.com
+          </li>
+        </ol>
+      </p>
+    </section>
+    <section id="faq">
+      <h1>Frequently Asked Questions</h1>
+      <h2>What is included in the rate?</h2>
+      <p>The rate includes round-trip shuttle from PUJ airport to Royalton Bavaro, hotel room, unlimited dining,
+        beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.</p>
+
+      <h2>Do I have to use your travel coordinator?</h2>
+      <p>Our travel coordinator requests the rooms to be together and other small perks to make your stay comfortable.
+        When
+        booking with us, you're dealing with an expert in the US, so there's no miscommunication. In many cases, the
+        group
+        leaders are arranging something during your stay, and the reservations all have to be booked at one place to
+        be
+        valid. In order to secure the group discount, you'll need to book through Ben Herrmann. If comparing rates,
+        please
+        make sure to add the round trip shuttles to and from the hotel (most sites do not include that in the rate).
+      </p>
+
+      <h2>Do I have to pay for the trip all at once?</h2>
+      <p>No! One of the benefits of booking through Destify is that you can set up a payment plan. The earlier you
+        book,
+        the
+        more flexibility you will have. Full payment will be due by September 08, 2019.</p>
+      <h2>When do I have to make the final payment?</h2>
+      <p>Full payment is due by September 08, 2019.</p>
+
+      <h2>If I book my reservation now, can I add someone later?</h2>
+      <p>You can book your room today and add a person later in the future, but keep in mind the price may change in
+        the
+        future when you're adding someone to your room.</p>
+
+      <h2>Do I need a passport?</h2>
+      <p>Since this is an international trip, you do need a passport valid at least 6+ months past your travel dates.
+        Passport cards are not valid for international air travel. If you have a passport, be sure to check the
+        expiration
+        date. If you don't already have a passport, it is a good idea to apply early to be sure you receive it in time
+        for
+        your trip. Passports normally take 4-6 weeks to process. We suggest applying a minimum of 3 months in advance
+        as
+        a
+        precaution.</p>
+
+      <h2>Where/when do I get my boarding pass?</h2>
+      <p>Boarding passes are issued 24 hours prior to departure, and can be issued online directly through the
+        airline's
+        website or picked up at the airport during check in. If airfare is included in your package, please check your
+        travel documents for the airline confirmation code to check in. You should also print your itinerary that will
+        be
+        emailed to you prior to your trip for verification at the airport.</p>
+
+      <h2>How do I get to the resort and how do shuttles work?</h2>
+      <p>Airport shuttles will take you to and from your hotel. Upon arrival at your destination,
+        your shuttle will pick you up at the airport and take you to the resort. Before your last day, you'll have to
+        confirm your departure time with the shuttle company so they can retrieve you from the resort and take you to
+        the
+        airport for your flight. Our round trip airport shuttles do not pick up clients at their homes in the U.S. and
+        take
+        them to the home airport nor do they pick you up from the U.S airport and take you home. Shuttles are only
+        available
+        at our destinations to and from your chosen resort.</p>
+
+      <h2>Can I use American Dollars?</h2>
+      <p>Yes, but many resorts and stores won't take USD, so be sure to prepare your credit and debit cards. Call your
+        bank
+        and let them know the dates you will be gone. Charges made at the resort or elsewhere on your trip may be
+        subject to
+        a foreign transaction fee by your bank (normally 1-3%).</p>
+    </section>
+    <section id="contact">
+      <h1>Questions?</h1>
+      <p>Contact our agent today! Ben Herrmann, <a href="mailto:ben@destify.com">ben@destify.com</a></p>
+      <p>Call: <a href="tel:(773) 800-2960">(773) 800-2960</a>, Text: <a href="sms:(224) 225-5564">(224) 225-5564</a>
+      </p>
+    </section>
+    <footer>
+      With <span style="color:#f3867a">❤</span><br>Anna &amp; Valdrin
+    </footer>
+  </div>
   </div>
   <script type="module">
     import { initializeParallax } from './parallax.js';
@@ -1091,14 +1153,11 @@
     const childrenEl = document.getElementById('children');
     const nightsEl = document.getElementById('nights');
     const hamburgerEl = document.querySelector('.hamburger');
-    const palmEl = document.getElementById('palm');
     const rsvpEl = document.getElementById('rsvpForm');
     const sentMsg = document.getElementById('sentMsg');
     const roomsEl = document.getElementById('rooms');
     const calculatorEl = document.getElementById('calculator');
 
-    let lastScroll = 0;
-    let scrollDebounceId = null;
     let rsvpRef = null;
 
     /* Initialization */
@@ -1108,25 +1167,27 @@
       const template = document.createElement('template');
       template.innerHTML = `
 <div id="${roomId}" class="room">
-  <lazy-image src="${room.image}"></lazy-image>
+  <div class="room-image">
+    <lazy-image src="${room.image}"></lazy-image>
+    <h2 class="title">${room.title}</h2>
+  </div> 
   <div class="price">
-    <h3 class="title">${room.title}</h3>
-    <div>
-      Price per night:
-      <div style="text-align:right">
-        <span class="rate adult"></span>/adult<br>
-        <span class="rate">\$${room.childPrice}</span>/child
+    <div class="row">
+      <div class="rate adult"></div>
+      <div class="rate secondary child">\$${room.childPrice}/child/night</div> 
+    </div>
+    <div class="row">
+      <div class="rate">
+        <span class="total"></span>
+        Total: <span class="afterdiscount"></span>*
       </div>
+      <div class="rate secondary recap"></div>
     </div>
-    <div>
-      <div>Total for <span class="nightsCount"></span> nights:</div>
-      <span class="rate total"></span>
+    <div class="row">
+      <div class="discount">* As a gift from us, a \$200 discount will be applied at the time of final payment 🥂</div> 
+      <a class="button" rel="noopener noreferrer" target="_blank"
+         href="${getBookingUrl(room)}">Book now</a>
     </div>
-    <div>
-      - \$200, on us: <span class="rate afterdiscount"></span>
-    </div>
-    <a class="button" rel="noopener noreferrer" target="_blank"
-       href="${getBookingUrl(room)}">Book now</a>
   </div>
 </div>`;
       roomsEl.appendChild(template.content);
@@ -1148,7 +1209,6 @@
     rsvpEl.addEventListener('change', onRsvpChange);
     calculatorEl.addEventListener('change', calculatePrices);
     hamburgerEl.addEventListener('click', onHamburgerClick);
-    window.addEventListener('scroll', onScroll, { passive: true });
 
     /* Methods */
 
@@ -1158,15 +1218,6 @@
       document.addEventListener('click', () => {
         hamburgerEl.classList.remove('is-active');
       }, { once: true });
-    }
-
-    function onScroll() {
-      const scrollTop = document.scrollingElement.scrollTop;
-      const angle = Math.max(-10, Math.min(10, scrollTop - lastScroll));
-      lastScroll = scrollTop;
-      palmEl.style.transform = `rotateZ(${angle}deg)`;
-      scrollDebounceId && clearTimeout(scrollDebounceId);
-      setTimeout(() => palmEl.style.transform = '', 200);
     }
 
     function onRsvpChange() {
@@ -1188,15 +1239,18 @@
       const adultsCount = getValueAsNumber(adultsEl);
       const childrenCount = getValueAsNumber(childrenEl);
       const nightsCount = getValueAsNumber(nightsEl);
+      let recapTextContent = adultsCount + ' adult' + (adultsCount === 1 ? '' : 's');
+      recapTextContent += childrenCount ? ', ' + childrenCount + ' child' + (childrenCount === 1 ? '' : 'ren') : '';
+      recapTextContent += ', ' + nightsCount + ' nights';
       for (const roomEl of roomsEl.children) {
         const room = bookingData[roomEl.id];
         const adultRate = room.price[adultsCount];
         const nightRate = adultRate * adultsCount + room.childPrice * childrenCount;
         const total = nightRate * nightsCount;
-        roomEl.querySelector('.nightsCount').textContent = nightsCount;
+        roomEl.querySelector('.recap').textContent = recapTextContent;
         roomEl.querySelector('.total').textContent = toCurrency(total);
         roomEl.querySelector('.afterdiscount').textContent = toCurrency(total - 200);
-        roomEl.querySelector('.rate.adult').textContent = toCurrency(adultRate);
+        roomEl.querySelector('.adult').textContent = toCurrency(adultRate) + '/adult/night';
       }
     }
 
@@ -1212,12 +1266,7 @@
     }
 
     function getValueAsNumber(el) {
-      const num = Number(el.value);
-      const plurEl = el.nextElementSibling;
-      if (plurEl && plurEl.classList.contains('plural')) {
-        plurEl.hidden = num === 1;
-      }
-      return num;
+      return Number(el.value);
     }
 
     function countdownLoop(endDate) {
