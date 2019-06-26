@@ -79,18 +79,6 @@ class LazyImage extends HTMLElement {
     return this.getAttribute('alt');
   }
 
-  get observe() {
-    return this.getAttribute('observe');
-  }
-
-  set observe(v) {
-    this.safeSetAttribute('observe', v);
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer.observe(this.getObservedNode());
-    }
-  }
-
   set intersecting(value) {
     if (value) {
       this.shadowImage.onload = this.setIntersecting;
@@ -126,8 +114,12 @@ class LazyImage extends HTMLElement {
       this.alt = this.getAttribute('alt');
       this.placeholder = this.getAttribute('placeholder');
     }
-    if ('IntersectionObserver' in window) this.initIntersectionObserver();
-    else this.intersecting = true;
+    // Avoid intersection observer when in parallax container.
+    if ('IntersectionObserver' in window && !this.closest('[parallax]')) {
+      this.initIntersectionObserver();
+    } else {
+      this.intersecting = true;
+    }
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
@@ -166,7 +158,7 @@ class LazyImage extends HTMLElement {
     const rootMargin = '10px';
     this.observer =
       new IntersectionObserver(this.observerCallback, { rootMargin });
-    this.observer.observe(this.getObservedNode());
+    this.observer.observe(this);
   }
 
 
@@ -179,15 +171,6 @@ class LazyImage extends HTMLElement {
     this.observer.disconnect();
     this.observer = null;
     delete this.observer;
-  }
-
-  getObservedNode() {
-    let observed;
-    const { observe } = this;
-    if (observe === 'nextElementSibling') {
-      observed = this.nextElementSibling;
-    }
-    return observed || this;
   }
 }
 
