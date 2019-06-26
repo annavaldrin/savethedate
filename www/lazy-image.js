@@ -114,12 +114,8 @@ class LazyImage extends HTMLElement {
       this.alt = this.getAttribute('alt');
       this.placeholder = this.getAttribute('placeholder');
     }
-    // Avoid intersection observer when in parallax container.
-    if ('IntersectionObserver' in window && !this.closest('[parallax]')) {
-      this.initIntersectionObserver();
-    } else {
-      this.intersecting = true;
-    }
+    if ('IntersectionObserver' in window) this.initIntersectionObserver();
+    else this.intersecting = true;
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
