@@ -117,7 +117,6 @@ function onResize(details) {
 
     var parallaxStart = previousCover ? (previousCover.offsetTop + previousCover.offsetHeight) : 0;
     var scrollbarWidth = details[i].sticky ? 0 : clip.offsetWidth - clip.clientWidth;
-    var parallaxElem = details[i].sticky ? container : clip;
     var height = details[i].node.offsetHeight;
     var depth = 0;
     if (rate) {

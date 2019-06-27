@@ -154,7 +154,9 @@ class LazyImage extends HTMLElement {
     const rootMargin = '10px';
     this.observer =
       new IntersectionObserver(this.observerCallback, { rootMargin });
-    this.observer.observe(this);
+    const observeId = this.getAttribute('observe');
+    const observeNode = observeId ? document.getElementById(observeId) : null;
+    this.observer.observe(observeNode || this);
   }
 
 
