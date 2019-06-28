@@ -15,10 +15,11 @@
  *
  */
 let resizeRaf = null;
+const details = [];
 
 export function initializeParallax(clip) {
+  details.length = 0;
   var parallax = clip.querySelectorAll('*[parallax]');
-  var parallaxDetails = [];
   var sticky = false;
 
   // Edge requires a transform on the document body and a fixed position element
@@ -73,7 +74,7 @@ export function initializeParallax(clip) {
     while (nextCover && !nextCover.hasAttribute('parallax-cover'))
       nextCover = nextCover.nextElementSibling;
 
-    parallaxDetails.push({
+    details.push({
       node: parallax[i],
       top: parallax[i].offsetTop,
       sticky: !!sticky,
@@ -82,14 +83,13 @@ export function initializeParallax(clip) {
     });
   }
 
-  window.addEventListener('resize', onResize.bind(null, parallaxDetails));
-  onResize(parallaxDetails);
   for (var i = 0; i < parallax.length; i++) {
     parallax[i].parentNode.insertBefore(parallax[i], parallax[i].parentNode.firstChild);
   }
+  updatePositions();
 }
 
-function onResize(details) {
+export function updatePositions() {
   resizeRaf && cancelAnimationFrame(resizeRaf);
   resizeRaf = requestAnimationFrame(() => {
     resizeRaf = null;

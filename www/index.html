@@ -1199,7 +1199,7 @@
     </div>
   </div>
   <script type="module">
-    import { initializeParallax } from './parallax.js';
+    import { initializeParallax, updatePositions } from './parallax.js';
     import './lazy-image.js';
 
     /* Variables */
@@ -1286,7 +1286,7 @@
     calculatePrices();
 
     initializeParallax(document.querySelector('.viewport'));
-
+    
     onResize();
 
     /* Listeners */
@@ -1304,6 +1304,7 @@
       resizeDebounceId = requestAnimationFrame(() => {
         resizeDebounceId = null;
         document.documentElement.style.setProperty('--one-vh', (innerHeight / 100) + 'px');
+        updatePositions();
       });
     }
 
