@@ -214,6 +214,13 @@
 
     lazy-image {
       display: block;
+      position: relative;
+    }
+
+    lazy-image img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
 
     section {
@@ -266,14 +273,14 @@
       position: absolute;
       top: 0;
       left: 0;
-      transform: translate(-10%, 40%) rotate(-19deg);
+      transform: translate(-20%, 40%) rotate(-19deg);
       animation: rotateTopLeft 800ms alternate infinite ease-in-out;
       animation-delay: 200ms;
     }
 
     @keyframes rotateTopLeft {
       to {
-        transform: translate(-10%, 40%) rotate(-16deg);
+        transform: translate(-20%, 40%) rotate(-16deg);
       }
     }
 
@@ -281,13 +288,13 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      transform: translate(120%, -20%) rotate(180deg);
+      transform: translate(125%, -20%) rotate(180deg);
       animation: rotateBottomRight 800ms alternate infinite ease-in-out;
     }
 
     @keyframes rotateBottomRight {
       to {
-        transform: translate(120%, -20%) rotate(174deg);
+        transform: translate(125%, -20%) rotate(177deg);
       }
     }
 
@@ -333,22 +340,25 @@
       padding-top: 80px;
     }
 
-    #main lazy-image {
+    #main-title {
+      position: relative;
       height: 70vh;
-      pointer-events: none;
-      background: white;
-      /*TODO blur*/
-      /* background-image: url('data:image/png;base64,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');
-      background-size: contain; */
       --lazy-image-fit: contain;
     }
 
-    #main h1 {
+    #main-title>* {
       position: absolute;
-      top: 80px;
+      top: 0;
       left: 0;
-      right: 0;
-      height: 70vh;
+      width: 100%;
+      height: 100%;
+    }
+
+    #main-title img {
+      object-fit: contain;
+    }
+
+    #main-title h1 {
       font-size: 4rem;
       font-weight: 100;
       display: flex;
@@ -357,7 +367,7 @@
       align-items: center;
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      color: lightgray;
+      color: white;
     }
 
     #main h1 span {
@@ -835,8 +845,13 @@
   <div class="viewport">
     <div>
       <section id="main">
-        <h1>Anna<span>&amp;</span>Valdrin</h1>
-        <lazy-image src="main.jpg"></lazy-image>
+        <div id="main-title">
+          <lazy-image src="main_bg.jpg">
+            <img slot="placeholder" src="main_bg_small.jpg">
+          </lazy-image>
+          <h1>Anna<span>&amp;</span>Valdrin</h1>
+          <lazy-image src="main_fg.png"></lazy-image>
+        </div>
         <p>Are Getting Married</p>
         <h2>November 30th, 2019</h2>
         <a href="#story"><svg preserveAspectRatio="xMidYMid meet" data-bbox="6.443 47.497 187.114 105.008"
@@ -858,7 +873,9 @@
           make our own pizza, from Oakland to New York.</p>
       </section>
       <div class="parallax" parallax="0.3">
-        <lazy-image observe="bg1space" src="bg1.jpg"></lazy-image>
+        <lazy-image observe="bg1space" src="bg1.jpg">
+          <img slot="placeholder" src="bg1_small.jpg">
+        </lazy-image>
         <lazy-image class="palm top-left" src="palm.png"></lazy-image>
         <lazy-image class="palm bottom-right" src="palm.png"></lazy-image>
       </div>
@@ -1034,7 +1051,9 @@
         </a>
       </section>
       <div class="parallax" parallax="0.3">
-        <lazy-image observe="bg2space" src="bg2.jpg"></lazy-image>
+        <lazy-image observe="bg2space" src="bg2.jpg">
+          <img slot="placeholder" src="bg2_small.jpg">
+        </lazy-image>
       </div>
       <div id="bg2space" class="parallaxspace"></div>
       <!-- <section>
