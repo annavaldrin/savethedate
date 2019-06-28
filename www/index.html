@@ -370,7 +370,7 @@
       color: white;
     }
 
-    #main h1 span {
+    #main-title h1 span {
       font-size: 6.5rem;
       display: block;
     }
@@ -807,8 +807,12 @@
     }
 
     @media (max-width: 640px) {
-      #main h1 {
-        font-size: 4rem;
+      #main-title {
+        --lazy-image-fit: cover;
+      }
+
+      #main-title h1 {
+        font-weight: 700;
       }
 
       .room {
