@@ -254,8 +254,8 @@
 
     .parallax {
       width: 100%;
-      height: 100vmax;
-      margin-bottom: -100vmax;
+      height: calc(100 * var(--one-vh));
+      margin-bottom: calc(-100 * var(--one-vh));
       overflow: hidden;
       z-index: 0;
     }
@@ -303,7 +303,7 @@
     }
 
     .parallaxspace {
-      height: 100vmax;
+      height: calc(100 * var(--one-vh));
     }
 
     h1 {
@@ -346,7 +346,7 @@
 
     #main-title {
       position: relative;
-      height: 70vmax;
+      height: calc(70 * var(--one-vh));
       --lazy-image-fit: contain;
     }
 
@@ -819,6 +819,16 @@
 
       .room {
         display: block;
+      }
+    }
+
+    @media (max-height: 640px) {
+      #main-title {
+        height: 70vw;
+      }
+
+      #main-title h1 {
+        font-weight: 700;
       }
     }
 
