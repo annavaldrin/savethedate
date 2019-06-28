@@ -81,24 +81,25 @@ export function initializeParallax(clip) {
 
   // Add a scroll listener to hide perspective elements when they should no
   // longer be visible.
+  var scrollRaf = null;
   clip.addEventListener('scroll', function() {
-    for (var i = 0; i < parallaxDetails.length; i++) {
-      var container = parallaxDetails[i].node.parentNode;
-      var previousCover = parallaxDetails[i].previousCover;
-      var nextCover = parallaxDetails[i].nextCover;
-      var parallaxStart = previousCover ? (previousCover.offsetTop + previousCover.offsetHeight) : 0;
-      var parallaxEnd = nextCover ? nextCover.offsetTop : container.offsetHeight;
-      var threshold = 200;
-      var visible = parallaxStart - threshold - clip.clientHeight < clip.scrollTop &&
-                    parallaxEnd + threshold > clip.scrollTop;
-      // FIXME: Repainting the images while scrolling can cause jank.
-      // For now, keep them all.
-      // var display = visible ? 'block' : 'none'
-      var display = 'block';
-      if (parallaxDetails[i].node.style.display != display)
-        parallaxDetails[i].node.style.display = display;
-    }
-  });
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(function () {
+      scrollRaf = null;
+      var scrollTop = clip.scrollTop;
+      var clientHeight = clip.clientHeight;
+      for (var i = 0; i < parallaxDetails.length; i++) {
+        var parallaxStart = parallaxDetails[i].parallaxStart;
+        var parallaxEnd = parallaxDetails[i].parallaxEnd;
+        var threshold = 200;
+        var visible = parallaxStart - threshold - clientHeight < scrollTop &&
+                      parallaxEnd + threshold > scrollTop;
+        var display = visible ? 'block' : 'none'
+        if (parallaxDetails[i].node.style.display != display)
+          parallaxDetails[i].node.style.display = display;
+      }
+    });
+  }, {passive: true});
   window.addEventListener('resize', onResize.bind(null, parallaxDetails));
   onResize(parallaxDetails);
   for (var i = 0; i < parallax.length; i++) {
@@ -109,34 +110,36 @@ export function initializeParallax(clip) {
 function onResize(details) {
   for (var i = 0; i < details.length; i++) {
     var container = details[i].node.parentNode;
-
+    
     var clip = container.parentNode;
     var previousCover = details[i].previousCover;
     var nextCover = details[i].nextCover;
     var rate = details[i].node.getAttribute('parallax');
 
     var parallaxStart = previousCover ? (previousCover.offsetTop + previousCover.offsetHeight) : 0;
+    var parallaxEnd = nextCover ? nextCover.offsetTop : container.offsetHeight;
     var scrollbarWidth = details[i].sticky ? 0 : clip.offsetWidth - clip.clientWidth;
     var height = details[i].node.offsetHeight;
     var depth = 0;
     if (rate) {
       depth = 1 - (1 / rate);
     } else {
-      var parallaxEnd = nextCover ? nextCover.offsetTop : container.offsetHeight;
       depth = (height - parallaxEnd + parallaxStart) / (height - clip.clientHeight);
     }
     if (details[i].sticky)
-      depth = 1.0 / depth;
-
+    depth = 1.0 / depth;
+    
     var scale = 1.0 / (1.0 - depth);
-
+    
     // The scrollbar is included in the 'bottom right' perspective origin.
     var dx = scrollbarWidth * (scale - 1);
     // Offset for the position within the container.
     var dy = details[i].sticky ?
-        -(clip.scrollHeight - parallaxStart - height) * (1 - scale) :
-        (parallaxStart - depth * (height - clip.clientHeight)) * scale;
-
+    -(clip.scrollHeight - parallaxStart - height) * (1 - scale) :
+    (parallaxStart - depth * (height - clip.clientHeight)) * scale;
+    
     details[i].node.style.transform = 'scale(' + (1 - depth) + ') translate3d(' + dx + 'px, ' + dy + 'px, ' + depth + 'px)';
+    details[i].parallaxStart = parallaxStart;
+    details[i].parallaxEnd = parallaxEnd;
   }
 }
