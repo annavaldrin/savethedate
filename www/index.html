@@ -10,6 +10,11 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Roboto:700&display=swap"
     rel="stylesheet">
   <style>
+    html {
+      --lazy-image-fit: cover;
+      --one-vh: 1vh;
+    }
+
     html,
     body {
       height: 100%;
@@ -21,7 +26,6 @@
       letter-spacing: 0.04rem;
       color: #163E3A;
       -webkit-font-smoothing: antialiased;
-      --lazy-image-fit: cover;
     }
 
     .viewport {
@@ -218,7 +222,7 @@
     }
 
     lazy-image img {
-      object-fit: cover;
+      object-fit: var(--lazy-image-fit);
       width: 100%;
       height: 100%;
     }
@@ -250,8 +254,8 @@
 
     .parallax {
       width: 100%;
-      height: 100vh;
-      margin-bottom: -100vh;
+      height: 100vmax;
+      margin-bottom: -100vmax;
       overflow: hidden;
       z-index: 0;
     }
@@ -299,7 +303,7 @@
     }
 
     .parallaxspace {
-      height: 100vh;
+      height: 100vmax;
     }
 
     h1 {
@@ -342,20 +346,18 @@
 
     #main-title {
       position: relative;
-      height: 70vh;
+      height: 70vmax;
       --lazy-image-fit: contain;
     }
 
     #main-title>* {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 50%;
       width: 100%;
+      max-width: 840px;
       height: 100%;
-    }
-
-    #main-title img {
-      object-fit: contain;
+      transform: translateX(-50%);
     }
 
     #main-title h1 {
@@ -782,7 +784,7 @@
         right: 0;
         left: 0;
         top: 0;
-        height: 100vh;
+        height: calc(100 * var(--one-vh));
         padding: 10px;
         box-sizing: border-box;
         background: white;
@@ -916,7 +918,7 @@
           </div>
           <input type="text" name="name" required placeholder="Your Full Name">
           <input type="email" name="email" required placeholder="Your Email">
-          <div>
+          <div class="show-if-attending">
             <input type="tel" name="phone" placeholder="Your Phone Number">
 
             <div class="custom-select">
@@ -1227,7 +1229,6 @@
         childPrice: 86,
       },
     };
-    const mainEl = document.getElementById('main');
     const adultsEl = document.getElementById('adults');
     const childrenEl = document.getElementById('children');
     const nightsEl = document.getElementById('nights');
@@ -1238,6 +1239,7 @@
     const calculatorEl = document.getElementById('calculator');
 
     let rsvpRef = null;
+    let resizeDebounceId = null;
 
     /* Initialization */
 
@@ -1275,21 +1277,25 @@
 
     initializeParallax(document.querySelector('.viewport'));
 
-    requestAnimationFrame(() => {
-      if (innerHeight < mainEl.offsetHeight) {
-        console.log('set #main height to ' + innerHeight);
-        mainEl.style.maxHeight = innerHeight + 'px';
-      }
-    });
+    onResize();
 
     /* Listeners */
 
+    window.addEventListener('resize', onResize);
     rsvpEl.addEventListener('submit', onSubmit);
     rsvpEl.addEventListener('change', onRsvpChange);
     calculatorEl.addEventListener('change', calculatePrices);
     hamburgerEl.addEventListener('click', onHamburgerClick);
 
     /* Methods */
+
+    function onResize() {
+      resizeDebounceId && cancelAnimationFrame(resizeDebounceId);
+      resizeDebounceId = requestAnimationFrame(() => {
+        resizeDebounceId = null;
+        document.documentElement.style.setProperty('--one-vh', (innerHeight / 100) + 'px');
+      });
+    }
 
     function onHamburgerClick(event) {
       event.stopPropagation();
@@ -1302,7 +1308,7 @@
     function onRsvpChange() {
       const attending = rsvpEl.elements.attending.value === 'yes';
       const guests = rsvpEl.elements.guests;
-      const container = guests.parentNode;
+      const container = guests.closest('.show-if-attending');
       container.hidden = !attending;
       let count = attending ? Number(guests.value) : 0;
       for (let i = 1; i <= 6; i++) {
