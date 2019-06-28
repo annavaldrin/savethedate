@@ -79,6 +79,27 @@ export function initializeParallax(clip) {
                           'previousCover': previousCover});
   }
 
+  // Add a scroll listener to hide perspective elements when they should no
+  // longer be visible.
+  var scrollRaf = null;
+  clip.addEventListener('scroll', function() {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(function () {
+      scrollRaf = null;
+      var scrollTop = clip.scrollTop;
+      var clientHeight = clip.clientHeight;
+      for (var i = 0; i < parallaxDetails.length; i++) {
+        var parallaxStart = parallaxDetails[i].parallaxStart;
+        var parallaxEnd = parallaxDetails[i].parallaxEnd;
+        var threshold = 200;
+        var visible = parallaxStart - threshold - clientHeight < scrollTop &&
+                      parallaxEnd + threshold > scrollTop;
+        var display = visible ? 'block' : 'none'
+        if (parallaxDetails[i].node.style.display != display)
+          parallaxDetails[i].node.style.display = display;
+      }
+    });
+  }, {passive: true});
   window.addEventListener('resize', onResize.bind(null, parallaxDetails));
   onResize(parallaxDetails);
   for (var i = 0; i < parallax.length; i++) {
