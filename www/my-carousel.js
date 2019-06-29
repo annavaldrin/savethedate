@@ -288,7 +288,7 @@ class MyCarousel extends HTMLElement {
         dx = 0;
       }
       if (dx > 0) {
-        if (dx > 100) {
+        if (dx > 60) {
           if (dx === this._width) {
             // No transitionend will fire (since we're already in the final state),
             // so reset children styles now
@@ -303,7 +303,7 @@ class MyCarousel extends HTMLElement {
           this._translateX(this.selected, 0, true);
         }
       } else if (dx < 0) {
-        if (dx < -100) {
+        if (dx < -60) {
           if (dx === -this._width) {
             // No transitionend will fire (since we're already in the final state),
             // so reset children styles now
