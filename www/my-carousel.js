@@ -145,9 +145,9 @@ class MyCarousel extends HTMLElement {
     this._prevBtn.addEventListener('click', this);
     this._nextBtn.addEventListener('click', this);
     this.addEventListener('transitionend', this);
-    this.addEventListener('touchstart', this);
-    this.addEventListener('touchmove', this);
-    this.addEventListener('touchend', this);
+    this.addEventListener('touchstart', this, { passive: true });
+    this.addEventListener('touchmove', this, { passive: false });
+    this.addEventListener('touchend', this, { passive: true });
   }
 
   handleEvent(event) {
