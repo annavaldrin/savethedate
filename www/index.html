@@ -1420,41 +1420,6 @@
       return Number(el.value);
     }
 
-    function countdownLoop(endDate) {
-      const endTime = new Date(endDate).getTime();
-      if (!Number.isFinite(endTime)) {
-        return;
-      }
-      const monthsEl = countdownEl.querySelector('#months');
-      const daysEl = countdownEl.querySelector('#days');
-      const hoursEl = countdownEl.querySelector('#hours');
-      const minutesEl = countdownEl.querySelector('#minutes');
-      const secondsEl = countdownEl.querySelector('#seconds');
-      calculate();
-      function calculate() {
-        const { months, days, hours, minutes, seconds } = countdown(new Date(), endTime, countdown.MONTHS |
-          countdown.DAYS |
-          countdown.HOURS |
-          countdown.MINUTES |
-          countdown.SECONDS);
-        monthsEl.textContent = format(months);
-        daysEl.textContent = format(days);
-        hoursEl.textContent = format(hours);
-        minutesEl.textContent = format(minutes);
-        secondsEl.textContent = format(seconds);
-        if (!months && !days && !hours && !minutes && !seconds) {
-          countdownEl.innerHTML = 'It\'s official 👰🤵';
-          countdownEl.style.fontSize = '3rem';
-          return;
-        }
-        setTimeout(calculate, 1000);
-
-        function format(t) {
-          return ('0' + t).slice(-2);
-        }
-      }
-    }
-
     function getBookingUrl({ title, image, price, childPrice }) {
       return 'https://destify.com/reservation/redirect.php/?r=36791258' +
         '&title_c=' + title +
