@@ -274,8 +274,8 @@
     }
 
     .parallax .palm {
-      width: 350px;
-      height: 300px;
+      width: 300px;
+      height: 250px;
       max-width: 40vw;
       max-height: 40vw;
       transform-origin: left center;
@@ -283,35 +283,43 @@
 
     .parallax .top-left {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      transform: translate(-20%, 40%) rotate(-19deg);
+      width: 400px;
+      height: 350px;
+      max-width: 70vw;
+      max-height: 70vw;
+      transform: translate(-25%, 10%) rotate(0deg) rotateX(180deg);
       animation: rotateTopLeft 800ms alternate infinite ease-in-out;
       animation-delay: 200ms;
     }
 
     @keyframes rotateTopLeft {
       to {
-        transform: translate(-20%, 40%) rotate(-16deg);
+        transform: translate(-25%, 10%) rotate(-3deg) rotateX(180deg);
       }
     }
 
     .parallax .bottom-right {
       position: absolute;
-      bottom: 0;
+      top: 0;
       right: 0;
-      transform: translate(125%, -20%) rotate(180deg);
+      transform: translate(125%, 30%) rotate(180deg) rotateX(180deg);
       animation: rotateBottomRight 800ms alternate infinite ease-in-out;
     }
 
     @keyframes rotateBottomRight {
       to {
-        transform: translate(125%, -20%) rotate(177deg);
+        transform: translate(125%, 30%) rotate(177deg) rotateX(180deg);
       }
     }
 
     .parallaxspace {
       height: calc(100 * var(--one-vh));
+    }
+
+    lazy-image[observe="bg1space"] {
+      filter: brightness(1.1);
     }
 
     h1 {
@@ -1153,8 +1161,8 @@
           the sun goes down, so bring some layers!
         </p>
         <p>No need to worry about sand in your shoes! The ceremony and reception will be right by the beach, but not
-          directly on the sand. You may want to wear shoes that can be easily slipped on and off, for
-          those times when you'll be frolicking on the beach.</p>
+          directly on the sand. You may want to wear shoes that can be easily slipped on and off (for those times when
+          you can't fight the urge to play in the sand).</p>
 
         <h2>What should I bring as a gift?</h2>
         <p>No need to bring us gifts - we know plane tickets are expensive and your presence at the wedding is
