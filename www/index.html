@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="Wedding in Punta Cana, November 30th, 2019">
 
-  <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Roboto:700&display=swap"
+  <link href="https://fonts.googleapis.com/css?family=Lato:900|Nunito+Sans:300,700|Kanit:800&display=swap"
     rel="stylesheet">
   <style>
     html {
@@ -52,7 +52,7 @@
       justify-content: space-around;
       align-items: center;
       height: 80px;
-      z-index: 10;
+      z-index: 2;
       background: #fefefe;
       border-bottom: 1px solid #ccc;
       box-sizing: border-box;
@@ -346,7 +346,7 @@
 
     #main-title {
       position: relative;
-      height: calc(70 * var(--one-vh));
+      height: calc(75 * var(--one-vh));
       --lazy-image-fit: contain;
     }
 
@@ -361,20 +361,21 @@
     }
 
     #main-title h1 {
-      font-size: 4rem;
-      font-weight: 100;
+      font-size: 4.5rem;
+      font-weight: 800;
+      line-height: 6.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
+      font-family: 'Kanit', sans-serif;
+      margin-top: -20px;
       color: white;
     }
 
-    #main-title h1 span {
-      font-size: 6.5rem;
-      display: block;
+    #main-title lazy-image {
+      margin-left: 10px;
+      pointer-events: none;
     }
 
     #main p {
@@ -497,6 +498,7 @@
 
     .room .title {
       position: absolute;
+      transform: translateZ(0);
       top: 0;
       bottom: 0;
       left: 0;
@@ -510,7 +512,6 @@
       margin: 0;
       letter-spacing: 0;
       font-size: 1.3rem;
-      z-index: 2;
       background-image: linear-gradient(180deg, #0000 50%, rgba(0, 0, 0, .5) 100%);
       pointer-events: none;
     }
@@ -518,19 +519,16 @@
     my-carousel {
       display: block;
       position: relative;
+      overflow: hidden;
     }
 
     my-carousel img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
       object-fit: var(--lazy-image-fit);
     }
 
     .room-image my-carousel {
       min-height: 250px;
       height: 100%;
-      z-index: 0;
     }
 
     .price {
@@ -821,17 +819,22 @@
 
       header .hamburger {
         display: block;
-        z-index: 1;
+        z-index: 2;
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 640px),
+    (orientation: portrait) {
       #main-title {
         --lazy-image-fit: cover;
       }
 
       #main-title h1 {
-        font-weight: 700;
+        margin: 0;
+      }
+
+      #main-title lazy-image {
+        margin: 0;
       }
 
       .room {
@@ -839,13 +842,13 @@
       }
     }
 
-    @media (max-height: 640px) {
+    @media (max-height: 640px) and (orientation: landscape) {
       #main-title {
         height: 70vw;
       }
 
-      #main-title h1 {
-        font-weight: 700;
+      #main-title lazy-image {
+        margin: 0;
       }
     }
 
@@ -883,7 +886,7 @@
           <lazy-image src="main_bg.jpg">
             <img slot="placeholder" src="main_bg_small.jpg">
           </lazy-image>
-          <h1>Anna<span>&amp;</span>Valdrin</h1>
+          <h1>Anna<div>&amp;</div>Valdrin</h1>
           <lazy-image src="main_fg.png"></lazy-image>
         </div>
         <p>Are Getting Married</p>
@@ -903,7 +906,8 @@
       <section id="story">
         <lazy-image class="flower" src="flower1.jpg"></lazy-image>
         <h1>Our story</h1>
-        <p>Pizza. Giraffes. Travel. Love. Repeat.</p>
+        <p>Pizza. Giraffes. Music. Travel. Love.</p>
+        <p>🍕 🦒 🎸 ✈️ 🥰 </p>
       </section>
       <div class="parallax" parallax="0.3">
         <lazy-image observe="bg1space" src="bg1.jpg">
@@ -1087,7 +1091,7 @@
       <div id="bg2space" class="parallaxspace"></div>
       <section id="schedule">
         <h1>Schedule of events</h1>
-        <p>🛠 Work in progress, keep an eye on this</p>
+        <p>🛠 Work in progress. Keep an eye on this 👀</p>
 
         <p>
           Here's a sneak-peak:
@@ -1131,12 +1135,12 @@
           beverages (alcoholic &amp; non-alcoholic), activities, entertainment, taxes and fees.</p>
 
         <h2>Do I have to book through your website/travel coordinator?</h2>
-        <p>Our travel coordinator requests the rooms to be together and other small perks to make your stay comfortable.
-          When booking with us, you're dealing with an expert in the US, so there's no miscommunication. In many cases,
-          the group leaders are arranging something during your stay, and the reservations all have to be booked at one
-          place to be valid. In order to secure the group discount, you'll need to book through Ben Herrmann. If
-          comparing rates, please make sure to add the round trip shuttles to and from the hotel (most sites do not
-          include that in the rate).
+        <p>
+          While you don't have to book this way, our travel coordinator requests the rooms to be together and other
+          small perks to make your stay comfortable. When booking with us, you're dealing with an expert in the US, so
+          there's no miscommunication. In order to secure the group discount, you'll need to book through our travel
+          agent, Ben Herrmann. When comparing rates on other websites, please make sure to add the round trip shuttles
+          to and from the hotel (most sites do not include that in the rate).
         </p>
 
         <h2>Do I have to pay for the trip all at once?</h2>

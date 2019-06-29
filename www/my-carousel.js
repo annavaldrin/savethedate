@@ -77,15 +77,14 @@ class MyCarousel extends HTMLElement {
       :host {
         display: block;
         position: relative;
+        overflow: hidden;
+        contain: content;
       }
       div {
-        contain: content;
-        overflow: hidden;
         position: absolute;
         width: 100%;
         height: 100%;
       }
- 
       div > ::slotted(:not([selected])) {
         display: none;
       }
@@ -100,7 +99,9 @@ class MyCarousel extends HTMLElement {
       button {
         will-change: opacity;
         position: absolute;
-        top: calc(50% - 20px);
+        top: 0;
+        bottom: 0;
+        width: 40px;
         padding: 0;
         line-height: 40px;
         border: none;
@@ -108,17 +109,22 @@ class MyCarousel extends HTMLElement {
         color: #DDD;
         font-size: 40px;
         font-weight: bold;
-        opacity: 0.7;
+        opacity: 0.8;
+        outline: 0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+      }
+      button:not([disabled]) {
+        cursor: pointer;
       }
       button:hover,
       button:focus {
         opacity: 1;
       }
       #prevBtn {
-        left: 12px;
+        left: 0;
       }
       #nextBtn {
-        right: 12px;
+        right: 0;
       }
       button[disabled] {
         opacity: 0.4;
