@@ -50,7 +50,7 @@ class LazyImage extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src', 'alt', 'observe'];
+    return ['src', 'alt'];
   }
 
   /**
@@ -134,6 +134,7 @@ class LazyImage extends HTMLElement {
     this.shadowImage.removeAttribute('aria-hidden');
     this.shadowPlaceholder.setAttribute('aria-hidden', 'true');
     this.setAttribute('intersecting', '');
+    this.dispatchEvent(new Event('load'));
   }
 
   /**

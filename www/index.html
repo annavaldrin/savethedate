@@ -502,6 +502,7 @@
       left: 0;
       right: 0;
       padding: 15px;
+      box-sizing: border-box;
       color: white;
       display: flex;
       justify-content: flex-end;
@@ -509,13 +510,27 @@
       margin: 0;
       letter-spacing: 0;
       font-size: 1.3rem;
-      z-index: 1;
+      z-index: 2;
       background-image: linear-gradient(180deg, #0000 50%, rgba(0, 0, 0, .5) 100%);
+      pointer-events: none;
     }
 
-    .room-image lazy-image {
+    my-carousel {
+      display: block;
+      position: relative;
+    }
+
+    my-carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: var(--lazy-image-fit);
+    }
+
+    .room-image my-carousel {
       min-height: 250px;
       height: 100%;
+      z-index: 0;
     }
 
     .price {
@@ -771,7 +786,7 @@
       content: '- • -';
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
       header {
         justify-content: space-between;
       }
@@ -794,6 +809,8 @@
       header #side>a {
         margin: 0;
         padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
       }
 
       header .hamburger:not(.is-active)+#side {
@@ -850,6 +867,7 @@
       <a href="#story">Our Story</a>
       <a href="#bigday">The Big Day</a>
       <a href="#resort">Accomodations</a>
+      <a href="#schedule">Schedule</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
@@ -885,8 +903,7 @@
       <section id="story">
         <lazy-image class="flower" src="flower1.jpg"></lazy-image>
         <h1>Our story</h1>
-        <p>Two hearts and a pizza. We met over the best pizza in San Francisco. We had pizza all over Italy. We
-          make our own pizza, from Oakland to New York.</p>
+        <p>Pizza. Giraffes. Travel. Love. Repeat.</p>
       </section>
       <div class="parallax" parallax="0.3">
         <lazy-image observe="bg1space" src="bg1.jpg">
@@ -899,7 +916,6 @@
       <section id="bigday">
         <lazy-image class="flower" src="flower2.jpg"></lazy-image>
         <h1>The Big Day</h1>
-        <!-- <p>We truly hope you can join our family in this special celebration.</p> -->
         <h3>When</h3>
         <p>November 30th, 5:00 PM</p>
         <h3>Where</h3>
@@ -964,9 +980,6 @@
               Bávaro Resort &amp; Spa All-inclusive</a> in
             Punta Cana, Dominican Republic.
           </p>
-          <!-- <iframe class="map"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824551.8372207391!2d-69.55630110866662!3d18.77380919994668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8ebbfad2b3771%3A0xc65d0ca12cc2fb7a!2sRoyalton+B%C3%A1varo+Resort+%26+Spa+All+Inclusive!5e0!3m2!1sen!2sus!4v1560488529114!5m2!1sen!2sus"
-            allowfullscreen></iframe> -->
           <div class="resortPhotos">
             <lazy-image src="RoyaltonBavaro1.jpg"></lazy-image>
             <lazy-image src="RoyaltonBavaro2.jpg"></lazy-image>
@@ -1072,33 +1085,29 @@
         </lazy-image>
       </div>
       <div id="bg2space" class="parallaxspace"></div>
-      <!-- <section>
-        <h1>Things to do</h1>
+      <section id="schedule">
+        <h1>Schedule of events</h1>
+        <p>🛠 Work in progress, keep an eye on this</p>
 
-        <h3>Eat and drink</h3>
-        <p>TODO. Royalton Bavaro Resort: restaurants <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants</a>
-          <br>Bars and entertainment <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment</a>
-        </p>
-
-        <h3>Play</h3>
-        <p>TODO. Royalton Bavaro Resort: Beach games, Night Events, Night Club.
-          <br>Beach party <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party</a>
-          <br>Casino <a rel="noopener noreferrer" target="_blank"
-            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino">https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino</a>
-        </p>
-
-        <h3>Explore</h3>
-        <p>TODO. Off-road tours with ATV 4x4, Snorkeling, River Cave, Catamaran, Deep-sea fishing.</p>
-
-        <h2>Schedule of activities</h2>
-        <p>Coming soon, keep an eye on this</p>
-        <iframe
+        <p>
+          Here's a sneak-peak:
+          <a rel="noopener noreferrer" target="_blank"
+            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/restaurants">
+            Royalton restaurants</a>,
+          <a rel="noopener noreferrer" target="_blank"
+            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/bars-entertainment">
+            Bars and entertainment</a>,
+          <a rel="noopener noreferrer" target="_blank"
+            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/all-in-white-party">
+            Beach Parties &amp; Night Events</a>,
+          <a rel="noopener noreferrer" target="_blank"
+            href="https://www.royaltonresorts.com/royalton-bavaro/explore-royalton/genesis-casino">
+            Casino</a>,
+          Off-road tours with ATV 4x4, Snorkeling, River Cave, Catamaran, Deep-sea fishing, and more 🤩</p>
+        <!-- <iframe
           src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;ctz=America%2FNew_York&amp;src=NzkwNmE0aWNwYmZ1ODc0OHVmNWw4Zmpsc2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;showTz=0&amp;showNav=1&amp;showTitle=0&amp;showDate=1&amp;showPrint=1&amp;showTabs=1&amp;showCalendars=0"
-          style="width:100%" height="600" frameborder="0" scrolling="no"></iframe>
-      </section> -->
+          style="width:100%" height="600" frameborder="0" scrolling="no"></iframe> -->
+      </section>
       <section id="faq">
         <lazy-image class="flower" src="flower3.jpg"></lazy-image>
         <h1>Frequently Asked Questions</h1>
@@ -1201,13 +1210,19 @@
   <script type="module">
     import { initializeParallax, updatePositions } from './parallax.js';
     import './lazy-image.js';
+    import './my-carousel.js';
 
     /* Variables */
 
     const bookingData = {
       oceanView: {
         title: 'Luxury Junior Suite Ocean View',
-        image: 'package1.jpg',
+        image: 'jr_suite_oceanview1.jpg',
+        otherImages: [
+          'jr_suite2.jpg',
+          'jr_suite3.jpg',
+          'jr_suite4.jpg',
+        ],
         price: {
           1: 245,
           2: 165,
@@ -1218,7 +1233,13 @@
       },
       swimOut: {
         title: 'Luxury Junior Suite Swim-Out',
-        image: 'package2.jpg',
+        image: 'jr_suite_swimout1.jpg',
+        otherImages: [
+          'jr_suite_swimout2.jpg',
+          'jr_suite_swimout3.jpg',
+          'jr_suite1.jpg',
+          'jr_suite_swimout4.jpg',
+        ],
         price: {
           1: 218,
           2: 148,
@@ -1229,7 +1250,12 @@
       },
       familySuite: {
         title: 'Luxury Family Suite',
-        image: 'package3.jpg',
+        image: 'fam_suite4.jpg',
+        otherImages: [
+          'fam_suite1.jpg',
+          'fam_suite2.jpg',
+          'fam_suite3.jpg',
+        ],
         price: {
           1: 245,
           2: 165,
@@ -1259,7 +1285,10 @@
       template.innerHTML = `
 <div id="${roomId}" class="room">
   <div class="room-image">
-    <lazy-image src="${room.image}"></lazy-image>
+    <my-carousel>
+      <img data-src="${room.image}">
+      ${(room.otherImages || []).map((image) => `<img data-src="${image}">`)}
+    </my-carousel>
     <h2 class="title">${room.title}</h2>
   </div> 
   <div class="price">
@@ -1286,7 +1315,7 @@
     calculatePrices();
 
     initializeParallax(document.querySelector('.viewport'));
-    
+
     onResize();
 
     /* Listeners */
